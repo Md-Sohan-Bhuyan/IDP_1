@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - IUS QUIZ SYSTEM</title>
+    <meta name="description" content="Create your account and start testing your knowledge with IUS Quiz System">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body class="bg-base-100">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50" aria-label="Main Navigation">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+                    <span class="sr-only">Open main menu</span>
+                </label>
+                <ul id="mobile-menu" tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a></li>
+                    <li>
+                        <details>
+                            <summary><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i> Courses</summary>
+                            <ul class="p-2">
+                                <li><a href="#" aria-label="Computer Science and Engineering courses">CSE</a></li>
+                                <li><a href="#" aria-label="Business Administration courses">BBA</a></li>
+                                <li><a href="#" aria-label="Textile courses">TEXTILE</a></li>
+                                <li><a href="#" aria-label="English courses">ENGLISH</a></li>
+                                <li><a href="#" aria-label="Electrical and Electronic Engineering courses">EEE</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li><a href="#"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Quizzes</a></li>
+                    <li><a href="#"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> Results</a></li>
+                    <li><a href="#"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i> Leaderboard</a></li>
+                    <li><a href="#"><i class="fa-solid fa-info" aria-hidden="true"></i> About</a></li>
+                    <li><a href="#"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
+                    <li><a href="signin.html"><i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
+                            SignIn</a></li>
+                    <li><a href="signup.html" class="active"><i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                            SignUp</a></li>
+                </ul>
+            </div>
+            <a href="index.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                IUS QUIZ SYSTEM
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a></li>
+
+                <li tabindex="0">
+                    <details>
+                        <summary><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i> Courses</summary>
+                        <ul class="p-2 bg-base-100 z-10 w-40">
+                            <li><a href="#" aria-label="Computer Science and Engineering courses">CSE</a></li>
+                            <li><a href="#" aria-label="Business Administration courses">BBA</a></li>
+                            <li><a href="#" aria-label="English courses">ENGLISH</a></li>
+                            <li><a href="#" aria-label="Textile courses">TEXTILE</a></li>
+                            <li><a href="#" aria-label="Electrical and Electronic Engineering courses">EEE</a></li>
+                        </ul>
+                    </details>
+                </li>
+
+                <li><a href="#"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Quizzes</a></li>
+                <li><a href="#"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> Results</a></li>
+                <li><a href="#"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i> Leaderboard</a></li>
+                <li><a href="#"><i class="fa-solid fa-info" aria-hidden="true"></i> About</a></li>
+                <li><a href="#"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end hidden lg:flex gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+
+            <!-- Dark Mode Toggle -->
+            <button id="dark-mode-toggle" class="btn btn-sm btn-ghost" aria-label="Toggle dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+
+            <a class="btn btn-sm" href="signin.html"><i class="fa-solid fa-arrow-right-to-bracket"
+                    aria-hidden="true"></i> SignIn</a>
+            <a class="btn btn-sm btn-primary text-white" href="signup.html"><i class="fa-solid fa-user-plus"
+                    aria-hidden="true"></i> SignUp</a>
+        </div>
+    </nav>
+
+    <!-- Signup Section -->
+    <section class="min-h-screen banner-gradient py-12 px-4 md:px-8 text-white relative overflow-hidden">
+        <!-- Particle Background -->
+        <div class="particles-container" id="particles-container"></div>
+
+        <div class="container mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <!-- Left Side - Benefits & Features -->
+                <div class="md:w-1/2 animate-fadeInUp">
+                    <div class="max-w-lg">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6">Join IUS Quiz System Today!</h1>
+                        <p class="text-xl mb-8">Create your account and unlock a world of knowledge testing
+                            opportunities.</p>
+
+                        <!-- Benefits List -->
+                        <div class="space-y-6 mb-8">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mt-1">
+                                    <i class="fa-solid fa-trophy text-xl text-yellow-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Compete & Win</h3>
+                                    <p class="text-white/80">Participate in quizzes and climb the leaderboard to
+                                        showcase your skills</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mt-1">
+                                    <i class="fa-solid fa-chart-line text-xl text-green-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Track Progress</h3>
+                                    <p class="text-white/80">Monitor your performance with detailed analytics and
+                                        improvement suggestions</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mt-1">
+                                    <i class="fa-solid fa-users text-xl text-blue-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold">Join Community</h3>
+                                    <p class="text-white/80">Connect with 2,500+ students and learn together</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div>
+                                    <div class="text-2xl font-bold" id="signup-total-users">2,500+</div>
+                                    <div class="text-sm text-white/80">Active Users</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold" id="signup-total-quizzes">1,250+</div>
+                                    <div class="text-sm text-white/80">Quizzes</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold" id="signup-avg-score">78%</div>
+                                    <div class="text-sm text-white/80">Avg. Score</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Signup Form -->
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="w-full max-w-md">
+                        <div class="bg-white rounded-2xl p-8 shadow-2xl text-gray-800 floating">
+                            <div class="text-center mb-8">
+                                <h2 class="text-3xl font-bold text-gray-900">Create Account</h2>
+                                <p class="text-gray-600 mt-2">Join our learning community today</p>
+                            </div>
+
+                            <form id="signup-form" class="space-y-6">
+                                <!-- Name Fields -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">First Name</span>
+                                        </label>
+                                        <input type="text" id="first-name" class="input input-bordered w-full"
+                                            placeholder="John" required>
+                                        <div class="validation-message text-error text-xs mt-1 hidden"
+                                            id="first-name-error"></div>
+                                    </div>
+
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Last Name</span>
+                                        </label>
+                                        <input type="text" id="last-name" class="input input-bordered w-full"
+                                            placeholder="Doe" required>
+                                        <div class="validation-message text-error text-xs mt-1 hidden"
+                                            id="last-name-error"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Email Field -->
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Email Address</span>
+                                    </label>
+                                    <input type="email" id="email" class="input input-bordered w-full"
+                                        placeholder="john.doe@ius.ac.bd" required>
+                                    <div class="validation-message text-error text-xs mt-1 hidden" id="email-error">
+                                    </div>
+                                </div>
+
+                                <!-- Student ID -->
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Student ID</span>
+                                    </label>
+                                    <input type="text" id="student-id" class="input input-bordered w-full"
+                                        placeholder="IUS-2024-001" required>
+                                    <div class="validation-message text-error text-xs mt-1 hidden"
+                                        id="student-id-error"></div>
+                                </div>
+
+                                <!-- Department Selection -->
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Department</span>
+                                    </label>
+                                    <select id="department" class="select select-bordered w-full" required>
+                                        <option value="" disabled selected>Select your department</option>
+                                        <option value="cse">Computer Science & Engineering (CSE)</option>
+                                        <option value="bba">Business Administration (BBA)</option>
+                                        <option value="eee">Electrical & Electronic Engineering (EEE)</option>
+                                        <option value="english">English</option>
+                                        <option value="textile">Textile Engineering</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div class="validation-message text-error text-xs mt-1 hidden"
+                                        id="department-error"></div>
+                                </div>
+
+                                <!-- Password Fields -->
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Password</span>
+                                    </label>
+                                    <div class="relative">
+                                        <input type="password" id="password" class="input input-bordered w-full pr-10"
+                                            placeholder="••••••••" required>
+                                        <button type="button"
+                                            class="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                                            id="toggle-password">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div class="password-strength mt-2">
+                                        <div class="flex justify-between text-xs mb-1">
+                                            <span>Password Strength</span>
+                                            <span id="password-strength-text">Weak</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div id="password-strength-bar"
+                                                class="bg-red-500 h-2 rounded-full transition-all duration-300"
+                                                style="width: 20%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="validation-message text-error text-xs mt-1 hidden" id="password-error">
+                                    </div>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Confirm Password</span>
+                                    </label>
+                                    <div class="relative">
+                                        <input type="password" id="confirm-password"
+                                            class="input input-bordered w-full pr-10" placeholder="••••••••" required>
+                                        <button type="button"
+                                            class="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                                            id="toggle-confirm-password">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div class="validation-message text-error text-xs mt-1 hidden"
+                                        id="confirm-password-error"></div>
+                                </div>
+
+                                <!-- Terms & Conditions -->
+                                <div class="form-control">
+                                    <label class="cursor-pointer label justify-start gap-3">
+                                        <input type="checkbox" id="terms" class="checkbox checkbox-primary" required>
+                                        <span class="label-text">I agree to the <a href="#"
+                                                class="link link-primary">Terms & Conditions</a> and <a href="#"
+                                                class="link link-primary">Privacy Policy</a></span>
+                                    </label>
+                                    <div class="validation-message text-error text-xs mt-1 hidden" id="terms-error">
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary w-full text-white text-lg py-3 pulse"
+                                    id="signup-submit">
+                                    <i class="fa-solid fa-user-plus mr-2"></i>
+                                    Create Account
+                                    <span class="loading loading-spinner loading-sm hidden" id="submit-loading"></span>
+                                </button>
+
+                                <!-- Divider -->
+                                <div class="divider">OR</div>
+
+                                <!-- Social Signup -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <button type="button" class="btn btn-outline gap-2">
+                                        <i class="fa-brands fa-google text-red-500"></i>
+                                        Google
+                                    </button>
+                                    <button type="button" class="btn btn-outline gap-2">
+                                        <i class="fa-brands fa-microsoft text-blue-500"></i>
+                                        Microsoft
+                                    </button>
+                                </div>
+
+                                <!-- Login Link -->
+                                <div class="text-center mt-6">
+                                    <p class="text-gray-600">
+                                        Already have an account?
+                                        <a href="signin.html" class="link link-primary font-semibold">Sign In</a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Highlight Section -->
+
+
+    <!-- Footer -->
+    <footer class="footer bg-base-200 text-base-content p-10">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full">
+                <!-- Brand Section -->
+                <div class="text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="text-xl font-bold">IUS QUIZ SYSTEM</span>
+                    </div>
+                    <p class="mb-4">The premier platform for interactive learning and knowledge testing at IUS.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="text-left">
+                    <span class="footer-title">Quick Links</span>
+                    <div class="space-y-2">
+                        <a class="link link-hover flex items-center gap-2" href="index.html">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Home
+                        </a>
+                        <a class="link link-hover flex items-center gap-2" href="signin.html">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Sign In
+                        </a>
+                        <a class="link link-hover flex items-center gap-2" href="signup.html">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Sign Up
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Courses -->
+                <div class="text-left">
+                    <span class="footer-title">Courses</span>
+                    <div class="space-y-2">
+                        <a class="link link-hover">Computer Science (CSE)</a>
+                        <a class="link link-hover">Business Administration (BBA)</a>
+                        <a class="link link-hover">Electrical Engineering (EEE)</a>
+                        <a class="link link-hover">English</a>
+                        <a class="link link-hover">Textile Engineering</a>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="text-left">
+                    <span class="footer-title">Contact</span>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-1 text-primary"></i>
+                            <span>IUS Campus, Banani, Dhaka-1213</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-primary"></i>
+                            <span>+880 1234-567890</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                            <span>quiz@ius.ac.bd</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="mt-12 border-t pt-6 w-full text-center">
+                <p>Copyright © <span id="current-year">2025</span> - All rights reserved by IUS Quiz System</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box text-center">
+            <div class="w-16 h-16 bg-success rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-check text-white text-2xl"></i>
+            </div>
+            <h3 class="font-bold text-2xl mb-2">Account Created Successfully!</h3>
+            <p class="py-4">Welcome to IUS Quiz System. Your account has been created successfully.</p>
+            <div class="modal-action justify-center">
+                <button class="btn btn-primary" id="go-to-dashboard">
+                    <i class="fa-solid fa-rocket mr-2"></i>
+                    Go to Dashboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="signup.js"></script>
+</body>
+
+</html>

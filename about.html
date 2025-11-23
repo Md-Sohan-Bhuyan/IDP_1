@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - IUS QUIZ SYSTEM</title>
+    <meta name="description"
+        content="Learn about IUS Quiz System - Your premier platform for interactive learning and knowledge testing">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body class="bg-base-100">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50" aria-label="Main Navigation">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+                    <span class="sr-only">Open main menu</span>
+                </label>
+                <ul id="mobile-menu" tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a></li>
+                    <li>
+                        <details>
+                            <summary><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i> Courses</summary>
+                            <ul class="p-2">
+                                <li><a href="#" aria-label="Computer Science and Engineering courses">CSE</a></li>
+                                <li><a href="#" aria-label="Business Administration courses">BBA</a></li>
+                                <li><a href="#" aria-label="Master of Business Administration courses">MBA</a></li>
+                                <li><a href="#" aria-label="Executive MBA courses">EMBA</a></li>
+                                <li><a href="#" aria-label="Textile courses">TEXTILE</a></li>
+                                <li><a href="#" aria-label="English courses">ENGLISH</a></li>
+                                <li><a href="#" aria-label="Electrical and Electronic Engineering courses">EEE</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i>
+                            Quizzes</a></li>
+                    <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i>
+                            Results</a></li>
+                    <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i>
+                            Leaderboard</a></li>
+                    <li><a href="about.html" class="active"><i class="fa-solid fa-info" aria-hidden="true"></i>
+                            About</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
+                    <li><a href="signin.html" id="mobile-signin"><i class="fa-solid fa-arrow-right-to-bracket"
+                                aria-hidden="true"></i> SignIn</a></li>
+                    <li><a href="signup.html" id="mobile-signup"><i class="fa-solid fa-user-plus"
+                                aria-hidden="true"></i> SignUp</a></li>
+                </ul>
+            </div>
+            <a href="index.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <img src="images/favicon.ico" alt="">
+                </div>
+                IUS QUIZ SYSTEM
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a></li>
+
+                <li tabindex="0">
+                    <details>
+                        <summary><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i> Courses</summary>
+                        <ul class="p-2 bg-base-100 z-10 w-40">
+                            <li><a href="#" aria-label="Computer Science and Engineering courses">CSE</a></li>
+                            <li><a href="#" aria-label="Business Administration courses">BBA</a></li>
+                            <li><a href="#" aria-label="Master of Business Administration courses">MBA</a></li>
+                            <li><a href="#" aria-label="Executive MBA courses">EMBA</a></li>
+                            <li><a href="#" aria-label="English courses">ENGLISH</a></li>
+                            <li><a href="#" aria-label="Textile courses">TEXTILE</a></li>
+                            <li><a href="#" aria-label="Electrical and Electronic Engineering courses">EEE</a></li>
+                        </ul>
+                    </details>
+                </li>
+
+                <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Quizzes</a>
+                </li>
+                <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i>
+                        Results</a></li>
+                <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i>
+                        Leaderboard</a></li>
+                <li><a href="about.html" class="active"><i class="fa-solid fa-info" aria-hidden="true"></i> About</a>
+                </li>
+                <li><a href="contact.html"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end hidden lg:flex gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+
+            <!-- Dark Mode Toggle -->
+            <button id="dark-mode-toggle" class="btn btn-sm btn-ghost" aria-label="Toggle dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+
+            <!-- Notification Bell -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-sm btn-ghost relative" aria-label="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                    <li class="menu-title">Notifications</li>
+                    <li><a><i class="fa-solid fa-trophy text-yellow-500"></i> You've moved up to 3rd place!</a></li>
+                    <li><a><i class="fa-solid fa-clock text-blue-500"></i> New quiz available: "Advanced Algorithms"</a>
+                    </li>
+                    <li><a><i class="fa-solid fa-users text-green-500"></i> 5 new students joined your course</a></li>
+                </ul>
+            </div>
+
+            <a class="btn btn-sm" href="signin.html" id="desktop-signin"><i class="fa-solid fa-arrow-right-to-bracket"
+                    aria-hidden="true"></i> SignIn</a>
+            <a class="btn btn-sm btn-primary text-white" href="signup.html" id="desktop-signup"><i
+                    class="fa-solid fa-user-plus" aria-hidden="true"></i> SignUp</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="banner-gradient py-20 px-4 md:px-8 text-white relative overflow-hidden">
+        <!-- Particle Background -->
+        <div class="particles-container" id="particles-container"></div>
+
+        <div class="container mx-auto relative z-10 text-center">
+            <div class="max-w-4xl mx-auto animate-fadeInUp">
+                <div class="mb-6 inline-block">
+                    <div
+                        class="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 pulse">
+                        <i class="fa-solid fa-graduation-cap text-4xl text-white"></i>
+                    </div>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient-animated">About IUS Quiz System</h1>
+                <p class="text-xl md:text-2xl mb-8 leading-relaxed">Empowering students through interactive learning and
+                    knowledge assessment</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
+                        <i class="fa-solid fa-calendar-check mr-2"></i>
+                        <span>Established 2020</span>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
+                        <i class="fa-solid fa-users mr-2"></i>
+                        <span>2,500+ Active Students</span>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
+                        <i class="fa-solid fa-book mr-2"></i>
+                        <span>1,250+ Quizzes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="py-16 bg-base-100">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Mission Card -->
+                <div
+                    class="card bg-gradient-to-br from-primary/10 to-primary/5 shadow-glow border border-primary/20 course-card card-lift shine-effect">
+                    <div class="card-body">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-primary to-purple-600 rounded-full flex items-center justify-center mb-4 mx-auto pulse-glow icon-hover">
+                            <i class="fa-solid fa-bullseye text-2xl text-white"></i>
+                        </div>
+                        <h2 class="card-title justify-center text-2xl mb-4 text-gradient-animated">Our Mission</h2>
+                        <p class="text-center text-lg leading-relaxed text-gray-700">
+                            To provide a comprehensive, interactive, and engaging quiz platform that enhances learning
+                            outcomes for students across all departments. We aim to make knowledge assessment fun,
+                            accessible, and effective, fostering a culture of continuous learning and academic
+                            excellence.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Vision Card -->
+                <div
+                    class="card bg-gradient-to-br from-secondary/10 to-secondary/5 shadow-glow border border-secondary/20 course-card card-lift shine-effect">
+                    <div class="card-body">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-secondary to-pink-600 rounded-full flex items-center justify-center mb-4 mx-auto pulse-glow icon-hover">
+                            <i class="fa-solid fa-eye text-2xl text-white"></i>
+                        </div>
+                        <h2 class="card-title justify-center text-2xl mb-4 text-gradient-animated">Our Vision</h2>
+                        <p class="text-center text-lg leading-relaxed text-gray-700">
+                            To become the leading digital learning platform in Bangladesh, recognized for innovation in
+                            educational technology. We envision a future where every student has access to personalized
+                            learning experiences that adapt to their unique learning styles and pace.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-16 bg-base-200">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-gradient-animated">Why Choose IUS Quiz System?</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Experience the difference of a platform designed
+                    specifically for university students</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Feature 1 -->
+                <div class="card bg-base-100 shadow-glow course-card card-lift border-glow">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-full flex items-center justify-center mb-4 pulse-glow icon-hover relative z-10 shadow-lg">
+                            <i class="fa-solid fa-rocket text-3xl text-white"></i>
+                        </div>
+                        <h3 class="card-title mb-2 text-xl text-gray-800 dark:text-gray-100 font-bold relative z-10">
+                            Cutting-Edge Technology</h3>
+                        <p class="text-gray-700 dark:text-gray-300 relative z-10 font-medium">Built with modern web
+                            technologies ensuring fast, responsive, and reliable performance across all devices.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="card bg-base-100 shadow-glow course-card card-lift border-glow">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-br from-green-500 via-teal-500 to-cyan-500 rounded-full flex items-center justify-center mb-4 pulse-glow icon-hover relative z-10 shadow-lg">
+                            <i class="fa-solid fa-chart-line text-3xl text-white"></i>
+                        </div>
+                        <h3 class="card-title mb-2 text-xl text-gray-800 dark:text-gray-100 font-bold relative z-10">
+                            Real-Time Analytics</h3>
+                        <p class="text-gray-700 dark:text-gray-300 relative z-10 font-medium">Track your progress with
+                            detailed performance metrics and insights that help you identify strengths and areas for
+                            improvement.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="card bg-base-100 shadow-glow course-card card-lift border-glow">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-br from-red-500 via-pink-500 to-rose-500 rounded-full flex items-center justify-center mb-4 pulse-glow icon-hover relative z-10 shadow-lg">
+                            <i class="fa-solid fa-shield-halved text-3xl text-white"></i>
+                        </div>
+                        <h3 class="card-title mb-2 text-xl text-gray-800 dark:text-gray-100 font-bold relative z-10">
+                            Secure & Reliable</h3>
+                        <p class="text-gray-700 dark:text-gray-300 relative z-10 font-medium">Your data and progress are
+                            protected with industry-standard security measures and regular backups.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="card bg-base-100 shadow-glow course-card card-lift border-glow">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 rounded-full flex items-center justify-center mb-4 pulse-glow icon-hover relative z-10 shadow-lg">
+                            <i class="fa-solid fa-users text-3xl text-white"></i>
+                        </div>
+                        <h3 class="card-title mb-2 text-xl text-gray-800 dark:text-gray-100 font-bold relative z-10">
+                            Community Driven</h3>
+                        <p class="text-gray-700 dark:text-gray-300 relative z-10 font-medium">Join thousands of students
+                            in a collaborative learning environment with leaderboards and peer interactions.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="card bg-base-100 shadow-glow course-card card-lift border-glow">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 rounded-full flex items-center justify-center mb-4 pulse-glow icon-hover relative z-10 shadow-lg">
+                            <i class="fa-solid fa-clock-rotate-left text-3xl text-white"></i>
+                        </div>
+                        <h3 class="card-title mb-2 text-xl text-gray-800 dark:text-gray-100 font-bold relative z-10">
+                            24/7 Availability</h3>
+                        <p class="text-gray-700 dark:text-gray-300 relative z-10 font-medium">Access quizzes and study
+                            materials anytime, anywhere. Learn at your own pace and schedule.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="card bg-base-100 shadow-glow course-card card-lift border-glow">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div
+                            class="w-20 h-20 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center mb-4 pulse-glow icon-hover relative z-10 shadow-lg">
+                            <i class="fa-solid fa-trophy text-3xl text-white"></i>
+                        </div>
+                        <h3 class="card-title mb-2 text-xl text-gray-800 dark:text-gray-100 font-bold relative z-10">
+                            Achievement System</h3>
+                        <p class="text-gray-700 dark:text-gray-300 relative z-10 font-medium">Earn badges, certificates,
+                            and recognition for your accomplishments. Compete and climb the leaderboard.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-16 stats-gradient text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Our Impact</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                <div class="stats-card rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold mb-2" id="about-total-students">2,500+</div>
+                    <div class="text-sm">Active Students</div>
+                </div>
+                <div class="stats-card rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold mb-2" id="about-total-quizzes">1,250+</div>
+                    <div class="text-sm">Total Quizzes</div>
+                </div>
+                <div class="stats-card rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold mb-2" id="about-questions">58,420+</div>
+                    <div class="text-sm">Questions Answered</div>
+                </div>
+                <div class="stats-card rounded-xl p-6 text-center">
+                    <div class="text-4xl font-bold mb-2" id="about-avg-score">78%</div>
+                    <div class="text-sm">Average Score</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-16 bg-base-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 text-gradient-animated">Our Story</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-8 pulse"></div>
+                </div>
+
+                <div class="prose prose-lg max-w-none">
+                    <div class="card bg-base-200 shadow-glow p-8 card-lift border-glow">
+                        <p class="text-lg leading-relaxed mb-6">
+                            The <strong>IUS Quiz System</strong> was born out of a vision to revolutionize the way
+                            students learn and assess their knowledge. Recognizing the challenges faced by university
+                            students in Bangladesh, we set out to create a platform that would make learning more
+                            interactive, engaging, and accessible.
+                        </p>
+
+                        <p class="text-lg leading-relaxed mb-6">
+                            Founded in 2020, our platform began as a small project aimed at helping students in the
+                            International University of Scholars (IUS) prepare for their examinations. Over time, we've
+                            grown into a comprehensive learning management system serving students across multiple
+                            departments including Computer Science, Business Administration, Electrical Engineering,
+                            English, and Textile Engineering.
+                        </p>
+
+                        <p class="text-lg leading-relaxed mb-6">
+                            Today, our platform hosts thousands of quizzes covering a wide range of subjects and topics.
+                            We're committed to continuous improvement, regularly adding new features based on student
+                            feedback and the latest educational research. Our goal is not just to help students pass
+                            exams, but to foster a genuine love for learning and academic excellence.
+                        </p>
+
+                        <div class="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg p-6 mt-8">
+                            <p class="text-lg font-semibold text-center italic">
+                                "Education is not the filling of a pail, but the lighting of a fire." - William Butler
+                                Yeats
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-16 bg-base-200">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4 text-gradient-animated">Our Core Values</h2>
+                <p class="text-xl text-gray-600">The principles that guide everything we do</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div class="card bg-base-100 shadow-glow course-card card-lift shine-effect">
+                    <div class="card-body items-center text-center">
+                        <i class="fa-solid fa-heart text-4xl text-red-500 mb-4 icon-hover pulse-glow"></i>
+                        <h3 class="card-title text-lg text-gradient-animated">Passion</h3>
+                        <p class="text-sm text-gray-600">We're passionate about education and student success</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-glow course-card card-lift shine-effect">
+                    <div class="card-body items-center text-center">
+                        <i class="fa-solid fa-lightbulb text-4xl text-yellow-500 mb-4 icon-hover pulse-glow"></i>
+                        <h3 class="card-title text-lg text-gradient-animated">Innovation</h3>
+                        <p class="text-sm text-gray-600">Constantly evolving with new technologies and ideas</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-glow course-card card-lift shine-effect">
+                    <div class="card-body items-center text-center">
+                        <i class="fa-solid fa-handshake text-4xl text-blue-500 mb-4 icon-hover pulse-glow"></i>
+                        <h3 class="card-title text-lg text-gradient-animated">Integrity</h3>
+                        <p class="text-sm text-gray-600">Honest, transparent, and ethical in all our practices</p>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-glow course-card card-lift shine-effect">
+                    <div class="card-body items-center text-center">
+                        <i class="fa-solid fa-star text-4xl text-purple-500 mb-4 icon-hover pulse-glow"></i>
+                        <h3 class="card-title text-lg text-gradient-animated">Excellence</h3>
+                        <p class="text-sm text-gray-600">Striving for the highest quality in everything we do</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl font-bold mb-6">Ready to Start Your Learning Journey?</h2>
+                <p class="text-xl mb-8">Join thousands of students already using IUS Quiz System to enhance their
+                    knowledge and excel in their studies.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="signup.html" class="btn btn-lg bg-white text-primary hover:bg-gray-100 btn-beautiful">
+                        <i class="fa-solid fa-user-plus mr-2"></i> Sign Up Now
+                    </a>
+                    <a href="index.html"
+                        class="btn btn-lg btn-outline text-white border-white hover:bg-white hover:text-primary btn-beautiful">
+                        <i class="fa-solid fa-home mr-2"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-base-200 text-base-content p-10 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-5">
+            <div class="absolute -top-10 -left-10 w-32 h-32 bg-primary rounded-full"></div>
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary rounded-full"></div>
+            <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-accent rounded-full"></div>
+        </div>
+
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full relative z-10">
+                <!-- Brand Section -->
+                <div class="text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="relative">
+                            <div
+                                class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white pulse">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                            </span>
+                        </div>
+                        <span
+                            class="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                            IUS QUIZ SYSTEM
+                        </span>
+                    </div>
+                    <p class="mb-4">The premier platform for interactive learning and knowledge testing at IUS.</p>
+                    <div class="flex gap-4 mt-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:bg-blue-600 hover:text-white text-blue-600"
+                            aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:bg-sky-500 hover:text-white text-sky-500"
+                            aria-label="Twitter">
+                            <i class="fa-brands fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:bg-pink-600 hover:text-white text-pink-600"
+                            aria-label="Instagram">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:bg-blue-800 hover:text-white text-blue-800"
+                            aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="text-left">
+                    <span class="footer-title">Quick Links</span>
+                    <div class="space-y-2">
+                        <a class="link link-hover flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                            href="index.html">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Home
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                            href="#">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Courses
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                            href="quizzes.html">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Quizzes
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                            href="about.html">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> About Us
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Courses -->
+                <div class="text-left">
+                    <span class="footer-title">Courses</span>
+                    <div class="space-y-2">
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-primary rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Computer Science (CSE)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-secondary rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Business Administration (BBA)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-warning rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Master of Business Administration (MBA)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-accent rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Executive MBA (EMBA)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-accent rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Electrical Engineering (EEE)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-primary rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            English
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="text-left">
+                    <span class="footer-title">Contact</span>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot mt-1 text-primary"></i>
+                            <span>IUS Campus, Banani, Dhaka-1200</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-primary"></i>
+                            <span>+880 1234-567890</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                            <span>quiz@ius.ac.bd</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="mt-12 border-t pt-6 w-full relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <aside>
+                        <p class="text-center md:text-left">Copyright © <span id="current-year">2025</span> - All rights
+                            reserved by IUS Quiz System</p>
+                    </aside>
+
+                    <!-- Additional Links -->
+                    <div class="flex gap-6 mt-4 md:mt-0">
+                        <a href="#" class="link link-hover text-xs">Privacy Policy</a>
+                        <a href="#" class="link link-hover text-xs">Terms of Service</a>
+                        <a href="about.html" class="link link-hover text-xs">About Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home.js"></script>
+</body>
+
+</html>

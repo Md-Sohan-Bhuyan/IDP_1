@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Quiz - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="play_quiz.css">
+</head>
+
+<body class="bg-base-100 min-h-screen flex flex-col select-none">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <a href="quizzes.html" class="btn btn-ghost gap-2"
+                onclick="return confirm('Are you sure you want to leave? Your progress will be lost.')">
+                <i class="fa-solid fa-arrow-left"></i> Exit Quiz
+            </a>
+        </div>
+        <div class="navbar-center">
+            <h1 class="text-xl font-bold" id="quiz-title">Loading Quiz...</h1>
+        </div>
+        <div class="navbar-end">
+            <div class="badge badge-primary badge-lg gap-2 font-mono text-lg" id="timer-badge">
+                <i class="fa-regular fa-clock"></i> <span id="timer">00:00</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow flex flex-col items-center justify-center">
+
+        <!-- Login Prompt (Hidden by default) -->
+        <div id="login-prompt" class="card w-96 bg-base-100 shadow-xl hidden">
+            <div class="card-body items-center text-center">
+                <div class="w-16 h-16 bg-error/10 rounded-full flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-lock text-3xl text-error"></i>
+                </div>
+                <h2 class="card-title text-2xl mb-2">Authentication Required</h2>
+                <p class="mb-6 text-gray-600">Please sign in to access this assessment.</p>
+                <div class="card-actions w-full">
+                    <a href="signin.html" class="btn btn-primary w-full">Sign In</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="w-full max-w-4xl hidden">
+            <!-- Progress Bar -->
+            <div class="w-full bg-base-200 rounded-full h-2 mb-6 overflow-hidden">
+                <div class="bg-primary h-full transition-all duration-500 ease-out" style="width: 0%" id="progress-bar">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Question Area -->
+                <div class="lg:col-span-2">
+                    <div class="card bg-base-100 shadow-xl border border-base-200 h-full">
+                        <div class="card-body">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="badge badge-outline" id="question-counter">Question 1 of 5</span>
+                                <span class="text-xs text-gray-500 uppercase tracking-wider font-bold">Single
+                                    Choice</span>
+                            </div>
+
+                            <h2 class="text-xl md:text-2xl font-bold mb-6 leading-relaxed" id="question-text">
+                                Loading question...
+                            </h2>
+
+                            <div class="space-y-3" id="options-container">
+                                <!-- Options will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar / Info -->
+                <div class="lg:col-span-1">
+                    <div class="card bg-base-100 shadow-xl border border-base-200 mb-6">
+                        <div class="card-body p-6">
+                            <h3 class="font-bold text-lg mb-4">Quiz Info</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600"><i class="fa-solid fa-layer-group mr-2"></i>
+                                        Category</span>
+                                    <span class="font-semibold" id="quiz-category">...</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600"><i class="fa-solid fa-signal mr-2"></i>
+                                        Difficulty</span>
+                                    <span class="badge badge-ghost" id="quiz-difficulty">...</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600"><i class="fa-solid fa-list-check mr-2"></i> Total
+                                        Qs</span>
+                                    <span class="font-semibold" id="total-questions">...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card bg-base-100 shadow-xl border border-base-200">
+                        <div class="card-body p-6">
+                            <button class="btn btn-primary w-full mb-3" id="next-btn" disabled>
+                                Next Question <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                            <button class="btn btn-outline w-full"
+                                onclick="return confirm('Are you sure you want to quit?') && (window.location.href='quizzes.html')">
+                                Quit Quiz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Container was here, now moved to results.html -->
+
+    </main>
+
+    <!-- IMPORTANT: Script tag was missing in previous version -->
+    <script src="play_quiz.js"></script>
+</body>
+
+</html>

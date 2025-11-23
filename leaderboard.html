@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="leaderboard.css">
+</head>
+
+<body class="bg-base-100 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quizzes</a></li>
+                    <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                    <li><a href="leaderboard.html" class="active"><i class="fa-solid fa-ranking-star"></i>
+                            Leaderboard</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-info"></i> About</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-headset"></i> Contact</a></li>
+                </ul>
+            </div>
+            <a href="index.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <img src="images/favicon.ico" alt="" class="w-6 h-6">
+                </div>
+                IUS QUIZ SYSTEM
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quizzes</a></li>
+                <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                <li><a href="leaderboard.html" class="active"><i class="fa-solid fa-ranking-star"></i> Leaderboard</a>
+                </li>
+                <li><a href="about.html"><i class="fa-solid fa-info"></i> About</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-headset"></i> Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end hidden lg:flex gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+            <button id="dark-mode-toggle" class="btn btn-sm btn-ghost">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <a class="btn btn-sm" href="signin.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> SignIn</a>
+            <a class="btn btn-sm btn-primary text-white" href="signup.html"><i class="fa-solid fa-user-plus"></i>
+                SignUp</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-r from-purple-600 to-indigo-700 text-white py-12 mb-8 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+        </div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 animate-fadeInUp">Top Performers</h1>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto animate-fadeInUp" style="animation-delay: 0.1s;">
+                See who's leading the charts. Compete, learn, and climb your way to the top!
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pb-16 flex-grow">
+
+        <!-- Your Rank Summary -->
+        <div id="user-rank-card"
+            class="card bg-base-100 shadow-xl border border-primary/20 mb-10 animate-fadeInUp hidden"
+            style="animation-delay: 0.2s;">
+            <div class="card-body flex-row items-center justify-between flex-wrap gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="avatar placeholder">
+                        <div class="bg-neutral text-neutral-content rounded-full w-16">
+                            <span class="text-xl">YOU</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="card-title text-2xl">Your Performance</h2>
+                        <p class="text-gray-500">Keep up the good work!</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 text-center">
+                    <div>
+                        <div class="text-sm uppercase font-bold text-gray-500">Rank</div>
+                        <div class="text-3xl font-bold text-primary" id="user-rank">#--</div>
+                    </div>
+                    <div>
+                        <div class="text-sm uppercase font-bold text-gray-500">Score</div>
+                        <div class="text-3xl font-bold text-secondary" id="user-score">0</div>
+                    </div>
+                    <div>
+                        <div class="text-sm uppercase font-bold text-gray-500">Quizzes</div>
+                        <div class="text-3xl font-bold text-accent" id="user-quizzes">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6 animate-fadeInUp"
+            style="animation-delay: 0.3s;">
+            <div class="tabs tabs-boxed bg-base-200 flex-wrap justify-center">
+                <a class="tab tab-active" data-filter="all">All</a>
+                <a class="tab" data-filter="CSE">CSE</a>
+                <a class="tab" data-filter="BBA">BBA</a>
+                <a class="tab" data-filter="MBA">MBA</a>
+                <a class="tab" data-filter="EEE">EEE</a>
+                <a class="tab" data-filter="English">English</a>
+            </div>
+
+            <div class="flex gap-2">
+                <select class="select select-bordered w-full max-w-xs" id="time-filter">
+                    <option value="all">All Time</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Leaderboard Table -->
+        <div class="overflow-x-auto bg-base-100 rounded-xl shadow-lg border border-base-200 animate-fadeInUp"
+            style="animation-delay: 0.4s;">
+            <table class="table w-full" id="leaderboard-table">
+                <thead class="bg-base-200 text-base">
+                    <tr>
+                        <th class="w-20 text-center">Rank</th>
+                        <th>Student</th>
+                        <th>Department</th>
+                        <th class="text-center">Quizzes</th>
+                        <th class="text-right">Total Score</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <!-- Rows will be populated by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-8">
+            <button class="btn btn-outline btn-primary" id="load-more-btn">Load More</button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-base-200 text-base-content p-10 relative overflow-hidden mt-auto">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full relative z-10">
+                <div class="text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="text-xl font-bold">IUS QUIZ SYSTEM</span>
+                    </div>
+                    <p>The premier platform for interactive learning and knowledge testing at IUS.</p>
+                </div>
+                <div>
+                    <span class="footer-title">Quick Links</span>
+                    <a href="index.html" class="link link-hover">Home</a>
+                    <a href="quizzes.html" class="link link-hover">Quizzes</a>
+                    <a href="leaderboard.html" class="link link-hover">Leaderboard</a>
+                    <a href="about.html" class="link link-hover">About Us</a>
+                </div>
+                <div>
+                    <span class="footer-title">Support</span>
+                    <a href="contact.html" class="link link-hover">Contact Us</a>
+                    <a href="#" class="link link-hover">FAQ</a>
+                    <a href="#" class="link link-hover">Privacy Policy</a>
+                </div>
+                <div>
+                    <span class="footer-title">Social</span>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t pt-6 text-center">
+                <p>Copyright © <span id="current-year">2025</span> - All rights reserved by IUS Quiz System</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home.js"></script> <!-- Reusing home.js for clock and dark mode -->
+    <script src="leaderboard.js"></script>
+</body>
+
+</html>

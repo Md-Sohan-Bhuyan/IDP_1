@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IUS QUIZ SYSTEM - Test Your Knowledge</title>
+    <meta name="description"
+        content="IUS Quiz System - Test your knowledge with our interactive quizzes across multiple subjects">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body class="bg-base-100">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50" aria-label="Main Navigation">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+                    <span class="sr-only">Open main menu</span>
+                </label>
+                <ul id="mobile-menu" tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html" class="active"><i class="fa-solid fa-house" aria-hidden="true"></i>
+                            Home</a></li>
+                    <li>
+                        <details>
+                            <summary><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i> Courses</summary>
+                            <ul class="p-2">
+                                <li><a href="#" aria-label="Computer Science and Engineering courses">CSE</a></li>
+                                <li><a href="#" aria-label="Business Administration courses">BBA</a></li>
+                                <li><a href="#" aria-label="Master of Business Administration courses">MBA</a></li>
+                                <li><a href="#" aria-label="Executive MBA courses">EMBA</a></li>
+                                <li><a href="#" aria-label="Textile courses">TEXTILE</a></li>
+                                <li><a href="#" aria-label="English courses">ENGLISH</a></li>
+                                <li><a href="#" aria-label="Electrical and Electronic Engineering courses">EEE</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i>
+                            Quizzes</a></li>
+                    <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i>
+                            Results</a></li>
+                    <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i>
+                            Leaderboard</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-info" aria-hidden="true"></i> About</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
+                    <li><a href="signin.html" id="mobile-signin"><i class="fa-solid fa-arrow-right-to-bracket"
+                                aria-hidden="true"></i> SignIn</a></li>
+                    <li><a href="signup.html" id="mobile-signup"><i class="fa-solid fa-user-plus"
+                                aria-hidden="true"></i> SignUp</a></li>
+
+                </ul>
+            </div>
+            <a href="index.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <img src="images/favicon.ico" alt="">
+                </div>
+                IUS QUIZ SYSTEM
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="index.html" class="active"><i class="fa-solid fa-house" aria-hidden="true"></i> Home</a>
+                </li>
+
+                <li tabindex="0">
+                    <details>
+                        <summary><i class="fa-solid fa-person-chalkboard" aria-hidden="true"></i> Courses</summary>
+                        <ul class="p-2 bg-base-100 z-10 w-40">
+                            <li><a href="#" aria-label="Computer Science and Engineering courses">CSE</a></li>
+                            <li><a href="#" aria-label="Business Administration courses">BBA</a></li>
+                            <li><a href="#" aria-label="Master of Business Administration courses">MBA</a></li>
+                            <li><a href="#" aria-label="Executive MBA courses">EMBA</a></li>
+                            <li><a href="#" aria-label="English courses">ENGLISH</a></li>
+                            <li><a href="#" aria-label="Textile courses">TEXTILE</a></li>
+                            <li><a href="#" aria-label="Electrical and Electronic Engineering courses">EEE</a></li>
+                        </ul>
+                    </details>
+                </li>
+
+                <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Quizzes</a>
+                </li>
+                <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i>
+                        Results</a></li>
+                <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i>
+                        Leaderboard</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-info" aria-hidden="true"></i> About</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end hidden lg:flex gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+
+            <!-- Dark Mode Toggle -->
+            <button id="dark-mode-toggle" class="btn btn-sm btn-ghost" aria-label="Toggle dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+
+            <!-- Notification Bell -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-sm btn-ghost relative" aria-label="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                    <li class="menu-title">Notifications</li>
+                    <li><a><i class="fa-solid fa-trophy text-yellow-500"></i> You've moved up to 3rd place!</a></li>
+                    <li><a><i class="fa-solid fa-clock text-blue-500"></i> New quiz available: "Advanced Algorithms"</a>
+                    </li>
+                    <li><a><i class="fa-solid fa-users text-green-500"></i> 5 new students joined your course</a></li>
+                </ul>
+            </div>
+
+            <a class="btn btn-sm" href="#" id="desktop-signin"><i class="fa-solid fa-arrow-right-to-bracket"
+                    aria-hidden="true"></i> SignIn</a>
+            <a class="btn btn-sm btn-primary text-white" href="#" id="desktop-signup"><i class="fa-solid fa-user-plus"
+                    aria-hidden="true"></i> SignUp</a>
+        </div>
+    </nav>
+
+    <!-- Banner Section -->
+    <section class="banner-gradient py-16 px-4 md:px-8 text-white relative overflow-hidden">
+        <!-- Particle Background -->
+        <div class="particles-container" id="particles-container"></div>
+
+        <div class="container mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeInUp">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 typing-animation text-white drop-shadow-lg">Test Your
+                        Knowledge with IUS Quiz System</h1>
+                    <p class="text-xl mb-6">Challenge yourself with interactive quizzes across various subjects and
+                        track your progress in real-time.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="btn btn-primary btn-lg text-white btn-beautiful pulse-glow" id="start-quiz-btn">
+                            <i class="fa-solid fa-play mr-2"></i> Start Quiz Now
+                        </button>
+                        <button
+                            class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-purple-700 btn-beautiful"
+                            id="leaderboard-btn">
+                            <i class="fa-solid fa-chart-line mr-2"></i> View Leaderboard
+                        </button>
+                    </div>
+                    <div class="mt-8 flex items-center">
+                        <div class="flex -space-x-4 mr-4">
+                            <div
+                                class="w-10 h-10 rounded-full bg-primary border-2 border-white flex items-center justify-center">
+                                <span class="text-xs font-bold">CSE</span>
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-secondary border-2 border-white flex items-center justify-center">
+                                <span class="text-xs font-bold">BBA</span>
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-accent border-2 border-white flex items-center justify-center">
+                                <span class="text-xs font-bold">ENG</span>
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-neutral border-2 border-white flex items-center justify-center">
+                                <span class="text-xs font-bold">+5</span>
+                            </div>
+                        </div>
+                        <p class="text-sm">Join <span class="font-bold" id="total-students">2,500+</span> students
+                            already testing their knowledge</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="floating">
+                            <div class="bg-white rounded-2xl p-6 shadow-2xl text-gray-800">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="font-bold text-lg">Current Active Quiz</h3>
+                                    <div class="badge badge-primary pulse" id="live-badge">Live</div>
+                                </div>
+                                <div class="mb-4">
+                                    <h4 class="font-semibold" id="active-quiz-title">Computer Science Fundamentals</h4>
+                                    <p class="text-sm text-gray-600" id="active-quiz-details">10 questions • 15 minutes
+                                    </p>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-sm">Participants: <span class="font-bold"
+                                                id="active-quiz-participants">243</span></p>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary" id="join-quiz-btn">Join Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-yellow-400 rounded-full opacity-20"></div>
+                        <div class="absolute -top-6 -right-6 w-20 h-20 bg-pink-400 rounded-full opacity-20"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-time Stats Section -->
+    <section class="py-12 stats-gradient text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="stats-card rounded-xl p-6">
+                    <div class="text-3xl font-bold mb-2" id="total-quizzes">1,250</div>
+                    <div class="text-sm">Total Quizzes</div>
+                </div>
+                <div class="stats-card rounded-xl p-6">
+                    <div class="text-3xl font-bold mb-2" id="active-users">347</div>
+                    <div class="text-sm">Active Users Now</div>
+                </div>
+                <div class="stats-card rounded-xl p-6">
+                    <div class="text-3xl font-bold mb-2" id="questions-answered">58,420</div>
+                    <div class="text-sm">Questions Answered</div>
+                </div>
+                <div class="stats-card rounded-xl p-6">
+                    <div class="text-3xl font-bold mb-2" id="avg-score">78%</div>
+                    <div class="text-sm">Average Score</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-base-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gradient-animated">Why Choose IUS Quiz System?</h2>
+            <p class="text-center text-lg mb-12 max-w-2xl mx-auto text-gray-600">Our platform offers a comprehensive
+                learning experience with cutting-edge features designed to enhance your knowledge.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card bg-base-200 shadow-glow course-card card-lift shine-effect">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4 pulse-glow icon-hover relative z-10 shadow-lg">
+                            <i class="fa-solid fa-brain text-2xl text-white"></i>
+                        </div>
+                        <h3 class="card-title mb-2 text-gray-800 dark:text-gray-100 font-bold relative z-10">Interactive
+                            Learning</h3>
+                        <p class="text-gray-700 dark:text-gray-300 relative z-10 font-medium">Engage with dynamic
+                            quizzes that adapt to your learning pace and style with real-time feedback.</p>
+                    </div>
+                </div>
+                <div class="card bg-base-200 shadow-glow course-card card-lift shine-effect">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-green-500 via-teal-500 to-cyan-500 rounded-full flex items-center justify-center mb-4 pulse-glow icon-hover relative z-10 shadow-lg">
+                            <i class="fa-solid fa-chart-line text-2xl text-white"></i>
+                        </div>
+                        <h3 class="card-title mb-2 text-gray-800 dark:text-gray-100 font-bold relative z-10">Real-time
+                            Analytics</h3>
+                        <p class="text-gray-700 dark:text-gray-300 relative z-10 font-medium">Track your progress with
+                            detailed performance analytics and insights updated in real-time.</p>
+                    </div>
+                </div>
+                <div class="card bg-base-200 shadow-glow course-card card-lift shine-effect">
+                    <div class="card-body items-center text-center relative z-10">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 rounded-full flex items-center justify-center mb-4 pulse-glow icon-hover relative z-10 shadow-lg">
+                            <i class="fa-solid fa-trophy text-2xl text-white"></i>
+                        </div>
+                        <h3 class="card-title mb-2 text-gray-800 dark:text-gray-100 font-bold relative z-10">Competitive
+                            Edge</h3>
+                        <p class="text-gray-700 dark:text-gray-300 relative z-10 font-medium">Compete with peers and
+                            climb the leaderboard to showcase your knowledge and skills.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Courses Section -->
+    <section class="py-16 bg-base-200 relative overflow-hidden">
+        <!-- Decorative background elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-30">
+            <div class="absolute top-10 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <h2
+                class="text-4xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary animate-gradient-x">
+                Explore Our Courses</h2>
+            <p class="text-center text-lg mb-12 max-w-2xl mx-auto text-gray-600">Discover specialized quizzes tailored
+                for your academic success.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+                <!-- CSE -->
+                <div
+                    class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-300 w-full group overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                    </div>
+                    <div class="card-body">
+                        <div
+                            class="w-14 h-14 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                            <i class="fa-solid fa-laptop-code text-white text-2xl"></i>
+                        </div>
+                        <h3 class="card-title text-xl mb-1 group-hover:text-primary transition-colors">Computer Science
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-4">Programming, Algorithms, Data Structures</p>
+                        <div class="flex justify-between items-center pt-4 border-t border-base-200">
+                            <div class="badge badge-primary badge-outline">42 Quizzes</div>
+                            <div class="text-sm font-medium text-gray-500"><i
+                                    class="fa-solid fa-users mr-1 text-primary"></i> 1,240</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BBA -->
+                <div
+                    class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-300 w-full group overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 via-rose-600 to-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                    </div>
+                    <div class="card-body">
+                        <div
+                            class="w-14 h-14 bg-gradient-to-br from-pink-500 via-rose-600 to-red-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                            <i class="fa-solid fa-chart-bar text-white text-2xl"></i>
+                        </div>
+                        <h3 class="card-title text-xl mb-1 group-hover:text-secondary transition-colors">Business Admin
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-4">Management, Marketing, Finance</p>
+                        <div class="flex justify-between items-center pt-4 border-t border-base-200">
+                            <div class="badge badge-secondary badge-outline">38 Quizzes</div>
+                            <div class="text-sm font-medium text-gray-500"><i
+                                    class="fa-solid fa-users mr-1 text-secondary"></i> 980</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MBA (New) -->
+                <div
+                    class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-300 w-full group overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                    </div>
+                    <div class="card-body">
+                        <div
+                            class="w-14 h-14 bg-gradient-to-br from-amber-500 via-orange-600 to-yellow-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                            <i class="fa-solid fa-briefcase text-white text-2xl"></i>
+                        </div>
+                        <h3 class="card-title text-xl mb-1 group-hover:text-warning transition-colors">MBA</h3>
+                        <p class="text-sm text-gray-500 mb-4">Advanced Business Strategy, Leadership</p>
+                        <div class="flex justify-between items-center pt-4 border-t border-base-200">
+                            <div class="badge badge-warning badge-outline">15 Quizzes</div>
+                            <div class="text-sm font-medium text-gray-500"><i
+                                    class="fa-solid fa-users mr-1 text-warning"></i> 450</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EMBA (New) -->
+                <div
+                    class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-300 w-full group overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-600 to-cyan-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                    </div>
+                    <div class="card-body">
+                        <div
+                            class="w-14 h-14 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                            <i class="fa-solid fa-user-tie text-white text-2xl"></i>
+                        </div>
+                        <h3 class="card-title text-xl mb-1 group-hover:text-accent transition-colors">Executive MBA</h3>
+                        <p class="text-sm text-gray-500 mb-4">Executive Leadership, Global Business</p>
+                        <div class="flex justify-between items-center pt-4 border-t border-base-200">
+                            <div class="badge badge-accent badge-outline">12 Quizzes</div>
+                            <div class="text-sm font-medium text-gray-500"><i
+                                    class="fa-solid fa-users mr-1 text-accent"></i> 320</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EEE -->
+                <div
+                    class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-300 w-full group overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-orange-500 to-amber-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                    </div>
+                    <div class="card-body">
+                        <div
+                            class="w-14 h-14 bg-gradient-to-br from-yellow-400 via-orange-500 to-amber-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                            <i class="fa-solid fa-bolt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="card-title text-xl mb-1 group-hover:text-warning transition-colors">Electrical Eng.
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-4">Circuits, Electronics, Power Systems</p>
+                        <div class="flex justify-between items-center pt-4 border-t border-base-200">
+                            <div class="badge badge-warning badge-outline">35 Quizzes</div>
+                            <div class="text-sm font-medium text-gray-500"><i
+                                    class="fa-solid fa-users mr-1 text-warning"></i> 760</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- English -->
+                <div
+                    class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-300 w-full group overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 via-emerald-600 to-teal-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                    </div>
+                    <div class="card-body">
+                        <div
+                            class="w-14 h-14 bg-gradient-to-br from-green-500 via-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                            <i class="fa-solid fa-language text-white text-2xl"></i>
+                        </div>
+                        <h3 class="card-title text-xl mb-1 group-hover:text-success transition-colors">English</h3>
+                        <p class="text-sm text-gray-500 mb-4">Literature, Grammar, Communication</p>
+                        <div class="flex justify-between items-center pt-4 border-t border-base-200">
+                            <div class="badge badge-success badge-outline">28 Quizzes</div>
+                            <div class="text-sm font-medium text-gray-500"><i
+                                    class="fa-solid fa-users mr-1 text-success"></i> 1,150</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Textile -->
+                <div
+                    class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-300 w-full group overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-fuchsia-600 to-pink-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                    </div>
+                    <div class="card-body">
+                        <div
+                            class="w-14 h-14 bg-gradient-to-br from-purple-500 via-fuchsia-600 to-pink-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                            <i class="fa-solid fa-tshirt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="card-title text-xl mb-1 group-hover:text-secondary transition-colors">Textile Eng.
+                        </h3>
+                        <p class="text-sm text-gray-500 mb-4">Fabric, Manufacturing, Design</p>
+                        <div class="flex justify-between items-center pt-4 border-t border-base-200">
+                            <div class="badge badge-secondary badge-outline">24 Quizzes</div>
+                            <div class="text-sm font-medium text-gray-500"><i
+                                    class="fa-solid fa-users mr-1 text-secondary"></i> 520</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Leaderboard Section -->
+    <section class="py-16 bg-base-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gradient-animated">Live Leaderboard</h2>
+            <p class="text-center text-lg mb-12 max-w-2xl mx-auto text-gray-600">See who's leading this week's
+                competition across all courses.</p>
+            <div class="bg-base-200 rounded-2xl shadow-xl overflow-hidden max-w-4xl mx-auto">
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra w-full">
+                        <thead>
+                            <tr>
+                                <th class="bg-base-300">Rank</th>
+                                <th class="bg-base-300">Student</th>
+                                <th class="bg-base-300">Course</th>
+                                <th class="bg-base-300">Score</th>
+                                <th class="bg-base-300">Quizzes Taken</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <!-- Leaderboard data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button class="btn btn-primary" id="view-full-leaderboard">View Full Leaderboard</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Activity Section -->
+    <section class="py-16 bg-base-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gradient-animated">Recent Activity</h2>
+            <p class="text-center text-lg mb-12 max-w-2xl mx-auto text-gray-600">See what's happening right now in the
+                IUS Quiz System.</p>
+
+            <div class="marquee bg-base-100 p-4 rounded-lg shadow mb-8">
+                <div class="marquee-content">
+                    <div class="flex space-x-8">
+                        <div class="flex items-center space-x-2">
+                            <div class="avatar">
+                                <div class="w-8 rounded-full bg-primary text-white flex items-center justify-center">
+                                    <span class="text-xs">SK</span>
+                                </div>
+                            </div>
+                            <span><strong>Sara Khan</strong> just scored 95% in Computer Science Fundamentals</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="avatar">
+                                <div class="w-8 rounded-full bg-secondary text-white flex items-center justify-center">
+                                    <span class="text-xs">AR</span>
+                                </div>
+                            </div>
+                            <span><strong>Ahmed Rahman</strong> completed 5 quizzes in Business Administration</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="avatar">
+                                <div class="w-8 rounded-full bg-accent text-white flex items-center justify-center">
+                                    <span class="text-xs">FI</span>
+                                </div>
+                            </div>
+                            <span><strong>Fatima Islam</strong> moved up to 2nd place in the leaderboard</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Recent Quiz Completions</h3>
+                        <div id="recent-completions" class="space-y-4">
+                            <!-- Recent completions will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Newly Added Quizzes</h3>
+                        <div id="new-quizzes" class="space-y-4">
+                            <!-- New quizzes will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-base-200 text-base-content p-10 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-5">
+            <div class="absolute -top-10 -left-10 w-32 h-32 bg-primary rounded-full"></div>
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary rounded-full"></div>
+            <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-accent rounded-full"></div>
+        </div>
+
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full relative z-10">
+                <!-- Brand Section -->
+                <div class="text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="relative">
+                            <div
+                                class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white pulse">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                            </span>
+                        </div>
+                        <span
+                            class="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                            IUS QUIZ SYSTEM
+                        </span>
+                    </div>
+                    <p class="mb-4">The premier platform for interactive learning and knowledge testing at IUS.</p>
+                    <div class="flex gap-4 mt-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:bg-blue-600 hover:text-white text-blue-600"
+                            aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:bg-sky-500 hover:text-white text-sky-500"
+                            aria-label="Twitter">
+                            <i class="fa-brands fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:bg-pink-600 hover:text-white text-pink-600"
+                            aria-label="Instagram">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:bg-blue-800 hover:text-white text-blue-800"
+                            aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in text-xl"></i>
+                        </a>
+                    </div>
+
+                    <!-- Newsletter Subscription -->
+                    <div class="mt-6">
+                        <p class="text-sm font-semibold mb-2">Stay Updated</p>
+                        <div class="join w-full">
+                            <input type="email" placeholder="Your email" class="input input-bordered join-item w-full"
+                                id="newsletter-email">
+                            <button class="btn btn-primary join-item" id="subscribe-btn">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs mt-1 text-success hidden" id="subscription-success">Subscribed successfully!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="text-left">
+                    <span class="footer-title">Quick Links</span>
+                    <div class="space-y-2">
+                        <a class="link link-hover flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                            href="index.html">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Home
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                            href="#">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Courses
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                            href="quizzes.html">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Quizzes
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                            href="#">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Results
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                            href="#">
+                            <i class="fa-solid fa-chevron-right text-xs"></i> Leaderboard
+                        </a>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="mt-6 p-3 bg-base-300 rounded-lg">
+                        <p class="text-sm font-semibold mb-2">Today's Activity</p>
+                        <div class="flex justify-between text-xs">
+                            <span>Quizzes Taken:</span>
+                            <span class="font-bold" id="today-quizzes">142</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span>New Users:</span>
+                            <span class="font-bold" id="today-users">28</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Courses -->
+                <div class="text-left">
+                    <span class="footer-title">Courses</span>
+                    <div class="space-y-2">
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-primary rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Computer Science (CSE)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-secondary rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Business Administration (BBA)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-warning rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Master of Business Administration (MBA)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-accent rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Executive MBA (EMBA)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-accent rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Electrical Engineering (EEE)
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-primary rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            English
+                        </a>
+                        <a class="link link-hover flex items-center gap-2 group" href="#">
+                            <div class="w-2 h-2 bg-secondary rounded-full group-hover:scale-150 transition-transform">
+                            </div>
+                            Textile Engineering
+                        </a>
+                    </div>
+
+                    <!-- Popular Quiz -->
+                    <div class="mt-6 p-3 bg-base-300 rounded-lg">
+                        <p class="text-sm font-semibold mb-1">Trending Quiz</p>
+                        <p class="text-xs" id="trending-quiz">Data Structures</p>
+                        <div class="flex items-center mt-1">
+                            <div class="w-full bg-base-100 rounded-full h-1.5">
+                                <div class="bg-primary h-1.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <span class="text-xs ml-2">85%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact & Live Stats -->
+                <div class="text-left">
+                    <span class="footer-title">Contact</span>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-2 group cursor-pointer" id="location-tooltip">
+                            <i
+                                class="fa-solid fa-location-dot mt-1 text-primary group-hover:scale-110 transition-transform"></i>
+                            <span>IUS Campus, Banani, Dhaka-1200</span>
+                        </div>
+                        <div class="flex items-center gap-2 group">
+                            <i class="fa-solid fa-phone text-primary group-hover:scale-110 transition-transform"></i>
+                            <span>+880 1234-567890</span>
+                        </div>
+                        <div class="flex items-center gap-2 group">
+                            <i class="fa-solid fa-envelope text-primary group-hover:scale-110 transition-transform"></i>
+                            <span>quiz@ius.ac.bd</span>
+                        </div>
+                    </div>
+
+                    <!-- Live Stats -->
+                    <div class="mt-6 space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-base-300 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-users mr-2 text-primary"></i>
+                                <span class="text-sm">Online Now:</span>
+                            </div>
+                            <span class="font-bold text-primary" id="footer-active-users">347</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-base-300 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-clock mr-2 text-secondary"></i>
+                                <span class="text-sm">Last Updated:</span>
+                            </div>
+                            <span class="font-bold text-secondary" id="footer-update-time">Just now</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-base-300 rounded-lg">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-server mr-2 text-accent"></i>
+                                <span class="text-sm">System Status:</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="flex h-2 w-2 mr-1">
+                                    <span
+                                        class="animate-ping absolute h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
+                                    <span class="relative rounded-full h-2 w-2 bg-green-500"></span>
+                                </span>
+                                <span class="font-bold text-accent" id="system-status">Operational</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Button -->
+                    <button class="btn btn-outline btn-sm w-full mt-4" id="feedback-btn">
+                        <i class="fa-solid fa-comment-dots mr-2"></i> Give Feedback
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="mt-12 border-t pt-6 w-full relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <aside>
+                        <p class="text-center md:text-left">Copyright © <span id="current-year">2025</span> - All rights
+                            reserved by IUS Quiz System</p>
+                    </aside>
+
+                    <!-- Additional Links -->
+                    <div class="flex gap-6 mt-4 md:mt-0">
+                        <a href="#" class="link link-hover text-xs">Privacy Policy</a>
+                        <a href="#" class="link link-hover text-xs">Terms of Service</a>
+                        <a href="#" class="link link-hover text-xs">Cookie Policy</a>
+                        <a href="#" class="link link-hover text-xs">Sitemap</a>
+                    </div>
+                </div>
+
+                <!-- Back to Top Button -->
+                <button
+                    class="btn btn-circle btn-sm absolute -top-6 left-1/2 transform -translate-x-1/2 bg-base-200 border-base-300"
+                    id="back-to-top">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Feedback Modal -->
+        <div id="feedback-modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <h3 class="font-bold text-lg">Share Your Feedback</h3>
+                <p class="py-4">We'd love to hear your thoughts about the IUS Quiz System!</p>
+
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text">Your Feedback</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-24"
+                        placeholder="What do you think about our platform?"></textarea>
+                </div>
+
+                <div class="form-control w-full mt-4">
+                    <label class="label">
+                        <span class="label-text">Rating</span>
+                    </label>
+                    <div class="rating rating-lg">
+                        <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
+                        <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                    </div>
+                </div>
+
+                <div class="modal-action">
+                    <button class="btn btn-ghost" id="cancel-feedback">Cancel</button>
+                    <button class="btn btn-primary" id="submit-feedback">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Location Tooltip -->
+        <div id="location-tooltip-content"
+            class="hidden absolute z-20 w-64 p-3 bg-base-100 border rounded-lg shadow-lg">
+            <h4 class="font-bold">IUS Campus Location</h4>
+            <p class="text-sm mt-1">International University of Scholars</p>
+            <p class="text-sm">Banani, Dhaka-1213, Bangladesh</p>
+            <div class="mt-2">
+                <button class="btn btn-xs btn-primary">
+                    <i class="fa-solid fa-map-location-dot mr-1"></i> View on Map
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home.js"></script>
+</body>
+
+</html>

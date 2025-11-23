@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="results.css">
+</head>
+
+<body class="bg-base-100 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <a href="index.html" class="btn btn-ghost normal-case text-xl gap-2">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+        </div>
+        <div class="navbar-center">
+            <h1 class="text-xl font-bold">Quiz Results</h1>
+        </div>
+        <div class="navbar-end">
+            <a href="leaderboard.html" class="btn btn-ghost">
+                <i class="fa-solid fa-ranking-star mr-2"></i> Leaderboard
+            </a>
+            <a href="quizzes.html" class="btn btn-ghost">
+                Quizzes <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow flex flex-col items-center justify-center">
+
+        <!-- Result Container -->
+        <div id="result-container" class="card w-full max-w-3xl bg-base-100 shadow-xl animate-fadeIn hidden">
+            <div class="card-body p-8 md:p-10 text-center">
+                <div class="mb-8 relative inline-block">
+                    <div
+                        class="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto animate-bounce-slow">
+                        <i class="fa-solid fa-trophy text-5xl text-yellow-500"></i>
+                    </div>
+                    <div
+                        class="absolute -top-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white animate-ping-slow">
+                        <i class="fa-solid fa-star text-xs"></i>
+                    </div>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-bold mb-2">Quiz Completed!</h2>
+                <p class="text-gray-600 mb-8 text-lg" id="quiz-title-display">...</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="stats shadow bg-base-200">
+                        <div class="stat place-items-center p-4">
+                            <div class="stat-title text-xs uppercase tracking-wider font-bold">Score</div>
+                            <div class="stat-value text-primary text-4xl" id="final-score">0</div>
+                            <div class="stat-desc">Points</div>
+                        </div>
+                    </div>
+                    <div class="stats shadow bg-base-200">
+                        <div class="stat place-items-center p-4">
+                            <div class="stat-title text-xs uppercase tracking-wider font-bold">Correct</div>
+                            <div class="stat-value text-success text-4xl" id="correct-answers">0</div>
+                            <div class="stat-desc">Answers</div>
+                        </div>
+                    </div>
+                    <div class="stats shadow bg-base-200">
+                        <div class="stat place-items-center p-4">
+                            <div class="stat-title text-xs uppercase tracking-wider font-bold">Accuracy</div>
+                            <div class="stat-value text-secondary text-4xl" id="accuracy">0%</div>
+                            <div class="stat-desc">Rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+                    <button onclick="viewAnswers()" class="btn btn-outline btn-info gap-2">
+                        <i class="fa-solid fa-eye"></i> View Answers
+                    </button>
+                    <a href="quizzes.html" class="btn btn-primary gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Play Another Quiz
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Answers Container (Hidden by default) -->
+        <div id="answers-container" class="w-full max-w-3xl hidden animate-fadeIn">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Review Answers</h2>
+                <button onclick="closeAnswers()" class="btn btn-sm btn-circle btn-ghost">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="space-y-6" id="review-list">
+                <!-- Review items injected here -->
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="closeAnswers()" class="btn btn-primary">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Back to Results
+                </button>
+            </div>
+        </div>
+
+        <!-- History Container (For when accessing from Navbar) -->
+        <div id="history-container" class="w-full max-w-5xl hidden animate-fadeIn">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4 text-gray-800">Academic Performance History</h2>
+                <p class="text-gray-500 mb-6">Track your progress across different departments</p>
+
+                <!-- Department Filter Tabs -->
+                <div class="history-tabs mb-8">
+                    <a class="tab history-tab tab-active" data-filter="all">All Departments</a>
+                    <a class="tab history-tab" data-filter="CSE">CSE</a>
+                    <a class="tab history-tab" data-filter="BBA">BBA</a>
+                    <a class="tab history-tab" data-filter="MBA">MBA</a>
+                    <a class="tab history-tab" data-filter="EEE">EEE</a>
+                    <a class="tab history-tab" data-filter="English">English</a>
+                </div>
+            </div>
+
+            <div class="history-table-container">
+                <table class="table w-full history-table">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Quiz Title</th>
+                            <th>Department</th>
+                            <th>Score</th>
+                            <th>Accuracy</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-list">
+                        <!-- History items injected here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="no-history" class="text-center py-16 hidden">
+                <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-clipboard-list text-4xl text-gray-300"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-700 mb-2">No Records Found</h3>
+                <p class="text-gray-500 mb-8">You haven't taken any quizzes in this category yet.</p>
+                <a href="quizzes.html" class="btn btn-primary px-8">Start a Quiz</a>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="results.js"></script>
+</body>
+
+</html>

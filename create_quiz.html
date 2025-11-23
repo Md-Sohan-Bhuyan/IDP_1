@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body class="bg-base-100 min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <a href="quizzes.html" class="btn btn-ghost gap-2">
+                <i class="fa-solid fa-arrow-left"></i> Back to Quizzes
+            </a>
+        </div>
+        <div class="navbar-center">
+            <h1 class="text-xl font-bold">Create New Quiz</h1>
+        </div>
+        <div class="navbar-end">
+            <div class="badge badge-primary">Teacher Mode</div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 max-w-4xl">
+        <form id="create-quiz-form" class="space-y-8">
+
+            <!-- Quiz Details -->
+            <div class="card bg-base-100 shadow-xl border border-base-200">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Quiz Details</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-control">
+                            <label class="label"><span class="label-text">Quiz Title</span></label>
+                            <input type="text" id="quiz-title" placeholder="e.g. Advanced Database Systems"
+                                class="input input-bordered" required />
+                        </div>
+                        <div class="form-control">
+                            <label class="label"><span class="label-text">Category</span></label>
+                            <select id="quiz-category" class="select select-bordered">
+                                <option>CSE</option>
+                                <option>BBA</option>
+                                <option>MBA</option>
+                                <option>EEE</option>
+                                <option>English</option>
+                                <option>Textile</option>
+                            </select>
+                        </div>
+                        <div class="form-control">
+                            <label class="label"><span class="label-text">Time Limit (minutes)</span></label>
+                            <input type="number" id="quiz-time" placeholder="e.g. 30" class="input input-bordered"
+                                required min="1" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label"><span class="label-text">Difficulty</span></label>
+                            <select id="quiz-difficulty" class="select select-bordered">
+                                <option>Easy</option>
+                                <option>Medium</option>
+                                <option>Hard</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions Section -->
+            <div id="questions-container" class="space-y-6">
+                <!-- Questions will be added here -->
+            </div>
+
+            <!-- Add Question Button -->
+            <button type="button" id="add-question-btn" class="btn btn-outline btn-block border-dashed">
+                <i class="fa-solid fa-plus"></i> Add Question
+            </button>
+
+            <!-- Submit -->
+            <div class="flex justify-end gap-4 pt-4">
+                <button type="button" class="btn btn-ghost"
+                    onclick="window.location.href='quizzes.html'">Cancel</button>
+                <button type="submit" class="btn btn-primary">Publish Quiz</button>
+            </div>
+        </form>
+    </main>
+
+    <script src="create_quiz.js"></script>
+</body>
+
+</html>

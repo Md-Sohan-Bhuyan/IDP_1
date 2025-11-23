@@ -1,0 +1,96 @@
+/* Quiz Player Styles */
+
+.option-btn {
+    width: 100%;
+    text-align: left;
+    justify-content: flex-start;
+    padding: 1.25rem;
+    height: auto;
+    border: 2px solid oklch(var(--b3));
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.option-btn:hover:not(:disabled) {
+    background-color: oklch(var(--b2));
+    border-color: oklch(var(--p));
+    transform: translateX(4px);
+}
+
+.option-btn .option-marker {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.option-btn.selected {
+    border-color: oklch(var(--p));
+    background-color: oklch(var(--p) / 0.05);
+}
+
+.option-btn.selected .option-marker {
+    background-color: oklch(var(--p));
+    color: oklch(var(--pc));
+    border-color: oklch(var(--p));
+}
+
+/* Correct Answer Style */
+.option-btn.correct {
+    background-color: oklch(var(--su) / 0.1) !important;
+    border-color: oklch(var(--su)) !important;
+    color: oklch(var(--su)) !important;
+}
+
+.option-btn.correct .option-marker {
+    background-color: oklch(var(--su));
+    border-color: oklch(var(--su));
+    color: white;
+}
+
+/* Wrong Answer Style */
+.option-btn.wrong {
+    background-color: oklch(var(--er) / 0.1) !important;
+    border-color: oklch(var(--er)) !important;
+    color: oklch(var(--er)) !important;
+}
+
+.option-btn.wrong .option-marker {
+    background-color: oklch(var(--er));
+    border-color: oklch(var(--er));
+    color: white;
+}
+
+/* Disable hover effects when answered */
+.options-locked .option-btn {
+    cursor: default;
+    transform: none !important;
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-bounce-slow {
+    animation: bounce 2s infinite;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

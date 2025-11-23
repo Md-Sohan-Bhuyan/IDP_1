@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Quizzes - IUS QUIZ SYSTEM</title>
+    <meta name="description" content="Browse and take quizzes across various subjects like CSE, BBA, MBA, and more.">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="quizzes.css">
+</head>
+
+<body class="bg-base-100 flex flex-col min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50" aria-label="Main Navigation">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="flex items-center gap-2 text-xl font-bold">
+                    <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                        <img src="images/favicon.ico" alt="logo" class="w-6 h-6">
+                    </div>
+                    <span>IUS Quiz</span>
+                </a>
+
+                <ul class="menu menu-horizontal p-0 hidden md:flex gap-2">
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li><a href="#">CSE</a></li>
+                    <li><a href="#">BBA</a></li>
+                    <li><a href="#">MBA</a></li>
+                    <li><a href="#">EEE</a></li>
+                    <li><a href="#">English</a></li>
+                </ul>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-2">
+                <a class="btn btn-sm" href="signin.html"><i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    SignIn</a>
+                <a class="btn btn-sm btn-primary text-white" href="signup.html"><i class="fa-solid fa-user-plus"></i>
+                    SignUp</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 mb-10 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+        </div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-64 h-64 bg-pink-500 opacity-10 rounded-full blur-3xl">
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 animate-fadeInUp">University Quiz Portal</h1>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto mb-8 animate-fadeInUp" style="animation-delay: 0.1s;">
+                Access a wide range of quizzes across various departments. Test your knowledge and track your progress.
+            </p>
+
+            <!-- Search Bar in Hero -->
+            <div class="max-w-xl mx-auto relative animate-fadeInUp" style="animation-delay: 0.2s;">
+                <input type="text" id="search-input" placeholder="Search for quizzes, topics, or categories..."
+                    class="input input-lg w-full pl-12 rounded-full shadow-lg text-gray-800 focus:outline-none focus:ring-4 focus:ring-white/30 transition-all duration-300" />
+                <i
+                    class="fa-solid fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg"></i>
+            </div>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 pb-16 flex-grow">
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10 animate-fadeInUp" style="animation-delay: 0.3s;">
+            <button
+                class="btn btn-outline rounded-full px-6 hover:bg-primary hover:text-white transition-all duration-300 btn-active"
+                data-filter="all">All Quizzes</button>
+            <button
+                class="btn btn-outline rounded-full px-6 hover:bg-primary hover:text-white transition-all duration-300"
+                data-filter="CSE">CSE</button>
+            <button
+                class="btn btn-outline rounded-full px-6 hover:bg-primary hover:text-white transition-all duration-300"
+                data-filter="BBA">BBA</button>
+            <button
+                class="btn btn-outline rounded-full px-6 hover:bg-primary hover:text-white transition-all duration-300"
+                data-filter="MBA">MBA</button>
+            <button
+                class="btn btn-outline rounded-full px-6 hover:bg-primary hover:text-white transition-all duration-300"
+                data-filter="EEE">EEE</button>
+            <button
+                class="btn btn-outline rounded-full px-6 hover:bg-primary hover:text-white transition-all duration-300"
+                data-filter="English">English</button>
+        </div>
+
+        <!-- Quiz Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="quiz-grid">
+            <!-- Quiz cards will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-base-200 text-base-content p-10 relative overflow-hidden mt-auto">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-5">
+            <div class="absolute -top-10 -left-10 w-32 h-32 bg-primary rounded-full"></div>
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary rounded-full"></div>
+            <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-accent rounded-full"></div>
+        </div>
+
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full relative z-10">
+                <!-- Brand Section -->
+                <div class="text-left">
+                    <p class="opacity-75 mt-4">
+                        Empowering students with a modern platform for testing knowledge and tracking academic progress.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="text-left">
+                    <span class="footer-title">Quick Links</span>
+                    <div class="space-y-2 flex flex-col">
+                        <a class="link link-hover flex items-center gap-2" href="index.html">Home</a>
+                        <a class="link link-hover flex items-center gap-2" href="#">Courses</a>
+                        <a class="link link-hover flex items-center gap-2" href="quizzes.html">Quizzes</a>
+                        <a class="link link-hover flex items-center gap-2" href="leaderboard.html">Leaderboard</a>
+                        <a class="link link-hover flex items-center gap-2" href="about.html">About</a>
+                        <a class="link link-hover flex items-center gap-2" href="contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Courses -->
+                <div class="text-left">
+                    <span class="footer-title">Courses</span>
+                    <div class="space-y-2 flex flex-col">
+                        <a class="link link-hover flex items-center gap-2" href="#">CSE</a>
+                        <a class="link link-hover flex items-center gap-2" href="#">BBA</a>
+                        <a class="link link-hover flex items-center gap-2" href="#">MBA</a>
+                        <a class="link link-hover flex items-center gap-2" href="#">EEE</a>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="text-left">
+                    <span class="footer-title">Contact</span>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            <span>IUS Campus, Banani, Dhaka-1200</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-primary"></i>
+                            <span>+880 1234-567890</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-primary"></i>
+                            <span>quiz@ius.ac.bd</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 border-t pt-6 w-full relative z-10 text-center">
+                <p>Copyright © <span id="current-year">2025</span> - All rights reserved by IUS Quiz System</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home.js"></script>
+    <script src="quizzes.js"></script>
+</body>
+
+</html>
