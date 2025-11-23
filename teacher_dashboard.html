@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="teacher_dashboard.css">
+</head>
+
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="teacher_dashboard.html" class="active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="teacher_questions.html"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                    <li><a href="teacher_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                    <li><a href="teacher_results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                    <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <a href="teacher_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-chalkboard-teacher"></i>
+                </div>
+                IUS QUIZ SYSTEM - TEACHER
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="teacher_dashboard.html" class="active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="teacher_questions.html"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                <li><a href="teacher_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                <li><a href="teacher_results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+            
+            <!-- Notification Bell -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-ghost btn-circle relative">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                    <span class="badge badge-xs badge-primary absolute -top-1 -right-1" id="notification-count">2</span>
+                </button>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                    <li class="menu-title">Notifications</li>
+                    <li><a class="text-sm"><i class="fa-solid fa-check-circle text-green-500"></i> Question approved by admin</a></li>
+                    <li><a class="text-sm"><i class="fa-solid fa-clock text-yellow-500"></i> 3 questions pending approval</a></li>
+                </ul>
+            </div>
+
+            <!-- User Profile -->
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">DR</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Dr. Rahman</li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="teacher_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">Teacher Dashboard</h1>
+            <p class="text-gray-600">Manage your questions, create quizzes, and track student progress</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-primary">
+                    <i class="fa-solid fa-question-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Questions</div>
+                <div class="stat-value text-primary" id="total-questions">47</div>
+                <div class="stat-desc" id="questions-status">12 pending approval</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-secondary">
+                    <i class="fa-solid fa-feather-pointed text-3xl"></i>
+                </div>
+                <div class="stat-title">Active Quizzes</div>
+                <div class="stat-value text-secondary" id="active-quizzes">8</div>
+                <div class="stat-desc">3 quizzes running now</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-accent">
+                    <i class="fa-solid fa-users text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Students</div>
+                <div class="stat-value text-accent" id="total-students">156</div>
+                <div class="stat-desc">↗︎ 14 new this month</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-info">
+                    <i class="fa-solid fa-chart-line text-3xl"></i>
+                </div>
+                <div class="stat-title">Avg. Score</div>
+                <div class="stat-value text-info" id="avg-score">78%</div>
+                <div class="stat-desc">↗︎ 5% from last month</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Quick Actions -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Quick Actions</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <button class="btn btn-primary btn-outline justify-start" id="add-question-btn">
+                                <i class="fa-solid fa-plus mr-2"></i>
+                                Add New Question
+                            </button>
+                            <button class="btn btn-secondary btn-outline justify-start" id="create-quiz-btn">
+                                <i class="fa-solid fa-feather-pointed mr-2"></i>
+                                Create New Quiz
+                            </button>
+                            <button class="btn btn-accent btn-outline justify-start" id="manage-questions-btn">
+                                <i class="fa-solid fa-edit mr-2"></i>
+                                Manage Questions
+                            </button>
+                            <button class="btn btn-info btn-outline justify-start" id="view-results-btn">
+                                <i class="fa-solid fa-chart-bar mr-2"></i>
+                                View Results
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Approvals -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="card-title">Pending Admin Approvals</h3>
+                            <div class="badge badge-warning badge-lg" id="pending-count">3 pending</div>
+                        </div>
+                        
+                        <div class="space-y-4" id="pending-approvals-list">
+                            <!-- Pending items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Recent Activity</h3>
+                        <div class="space-y-4" id="recent-activity-list">
+                            <!-- Activity items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-8">
+                <!-- Upcoming Quizzes -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Upcoming Quizzes</h3>
+                        <div class="space-y-4" id="upcoming-quizzes-list">
+                            <!-- Upcoming quizzes will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Question Stats -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Question Statistics</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span>Approved Questions</span>
+                                <span class="font-semibold text-success" id="approved-questions">35</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Pending Approval</span>
+                                <span class="font-semibold text-warning" id="pending-questions">12</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Rejected Questions</span>
+                                <span class="font-semibold text-error" id="rejected-questions">2</span>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold">Total Questions</span>
+                                <span class="font-semibold text-primary" id="total-questions-side">49</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Contact -->
+                <div class="card bg-base-100 shadow-xl border-2 border-primary">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary mb-4">Need Help?</h3>
+                        <p class="text-sm mb-4">Contact admin for question approvals and technical support</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-envelope text-primary"></i>
+                                <span class="text-sm">admin@ius.ac.bd</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-phone text-primary"></i>
+                                <span class="text-sm">+880 XXXX-XXXXXX</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-sm mt-4" id="contact-admin-btn">
+                            <i class="fa-solid fa-message mr-2"></i>
+                            Send Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Question Modal -->
+    <div id="add-question-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-4xl">
+            <h3 class="font-bold text-2xl mb-4">Add New Question</h3>
+            
+            <form id="add-question-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Subject</span>
+                        </label>
+                        <select class="select select-bordered" id="question-subject" required>
+                            <option value="">Select Subject</option>
+                            <option value="math">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="chemistry">Chemistry</option>
+                            <option value="biology">Biology</option>
+                            <option value="english">English</option>
+                            <option value="computer">Computer Science</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Difficulty Level</span>
+                        </label>
+                        <select class="select select-bordered" id="question-difficulty" required>
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Question Text</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-24" id="question-text" placeholder="Enter your question here..." required></textarea>
+                </div>
+
+                <!-- Options -->
+                <div class="space-y-3">
+                    <label class="label">
+                        <span class="label-text font-semibold">Options</span>
+                    </label>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="option-a" placeholder="Option A" required>
+                        <input type="radio" name="correct-answer" value="A" class="radio radio-primary" required>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="option-b" placeholder="Option B" required>
+                        <input type="radio" name="correct-answer" value="B" class="radio radio-primary">
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="option-c" placeholder="Option C" required>
+                        <input type="radio" name="correct-answer" value="C" class="radio radio-primary">
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="option-d" placeholder="Option D" required>
+                        <input type="radio" name="correct-answer" value="D" class="radio radio-primary">
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Explanation (Optional)</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-20" id="question-explanation" placeholder="Explain why this answer is correct..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Time Limit (seconds)</span>
+                        </label>
+                        <input type="number" class="input input-bordered" id="question-time" min="30" max="300" value="60" required>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Marks</span>
+                        </label>
+                        <input type="number" class="input input-bordered" id="question-marks" min="1" max="10" value="5" required>
+                    </div>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-question">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-question">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>
+                        Submit for Approval
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Admin Modal -->
+    <div id="contact-admin-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Contact Admin</h3>
+            
+            <form id="contact-admin-form" class="space-y-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Subject</span>
+                    </label>
+                    <select class="select select-bordered" id="message-subject" required>
+                        <option value="">Select Subject</option>
+                        <option value="approval">Question Approval Request</option>
+                        <option value="technical">Technical Issue</option>
+                        <option value="feature">Feature Request</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Message</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-32" id="admin-message" placeholder="Describe your issue or request..." required></textarea>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-admin-message">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="send-admin-message">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-base-200 text-base-content p-10 mt-16">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full">
+                <div class="text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                            <i class="fa-solid fa-chalkboard-teacher"></i>
+                        </div>
+                        <span class="text-xl font-bold">IUS QUIZ SYSTEM</span>
+                    </div>
+                    <p class="mb-4">The premier platform for interactive teaching and knowledge assessment at IUS.</p>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Quick Links</span>
+                    <a href="teacher_dashboard.html" class="link link-hover">Dashboard</a>
+                    <a href="teacher_questions.html" class="link link-hover">Manage Questions</a>
+                    <a href="teacher_quizzes.html" class="link link-hover">Create Quiz</a>
+                    <a href="teacher_results.html" class="link link-hover">Results</a>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Support</span>
+                    <a href="#" class="link link-hover">Contact Admin</a>
+                    <a href="#" class="link link-hover">Teacher Guide</a>
+                    <a href="#" class="link link-hover">Privacy Policy</a>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Social</span>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t pt-6 text-center">
+                <p>Copyright © <span id="current-year">2025</span> - All rights reserved by IUS Quiz System</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="teacher_dashboard.js"></script>
+</body>
+
+</html>

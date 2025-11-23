@@ -1,0 +1,305 @@
+/* Teacher Dashboard Specific Styles */
+.stat {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Activity Items */
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--b1));
+    border: 1px solid hsl(var(--bc) / 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.activity-item:hover {
+    background-color: hsl(var(--bc) / 0.05);
+    transform: translateX(4px);
+}
+
+.activity-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-time {
+    font-size: 0.75rem;
+    color: hsl(var(--bc) / 0.6);
+}
+
+/* Pending Approval Items */
+.pending-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--warning) / 0.1);
+    border: 1px solid hsl(var(--warning) / 0.2);
+}
+
+.pending-status {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    background-color: hsl(var(--warning));
+    color: white;
+}
+
+/* Quiz Cards */
+.quiz-card {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--b1));
+    border: 1px solid hsl(var(--bc) / 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.quiz-card:hover {
+    border-color: hsl(var(--p));
+    transform: translateY(-2px);
+}
+
+.quiz-date {
+    font-size: 0.875rem;
+    color: hsl(var(--bc) / 0.6);
+}
+
+.quiz-status {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+}
+
+/* Modal Styles */
+.modal {
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Styles */
+.form-control {
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Option Radio Styles */
+.radio {
+    margin-left: 0.5rem;
+}
+
+/* Button Groups */
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Notification Badge */
+.notification-badge {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Success/Error States */
+.status-success {
+    border-left: 4px solid hsl(var(--su));
+}
+
+.status-warning {
+    border-left: 4px solid hsl(var(--wa));
+}
+
+.status-error {
+    border-left: 4px solid hsl(var(--er));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stat {
+        padding: 1rem;
+    }
+    
+    .activity-item {
+        padding: 0.75rem;
+    }
+    
+    .pending-item {
+        padding: 0.75rem;
+    }
+    
+    .quiz-card {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .modal-box {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--b1));
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--bc) / 0.3);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--bc) / 0.5);
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .footer,
+    .modal,
+    .btn {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+}
+
+/* High Contrast Mode Support */
+.high-contrast {
+    --bc: 0 0% 0%;
+    --b1: 0 0% 100%;
+    --b2: 0 0% 95%;
+    --b3: 0 0% 90%;
+}
+
+.high-contrast .card {
+    border: 2px solid var(--bc) !important;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .stat,
+    .activity-item,
+    .quiz-card,
+    .modal {
+        transition: none;
+        animation: none;
+    }
+    
+    .stat:hover,
+    .activity-item:hover,
+    .quiz-card:hover {
+        transform: none;
+    }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background-color: hsl(var(--b2));
+    }
+    
+    .stat {
+        background-color: hsl(var(--b2));
+    }
+}
+
+/* Focus styles for accessibility */
+.btn:focus,
+.input:focus,
+.textarea:focus,
+.select:focus {
+    outline: 2px solid hsl(var(--p));
+    outline-offset: 2px;
+}
+
+/* Custom utility classes */
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
