@@ -1,0 +1,267 @@
+/* Student Dashboard Specific Styles */
+
+/* Stat Cards */
+.stat-card {
+    @apply rounded-2xl p-6 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl;
+}
+
+.stat-icon {
+    @apply text-3xl mb-4 opacity-90;
+}
+
+.stat-value {
+    @apply text-3xl font-bold mb-1;
+}
+
+.stat-title {
+    @apply text-sm opacity-90 font-medium;
+}
+
+/* Progress Items */
+.progress-item {
+    @apply transition-all duration-300 hover:scale-105;
+}
+
+/* Achievement Badges */
+.achievement-badge {
+    @apply flex flex-col items-center p-3 rounded-lg bg-base-200 transition-all duration-300 hover:scale-110 cursor-pointer;
+}
+
+.badge-icon {
+    @apply w-12 h-12 rounded-full flex items-center justify-center text-white text-xl;
+}
+
+.badge-icon.gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.badge-icon.silver {
+    background: linear-gradient(135deg, #C0C0C0, #808080);
+}
+
+.badge-icon.bronze {
+    background: linear-gradient(135deg, #CD7F32, #8B4513);
+}
+
+/* Quiz Cards */
+.quiz-card {
+    @apply card bg-base-100 shadow-xl border border-base-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer;
+}
+
+.quiz-card:hover .quiz-title {
+    @apply text-primary;
+}
+
+.quiz-badge {
+    @apply badge badge-sm absolute top-3 right-3;
+}
+
+.quiz-badge.easy {
+    @apply badge-success;
+}
+
+.quiz-badge.medium {
+    @apply badge-warning;
+}
+
+.quiz-badge.hard {
+    @apply badge-error;
+}
+
+/* Activity Items */
+.activity-item {
+    @apply flex items-center gap-4 p-3 rounded-lg bg-base-200 transition-all duration-300 hover:bg-base-300;
+}
+
+.activity-icon {
+    @apply w-10 h-10 rounded-full flex items-center justify-center text-white;
+}
+
+.activity-icon.quiz {
+    @apply bg-blue-500;
+}
+
+.activity-icon.achievement {
+    @apply bg-yellow-500;
+}
+
+.activity-icon.rank {
+    @apply bg-green-500;
+}
+
+/* Upcoming Quiz Items */
+.upcoming-quiz {
+    @apply flex items-center justify-between p-3 rounded-lg bg-base-200 transition-all duration-300 hover:bg-base-300 cursor-pointer;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Loading States */
+.skeleton {
+    @apply bg-gray-300 animate-pulse rounded;
+}
+
+.skeleton-text {
+    @apply h-4 bg-gray-300 animate-pulse rounded;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stat-card {
+        @apply p-4;
+    }
+    
+    .stat-value {
+        @apply text-2xl;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-base-200;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-focus;
+}
+
+/* Notification Badge Animation */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    }
+}
+
+.notification-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Progress Bar Animation */
+@keyframes progressFill {
+    from {
+        width: 0%;
+    }
+}
+
+.progress-fill {
+    animation: progressFill 1.5s ease-out forwards;
+}
+
+/* Hover Effects */
+.hover-lift {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Card Hover Effects */
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Button Animations */
+.btn-animate {
+    transition: all 0.3s ease;
+}
+
+.btn-animate:hover {
+    transform: scale(1.05);
+}
+
+/* Achievement Pop Animation */
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.achievement-pop {
+    animation: popIn 0.6s ease-out forwards;
+}
+
+/* Real-time Update Indicator */
+.update-indicator {
+    @apply inline-block w-2 h-2 bg-green-500 rounded-full ml-2;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .skeleton {
+        @apply bg-gray-700;
+    }
+    
+    .skeleton-text {
+        @apply bg-gray-700;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .stat-card {
+        break-inside: avoid;
+    }
+}

@@ -10,6 +10,94 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="home.css">
+    <style>
+        /* Remove rotation animation */
+        .floating {
+            animation: none !important;
+            transform: none !important;
+        }
+        
+        /* Fix for form elements to prevent rotation */
+        .form-control, .input, .select, .btn {
+            transform: none !important;
+        }
+        
+        /* Enhanced particle animation without rotation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-15px) translateX(10px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-25px) translateX(-5px) rotate(0deg);
+            }
+            75% {
+                transform: translateY(-15px) translateX(-10px) rotate(0deg);
+            }
+        }
+        
+        .particle {
+            animation: float linear infinite;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Enhanced password strength indicator */
+        .password-strength-bar {
+            transition: all 0.5s ease-in-out;
+        }
+        
+        /* Security features animation */
+        @keyframes security-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .security-feature {
+            animation: security-pulse 3s ease-in-out infinite;
+        }
+        
+        /* Real-time validation styles */
+        .validation-success {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1);
+        }
+        
+        .validation-error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+        }
+        
+        /* Progress indicator */
+        .signup-progress {
+            transition: all 0.5s ease-in-out;
+        }
+        
+        /* Enhanced focus states */
+        .input:focus, .select:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+        }
+        
+        /* Security badge animation */
+        @keyframes badge-glow {
+            0%, 100% { 
+                box-shadow: 0 0 5px rgba(34, 197, 94, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 20px rgba(34, 197, 94, 0.8);
+            }
+        }
+        
+        .security-badge {
+            animation: badge-glow 2s ease-in-out infinite;
+        }
+    </style>
 </head>
 
 <body class="bg-base-100">
@@ -99,7 +187,7 @@
 
     <!-- Signup Section -->
     <section class="min-h-screen banner-gradient py-12 px-4 md:px-8 text-white relative overflow-hidden">
-        <!-- Particle Background -->
+        <!-- Enhanced Particle Background -->
         <div class="particles-container" id="particles-container"></div>
 
         <div class="container mx-auto relative z-10">
@@ -110,6 +198,30 @@
                         <h1 class="text-4xl md:text-5xl font-bold mb-6">Join IUS Quiz System Today!</h1>
                         <p class="text-xl mb-8">Create your account and unlock a world of knowledge testing
                             opportunities.</p>
+
+                        <!-- Security Features -->
+                        <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm mb-6 security-feature">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                                    <i class="fa-solid fa-shield-halved text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold">Secure Registration</h3>
+                            </div>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-green-400"></i>
+                                    <span>End-to-end encryption</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-green-400"></i>
+                                    <span>Real-time validation</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-green-400"></i>
+                                    <span>Password strength monitoring</span>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Benefits List -->
                         <div class="space-y-6 mb-8">
@@ -169,7 +281,18 @@
                 <!-- Right Side - Signup Form -->
                 <div class="md:w-1/2 flex justify-center">
                     <div class="w-full max-w-md">
-                        <div class="bg-white rounded-2xl p-8 shadow-2xl text-gray-800 floating">
+                        <div class="bg-white rounded-2xl p-8 shadow-2xl text-gray-800">
+                            <!-- Progress Indicator -->
+                            <div class="mb-6">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm font-medium">Registration Progress</span>
+                                    <span class="text-sm" id="progress-percentage">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div id="signup-progress" class="signup-progress bg-primary h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+
                             <div class="text-center mb-8">
                                 <h2 class="text-3xl font-bold text-gray-900">Create Account</h2>
                                 <p class="text-gray-600 mt-2">Join our learning community today</p>
@@ -243,6 +366,9 @@
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text font-semibold">Password</span>
+                                        <span class="security-badge badge badge-success badge-sm ml-2">
+                                            <i class="fa-solid fa-lock mr-1"></i>Secure
+                                        </span>
                                     </label>
                                     <div class="relative">
                                         <input type="password" id="password" class="input input-bordered w-full pr-10"
@@ -260,8 +386,26 @@
                                         </div>
                                         <div class="w-full bg-gray-200 rounded-full h-2">
                                             <div id="password-strength-bar"
-                                                class="bg-red-500 h-2 rounded-full transition-all duration-300"
+                                                class="password-strength-bar h-2 rounded-full transition-all duration-300"
                                                 style="width: 20%"></div>
+                                        </div>
+                                        <div class="password-requirements mt-2 space-y-1 text-xs">
+                                            <div class="flex items-center gap-2" id="req-length">
+                                                <i class="fa-solid fa-circle text-gray-300"></i>
+                                                <span>At least 8 characters</span>
+                                            </div>
+                                            <div class="flex items-center gap-2" id="req-uppercase">
+                                                <i class="fa-solid fa-circle text-gray-300"></i>
+                                                <span>Uppercase & lowercase letters</span>
+                                            </div>
+                                            <div class="flex items-center gap-2" id="req-number">
+                                                <i class="fa-solid fa-circle text-gray-300"></i>
+                                                <span>At least one number</span>
+                                            </div>
+                                            <div class="flex items-center gap-2" id="req-special">
+                                                <i class="fa-solid fa-circle text-gray-300"></i>
+                                                <span>Special character</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="validation-message text-error text-xs mt-1 hidden" id="password-error">
@@ -298,7 +442,7 @@
                                 </div>
 
                                 <!-- Submit Button -->
-                                <button type="submit" class="btn btn-primary w-full text-white text-lg py-3 pulse"
+                                <button type="submit" class="btn btn-primary w-full text-white text-lg py-3"
                                     id="signup-submit">
                                     <i class="fa-solid fa-user-plus mr-2"></i>
                                     Create Account
@@ -336,7 +480,6 @@
     </section>
 
     <!-- Features Highlight Section -->
-
 
     <!-- Footer -->
     <footer class="footer bg-base-200 text-base-content p-10">

@@ -60,10 +60,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Form submission
+    // Form submission - UPDATED FOR STUDENT REDIRECT
     document.getElementById('signin-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        handleSignin();
+        
+        // Student hole direct redirect, other roles er jonno modal
+        if (currentRole === 'student') {
+            handleStudentSignin(); // Direct redirect for students
+        } else {
+            handleSignin(); // Modal show kore then redirect for other roles
+        }
     });
     
     // Forgot password modal
@@ -86,12 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('reset-sent-modal').classList.remove('modal-open');
     });
     
-    // Go to dashboard button
+    // Go to dashboard button - UPDATED FOR STUDENT DASHBOARD
     document.getElementById('go-to-dashboard').addEventListener('click', function() {
         const dashboardUrls = {
-            student: 'student-dashboard.html',
-            admin: 'admin-dashboard.html',
-            superadmin: 'superadmin-dashboard.html'
+            student: 'student_dashboard.html',
+            teacher: 'teacher_dashboard.html',
+            admin: 'admin_dashboard.html',
+            superadmin: 'superadmin_dashboard.html'
         };
         window.location.href = dashboardUrls[currentRole] || 'dashboard.html';
     });
@@ -154,6 +161,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 emailInput.placeholder = 'student.id@ius.ac.bd';
                 formTitle.textContent = 'Student Sign In';
                 break;
+            case 'teacher':
+                emailInput.placeholder = 'teacher.name@ius.ac.bd';
+                formTitle.textContent = 'Teacher Sign In';
+                break;
             case 'admin':
                 emailInput.placeholder = 'admin@ius.ac.bd';
                 formTitle.textContent = 'Admin Sign In';
@@ -165,7 +176,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Form validation and submission
+    // NEW FUNCTION: Student signin with direct redirect
+    function handleStudentSignin() {
+        const form = document.getElementById('signin-form');
+        const submitButton = document.getElementById('signin-submit');
+        const loadingSpinner = document.getElementById('submit-loading');
+        
+        // Clear previous errors
+        clearValidationErrors();
+        
+        // Validate form
+        if (validateSigninForm()) {
+            // Show loading state
+            submitButton.disabled = true;
+            loadingSpinner.classList.remove('hidden');
+            
+            // Change button text to show loading
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = `
+                <i class="fa-solid fa-spinner fa-spin mr-2"></i>
+                Signing In...
+                <span class="loading loading-spinner loading-sm"></span>
+            `;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Direct redirect to student dashboard
+                window.location.href = 'student_dashboard.html';
+            }, 2000);
+        }
+    }
+    
+    // Form validation and submission for non-student roles
     function handleSignin() {
         const form = document.getElementById('signin-form');
         const submitButton = document.getElementById('signin-submit');
@@ -194,6 +236,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     student: {
                         title: 'Welcome Back, Student!',
                         message: 'You have successfully signed in to your student account.'
+                    },
+                    teacher: {
+                        title: 'Welcome, Teacher!',
+                        message: 'You have successfully signed in to your teacher account.'
                     },
                     admin: {
                         title: 'Welcome, Administrator!',

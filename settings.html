@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="settings.css">
+</head>
+
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="student_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quizzes</a></li>
+                    <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                    <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star"></i> Leaderboard</a></li>
+                    <li><a href="student_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="settings.html" class="active"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                </ul>
+            </div>
+            <a href="student_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                IUS QUIZ SYSTEM
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="student_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quizzes</a></li>
+                <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star"></i> Leaderboard</a></li>
+                <li><a href="student_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="settings.html" class="active"><i class="fa-solid fa-gear"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+            
+            <!-- Notification Bell -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-ghost btn-circle relative">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                    <span class="badge badge-xs badge-primary absolute -top-1 -right-1">1</span>
+                </button>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                    <li class="menu-title">Notifications</li>
+                    <li><a class="text-sm"><i class="fa-solid fa-gear text-blue-500"></i> New settings available</a></li>
+                </ul>
+            </div>
+
+            <!-- User Profile -->
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">JS</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">John Smith</li>
+                    <li><a href="student_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="settings.html" class="active"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">Settings</h1>
+            <p class="text-gray-600">Customize your learning experience and preferences</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Settings Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="card bg-base-100 shadow-xl sticky top-24">
+                    <div class="card-body p-4">
+                        <ul class="menu space-y-2" id="settings-menu">
+                            <li>
+                                <a class="settings-menu-item active" data-target="general">
+                                    <i class="fa-solid fa-sliders"></i>
+                                    General
+                                </a>
+                            </li>
+                            <li>
+                                <a class="settings-menu-item" data-target="notifications">
+                                    <i class="fa-solid fa-bell"></i>
+                                    Notifications
+                                    <span class="badge badge-primary badge-sm" id="notification-count">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="settings-menu-item" data-target="appearance">
+                                    <i class="fa-solid fa-palette"></i>
+                                    Appearance
+                                </a>
+                            </li>
+                            <li>
+                                <a class="settings-menu-item" data-target="privacy">
+                                    <i class="fa-solid fa-shield"></i>
+                                    Privacy & Security
+                                </a>
+                            </li>
+                            <li>
+                                <a class="settings-menu-item" data-target="study">
+                                    <i class="fa-solid fa-book"></i>
+                                    Study Preferences
+                                </a>
+                            </li>
+                            <li>
+                                <a class="settings-menu-item" data-target="account">
+                                    <i class="fa-solid fa-user-cog"></i>
+                                    Account
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card bg-base-100 shadow-xl mt-6">
+                    <div class="card-body p-4">
+                        <h3 class="font-semibold mb-4">Settings Status</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Settings Applied</span>
+                                <span class="text-sm font-semibold text-success" id="applied-settings">24/28</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Last Updated</span>
+                                <span class="text-sm font-semibold" id="last-updated">Just now</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm">Auto-save</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs" id="auto-save-status">ON</span>
+                                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="lg:col-span-3">
+                <!-- General Settings -->
+                <div class="settings-section active" id="general-section">
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">General Settings</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Language -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Language</h4>
+                                            <p class="text-sm text-gray-600">Choose your preferred language</p>
+                                        </div>
+                                        <select class="select select-bordered" id="language-select">
+                                            <option value="en" selected>English</option>
+                                            <option value="bn">Bengali</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="fr">French</option>
+                                            <option value="ar">Arabic</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Time Zone -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Time Zone</h4>
+                                            <p class="text-sm text-gray-600">Set your local time zone</p>
+                                        </div>
+                                        <select class="select select-bordered" id="timezone-select">
+                                            <option value="+6" selected>GMT+6 (Bangladesh)</option>
+                                            <option value="+5.5">GMT+5.5 (India)</option>
+                                            <option value="+8">GMT+8 (China)</option>
+                                            <option value="+0">GMT+0 (UK)</option>
+                                            <option value="-5">GMT-5 (EST)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Auto-save -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Auto-save Settings</h4>
+                                            <p class="text-sm text-gray-600">Automatically save changes</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="auto-save-toggle" checked>
+                                    </div>
+                                </div>
+
+                                <!-- Sound Effects -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Sound Effects</h4>
+                                            <p class="text-sm text-gray-600">Play sounds during quizzes</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="sound-effects-toggle" checked>
+                                    </div>
+                                </div>
+
+                                <!-- Quiz Auto-start -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Auto-start Quizzes</h4>
+                                            <p class="text-sm text-gray-600">Start quizzes immediately after selection</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="auto-start-toggle">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Settings -->
+                <div class="settings-section" id="notifications-section">
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Notification Preferences</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Email Notifications -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Email Notifications</h4>
+                                            <p class="text-sm text-gray-600">Receive updates via email</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="email-notifications-toggle" checked>
+                                    </div>
+                                </div>
+
+                                <!-- Push Notifications -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Push Notifications</h4>
+                                            <p class="text-sm text-gray-600">Browser notifications</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="push-notifications-toggle" checked>
+                                    </div>
+                                </div>
+
+                                <!-- Quiz Reminders -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Quiz Reminders</h4>
+                                            <p class="text-sm text-gray-600">Remind about upcoming quizzes</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="quiz-reminders-toggle" checked>
+                                    </div>
+                                </div>
+
+                                <!-- Results Notifications -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Results Notifications</h4>
+                                            <p class="text-sm text-gray-600">Notify when results are available</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="results-notifications-toggle" checked>
+                                    </div>
+                                </div>
+
+                                <!-- Leaderboard Updates -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Leaderboard Updates</h4>
+                                            <p class="text-sm text-gray-600">Notify about rank changes</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="leaderboard-notifications-toggle">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notification Schedule -->
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Notification Schedule</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Quiet Hours Start</span>
+                                    </label>
+                                    <input type="time" class="input input-bordered" id="quiet-start" value="22:00">
+                                </div>
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Quiet Hours End</span>
+                                    </label>
+                                    <input type="time" class="input input-bordered" id="quiet-end" value="07:00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appearance Settings -->
+                <div class="settings-section" id="appearance-section">
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Appearance Settings</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Theme -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Theme</h4>
+                                            <p class="text-sm text-gray-600">Choose your preferred theme</p>
+                                        </div>
+                                        <div class="flex gap-2" id="theme-selector">
+                                            <button class="theme-option active" data-theme="light">
+                                                <i class="fa-solid fa-sun"></i>
+                                                <span>Light</span>
+                                            </button>
+                                            <button class="theme-option" data-theme="dark">
+                                                <i class="fa-solid fa-moon"></i>
+                                                <span>Dark</span>
+                                            </button>
+                                            <button class="theme-option" data-theme="auto">
+                                                <i class="fa-solid fa-circle-half-stroke"></i>
+                                                <span>Auto</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Font Size -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Font Size</h4>
+                                            <p class="text-sm text-gray-600">Adjust text size for better readability</p>
+                                        </div>
+                                        <div class="flex items-center gap-4">
+                                            <button class="btn btn-sm btn-ghost" id="font-decrease">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </button>
+                                            <span class="font-semibold w-8 text-center" id="font-size-display">16px</span>
+                                            <button class="btn btn-sm btn-ghost" id="font-increase">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Animation Speed -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Animation Speed</h4>
+                                            <p class="text-sm text-gray-600">Control interface animation speed</p>
+                                        </div>
+                                        <select class="select select-bordered" id="animation-speed">
+                                            <option value="fast">Fast</option>
+                                            <option value="normal" selected>Normal</option>
+                                            <option value="slow">Slow</option>
+                                            <option value="none">None</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- High Contrast Mode -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">High Contrast Mode</h4>
+                                            <p class="text-sm text-gray-600">Increase color contrast for better visibility</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="high-contrast-toggle">
+                                    </div>
+                                </div>
+
+                                <!-- Reduce Motion -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Reduce Motion</h4>
+                                            <p class="text-sm text-gray-600">Minimize animations and transitions</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="reduce-motion-toggle">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview Card -->
+                    <div class="card bg-base-100 shadow-xl border-2 border-primary">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4">Theme Preview</h3>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div class="p-4 bg-primary text-primary-content rounded-lg">
+                                    Primary
+                                </div>
+                                <div class="p-4 bg-secondary text-secondary-content rounded-lg">
+                                    Secondary
+                                </div>
+                                <div class="p-4 bg-accent text-accent-content rounded-lg">
+                                    Accent
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy & Security Settings -->
+                <div class="settings-section" id="privacy-section">
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Privacy & Security</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Profile Visibility -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Profile Visibility</h4>
+                                            <p class="text-sm text-gray-600">Control who can see your profile</p>
+                                        </div>
+                                        <select class="select select-bordered" id="profile-visibility">
+                                            <option value="public" selected>Public</option>
+                                            <option value="friends">Friends Only</option>
+                                            <option value="private">Private</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Leaderboard Visibility -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Leaderboard Visibility</h4>
+                                            <p class="text-sm text-gray-600">Show your rank on public leaderboards</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="leaderboard-visibility-toggle" checked>
+                                    </div>
+                                </div>
+
+                                <!-- Data Sharing -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Data Sharing</h4>
+                                            <p class="text-sm text-gray-600">Help improve the platform anonymously</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="data-sharing-toggle">
+                                    </div>
+                                </div>
+
+                                <!-- Session Timeout -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Session Timeout</h4>
+                                            <p class="text-sm text-gray-600">Auto-logout after inactivity</p>
+                                        </div>
+                                        <select class="select select-bordered" id="session-timeout">
+                                            <option value="15">15 minutes</option>
+                                            <option value="30">30 minutes</option>
+                                            <option value="60" selected>1 hour</option>
+                                            <option value="120">2 hours</option>
+                                            <option value="never">Never</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Log -->
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4">Recent Activity</h3>
+                            <div class="space-y-3" id="security-log">
+                                <!-- Security log items will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Study Preferences -->
+                <div class="settings-section" id="study-section">
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Study Preferences</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Default Quiz Duration -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Default Quiz Duration</h4>
+                                            <p class="text-sm text-gray-600">Preferred time limit for quizzes</p>
+                                        </div>
+                                        <select class="select select-bordered" id="quiz-duration">
+                                            <option value="10">10 minutes</option>
+                                            <option value="15">15 minutes</option>
+                                            <option value="20" selected>20 minutes</option>
+                                            <option value="30">30 minutes</option>
+                                            <option value="45">45 minutes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Questions Per Page -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Questions Per Page</h4>
+                                            <p class="text-sm text-gray-600">Number of questions to show at once</p>
+                                        </div>
+                                        <select class="select select-bordered" id="questions-per-page">
+                                            <option value="1">1 question</option>
+                                            <option value="5" selected>5 questions</option>
+                                            <option value="10">10 questions</option>
+                                            <option value="all">All questions</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Show Explanations -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Show Explanations</h4>
+                                            <p class="text-sm text-gray-600">Display answer explanations after quiz</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="show-explanations-toggle" checked>
+                                    </div>
+                                </div>
+
+                                <!-- Instant Feedback -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Instant Feedback</h4>
+                                            <p class="text-sm text-gray-600">Show correct/incorrect immediately</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="instant-feedback-toggle">
+                                    </div>
+                                </div>
+
+                                <!-- Study Reminders -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Study Reminders</h4>
+                                            <p class="text-sm text-gray-600">Remind to study based on performance</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" id="study-reminders-toggle" checked>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Schedule -->
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Preferred Study Times</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Morning</span>
+                                    </label>
+                                    <input type="time" class="input input-bordered" id="study-morning" value="08:00">
+                                </div>
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Afternoon</span>
+                                    </label>
+                                    <input type="time" class="input input-bordered" id="study-afternoon" value="14:00">
+                                </div>
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Evening</span>
+                                    </label>
+                                    <input type="time" class="input input-bordered" id="study-evening" value="19:00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Settings -->
+                <div class="settings-section" id="account-section">
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Account Management</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Change Email -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Email Address</h4>
+                                            <p class="text-sm text-gray-600" id="current-email-display">john.smith@ius.ac.bd</p>
+                                        </div>
+                                        <button class="btn btn-outline btn-sm" id="change-email-btn">
+                                            Change Email
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Change Password -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Password</h4>
+                                            <p class="text-sm text-gray-600">Last changed 3 months ago</p>
+                                        </div>
+                                        <button class="btn btn-outline btn-sm" id="change-password-btn">
+                                            Change Password
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Two-Factor Authentication -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-semibold">Two-Factor Authentication</h4>
+                                            <p class="text-sm text-gray-600">Add an extra layer of security</p>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-sm" id="2fa-status">Disabled</span>
+                                            <input type="checkbox" class="toggle toggle-primary" id="2fa-toggle">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Linked Accounts -->
+                                <div class="setting-item">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-semibold">Linked Accounts</h4>
+                                            <p class="text-sm text-gray-600">Manage connected social accounts</p>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="btn btn-circle btn-sm btn-outline">
+                                                <i class="fa-brands fa-google text-red-500"></i>
+                                            </button>
+                                            <button class="btn btn-circle btn-sm btn-outline">
+                                                <i class="fa-brands fa-microsoft text-blue-500"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="card bg-base-100 shadow-xl border-2 border-error">
+                        <div class="card-body">
+                            <h3 class="card-title text-error mb-4">Danger Zone</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center p-4 bg-error/10 rounded-lg">
+                                    <div>
+                                        <h4 class="font-semibold">Delete Account</h4>
+                                        <p class="text-sm text-gray-600">Permanently delete your account and all data</p>
+                                    </div>
+                                    <button class="btn btn-error btn-outline btn-sm" id="delete-account-btn">
+                                        Delete Account
+                                    </button>
+                                </div>
+                                
+                                <div class="flex justify-between items-center p-4 bg-warning/10 rounded-lg">
+                                    <div>
+                                        <h4 class="font-semibold">Export Data</h4>
+                                        <p class="text-sm text-gray-600">Download all your quiz data</p>
+                                    </div>
+                                    <button class="btn btn-warning btn-outline btn-sm" id="export-data-btn">
+                                        Export Data
+                                    </button>
+                                </div>
+
+                                <div class="flex justify-between items-center p-4 bg-info/10 rounded-lg">
+                                    <div>
+                                        <h4 class="font-semibold">Clear All Data</h4>
+                                        <p class="text-sm text-gray-600">Reset all your progress and settings</p>
+                                    </div>
+                                    <button class="btn btn-info btn-outline btn-sm" id="clear-data-btn">
+                                        Clear Data
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Email Modal -->
+    <div id="change-email-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Change Email Address</h3>
+            
+            <form id="change-email-form" class="space-y-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Current Email</span>
+                    </label>
+                    <input type="email" class="input input-bordered" value="john.smith@ius.ac.bd" readonly>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">New Email Address</span>
+                    </label>
+                    <input type="email" class="input input-bordered" id="new-email" required>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Confirm Password</span>
+                    </label>
+                    <input type="password" class="input input-bordered" id="confirm-password-email" required>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-email">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-email">
+                        <i class="fa-solid fa-envelope mr-2"></i>
+                        Update Email
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="change-password-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Change Password</h3>
+            
+            <form id="change-password-form" class="space-y-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Current Password</span>
+                    </label>
+                    <input type="password" class="input input-bordered" id="current-password" required>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">New Password</span>
+                    </label>
+                    <input type="password" class="input input-bordered" id="new-password" required>
+                    <div class="password-strength mt-2" id="password-strength">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>Password Strength</span>
+                            <span id="password-strength-text">Weak</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="password-strength-bar" class="bg-red-500 h-2 rounded-full transition-all duration-300" style="width: 20%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Confirm New Password</span>
+                    </label>
+                    <input type="password" class="input input-bordered" id="confirm-new-password" required>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-password">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-password">
+                        <i class="fa-solid fa-key mr-2"></i>
+                        Update Password
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-base-200 text-base-content p-10 mt-16">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full">
+                <div class="text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="text-xl font-bold">IUS QUIZ SYSTEM</span>
+                    </div>
+                    <p class="mb-4">The premier platform for interactive learning and knowledge testing at IUS.</p>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Quick Links</span>
+                    <a href="student_dashboard.html" class="link link-hover">Dashboard</a>
+                    <a href="quizzes.html" class="link link-hover">Quizzes</a>
+                    <a href="results.html" class="link link-hover">Results</a>
+                    <a href="leaderboard.html" class="link link-hover">Leaderboard</a>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Support</span>
+                    <a href="contact.html" class="link link-hover">Contact Us</a>
+                    <a href="#" class="link link-hover">FAQ</a>
+                    <a href="#" class="link link-hover">Privacy Policy</a>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Social</span>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t pt-6 text-center">
+                <p>Copyright © <span id="current-year">2025</span> - All rights reserved by IUS Quiz System</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="settings.js"></script>
+</body>
+
+</html>

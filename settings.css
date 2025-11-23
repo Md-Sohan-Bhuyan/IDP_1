@@ -1,0 +1,219 @@
+/* Settings Page Specific Styles */
+.settings-section {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.settings-section.active {
+    display: block;
+}
+
+.settings-menu-item {
+    transition: all 0.2s ease-in-out;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0;
+}
+
+.settings-menu-item.active {
+    background-color: hsl(var(--p) / 0.1);
+    color: hsl(var(--p));
+    font-weight: 600;
+}
+
+.settings-menu-item:hover:not(.active) {
+    background-color: hsl(var(--bc) / 0.05);
+}
+
+.setting-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid hsl(var(--bc) / 0.1);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.theme-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 2px solid hsl(var(--bc) / 0.2);
+    border-radius: 0.5rem;
+    background: transparent;
+    transition: all 0.2s ease-in-out;
+    min-width: 80px;
+}
+
+.theme-option.active {
+    border-color: hsl(var(--p));
+    background-color: hsl(var(--p) / 0.1);
+    color: hsl(var(--p));
+}
+
+.theme-option:hover:not(.active) {
+    border-color: hsl(var(--bc) / 0.4);
+    transform: translateY(-2px);
+}
+
+/* Password strength indicator */
+.password-strength {
+    margin-top: 0.5rem;
+}
+
+#password-strength-bar {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Security log items */
+.security-log-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--b1));
+    border: 1px solid hsl(var(--bc) / 0.1);
+}
+
+.security-log-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Modal animations */
+.modal {
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sticky sidebar */
+.sticky {
+    position: sticky;
+}
+
+/* Custom scrollbar for settings menu */
+#settings-menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+#settings-menu::-webkit-scrollbar-track {
+    background: hsl(var(--b1));
+}
+
+#settings-menu::-webkit-scrollbar-thumb {
+    background: hsl(var(--bc) / 0.3);
+    border-radius: 2px;
+}
+
+#settings-menu::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--bc) / 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .theme-option {
+        min-width: 70px;
+        padding: 0.75rem;
+    }
+    
+    .setting-item {
+        padding: 1rem 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-menu-item {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .theme-option {
+        min-width: 60px;
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* High contrast mode support */
+.high-contrast {
+    --bc: 0 0% 0%;
+    --b1: 0 0% 100%;
+    --b2: 0 0% 95%;
+    --b3: 0 0% 90%;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .settings-section,
+    .settings-menu-item,
+    .theme-option,
+    .modal {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Loading states */
+.btn.loading {
+    pointer-events: none;
+}
+
+/* Success/Error states */
+.setting-saved {
+    border-left: 4px solid hsl(var(--su));
+    padding-left: 1rem;
+}
+
+.setting-error {
+    border-left: 4px solid hsl(var(--er));
+    padding-left: 1rem;
+}
+
+/* Custom font size classes */
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-base {
+    font-size: 1rem;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+}
+
+.text-xl {
+    font-size: 1.25rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}

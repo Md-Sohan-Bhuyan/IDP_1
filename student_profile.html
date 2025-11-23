@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="student_profile.css">
+</head>
+
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="student_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quizzes</a></li>
+                    <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                    <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star"></i> Leaderboard</a></li>
+                    <li><a href="student_profile.html" class="active"><i class="fa-solid fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <a href="student_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                IUS QUIZ SYSTEM
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="student_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quizzes</a></li>
+                <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star"></i> Leaderboard</a></li>
+                <li><a href="student_profile.html" class="active"><i class="fa-solid fa-user"></i> Profile</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+            
+            <!-- Notification Bell -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-ghost btn-circle relative">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                    <span class="badge badge-xs badge-primary absolute -top-1 -right-1">2</span>
+                </button>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                    <li class="menu-title">Notifications</li>
+                    <li><a class="text-sm"><i class="fa-solid fa-trophy text-yellow-500"></i> Profile updated successfully!</a></li>
+                    <li><a class="text-sm"><i class="fa-solid fa-award text-green-500"></i> New achievement available</a></li>
+                </ul>
+            </div>
+
+            <!-- User Profile -->
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">JS</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">John Smith</li>
+                    <li><a href="student_profile.html" class="active"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8 text-center">
+            <h1 class="text-4xl font-bold mb-2">My Profile</h1>
+            <p class="text-gray-600">Manage your personal information and academic progress</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Left Sidebar - Profile Overview -->
+            <div class="lg:col-span-1">
+                <!-- Profile Card -->
+                <div class="card bg-base-100 shadow-xl mb-6 sticky top-24">
+                    <div class="card-body items-center text-center">
+                        <!-- Profile Avatar -->
+                        <div class="avatar mb-4">
+                            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-secondary relative">
+                                <span class="text-white text-2xl font-bold flex items-center justify-center h-full">JS</span>
+                                <div class="absolute bottom-0 right-0 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fa-solid fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h2 class="card-title mb-1" id="profile-name">John Smith</h2>
+                        <p class="text-gray-500 mb-2" id="profile-department">Computer Science & Engineering</p>
+                        <div class="badge badge-primary badge-lg mb-4">
+                            <i class="fa-solid fa-graduation-cap mr-1"></i>
+                            Student
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="w-full space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Member Since</span>
+                                <span class="font-semibold" id="member-since">2024</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Quizzes Taken</span>
+                                <span class="font-semibold text-primary" id="total-quizzes-taken">24</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Current Rank</span>
+                                <span class="font-semibold text-secondary" id="current-rank">#3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Overview -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Overall Progress</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm">Course Completion</span>
+                                    <span class="text-sm font-semibold" id="course-completion">65%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-primary h-2 rounded-full progress-fill" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm">Quiz Performance</span>
+                                    <span class="text-sm font-semibold" id="quiz-performance">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full progress-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm">Learning Consistency</span>
+                                    <span class="text-sm font-semibold" id="learning-consistency">78%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-purple-500 h-2 rounded-full progress-fill" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content Area -->
+            <div class="lg:col-span-3">
+                <!-- Tabs Navigation -->
+                <div class="tabs tabs-boxed bg-base-200 mb-8 justify-start">
+                    <button class="tab tab-active" data-tab="personal">Personal Info</button>
+                    <button class="tab" data-tab="academic">Academic</button>
+                    <button class="tab" data-tab="achievements">Achievements</button>
+                    <button class="tab" data-tab="settings">Settings</button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div id="tab-contents">
+                    <!-- Personal Info Tab -->
+                    <div class="tab-content active" id="personal-tab">
+                        <div class="card bg-base-100 shadow-xl mb-6">
+                            <div class="card-body">
+                                <h3 class="card-title mb-6">Personal Information</h3>
+                                
+                                <form id="personal-info-form" class="space-y-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">First Name</span>
+                                            </label>
+                                            <input type="text" class="input input-bordered" id="first-name" value="John" required>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Last Name</span>
+                                            </label>
+                                            <input type="text" class="input input-bordered" id="last-name" value="Smith" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Email Address</span>
+                                            </label>
+                                            <input type="email" class="input input-bordered" id="email" value="john.smith@ius.ac.bd" required>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Phone Number</span>
+                                            </label>
+                                            <input type="tel" class="input input-bordered" id="phone" value="+880 1234-567890">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Bio</span>
+                                        </label>
+                                        <textarea class="textarea textarea-bordered h-24" id="bio" placeholder="Tell us about yourself...">Passionate Computer Science student with interest in web development and artificial intelligence. Always eager to learn new technologies and solve challenging problems.</textarea>
+                                    </div>
+
+                                    <div class="card-actions justify-end">
+                                        <button type="button" class="btn btn-ghost" id="cancel-personal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary" id="save-personal">
+                                            <i class="fa-solid fa-save mr-2"></i>
+                                            Save Changes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Security Settings -->
+                        <div class="card bg-base-100 shadow-xl">
+                            <div class="card-body">
+                                <h3 class="card-title mb-6">Security Settings</h3>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center p-4 bg-base-200 rounded-lg">
+                                        <div>
+                                            <h4 class="font-semibold">Password</h4>
+                                            <p class="text-sm text-gray-600">Last changed 3 months ago</p>
+                                        </div>
+                                        <button class="btn btn-outline btn-sm" id="change-password-btn">
+                                            Change Password
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center p-4 bg-base-200 rounded-lg">
+                                        <div>
+                                            <h4 class="font-semibold">Two-Factor Authentication</h4>
+                                            <p class="text-sm text-gray-600">Add an extra layer of security</p>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-sm text-gray-600">Disabled</span>
+                                            <input type="checkbox" class="toggle toggle-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Tab -->
+                    <div class="tab-content" id="academic-tab">
+                        <div class="card bg-base-100 shadow-xl mb-6">
+                            <div class="card-body">
+                                <h3 class="card-title mb-6">Academic Information</h3>
+                                
+                                <form id="academic-info-form" class="space-y-6">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Student ID</span>
+                                            </label>
+                                            <input type="text" class="input input-bordered" id="student-id" value="IUS-2024-001" readonly>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Department</span>
+                                            </label>
+                                            <select class="select select-bordered" id="department">
+                                                <option value="cse" selected>Computer Science & Engineering</option>
+                                                <option value="bba">Business Administration</option>
+                                                <option value="eee">Electrical & Electronic Engineering</option>
+                                                <option value="english">English</option>
+                                                <option value="textile">Textile Engineering</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Semester</span>
+                                            </label>
+                                            <select class="select select-bordered" id="semester">
+                                                <option value="1">1st Semester</option>
+                                                <option value="2">2nd Semester</option>
+                                                <option value="3">3rd Semester</option>
+                                                <option value="4" selected>4th Semester</option>
+                                                <option value="5">5th Semester</option>
+                                                <option value="6">6th Semester</option>
+                                                <option value="7">7th Semester</option>
+                                                <option value="8">8th Semester</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">CGPA</span>
+                                            </label>
+                                            <input type="number" class="input input-bordered" id="cgpa" value="3.75" step="0.01" min="0" max="4.0">
+                                        </div>
+                                    </div>
+
+                                    <div class="card-actions justify-end">
+                                        <button type="button" class="btn btn-ghost" id="cancel-academic">Cancel</button>
+                                        <button type="submit" class="btn btn-primary" id="save-academic">
+                                            <i class="fa-solid fa-save mr-2"></i>
+                                            Save Changes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Course Progress -->
+                        <div class="card bg-base-100 shadow-xl">
+                            <div class="card-body">
+                                <h3 class="card-title mb-6">Course Progress</h3>
+                                
+                                <div class="space-y-4" id="course-progress-list">
+                                    <!-- Course progress items will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements Tab -->
+                    <div class="tab-content" id="achievements-tab">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Unlocked Achievements -->
+                            <div class="card bg-base-100 shadow-xl">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-4">Unlocked Achievements</h3>
+                                    <div class="grid grid-cols-2 gap-4" id="unlocked-achievements">
+                                        <!-- Unlocked achievements will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Locked Achievements -->
+                            <div class="card bg-base-100 shadow-xl">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-4">Next Achievements</h3>
+                                    <div class="grid grid-cols-2 gap-4" id="locked-achievements">
+                                        <!-- Locked achievements will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievement Stats -->
+                        <div class="card bg-base-100 shadow-xl mt-6">
+                            <div class="card-body">
+                                <h3 class="card-title mb-4">Achievement Progress</h3>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                    <div class="achievement-stat">
+                                        <div class="stat-value" id="total-achievements">8</div>
+                                        <div class="stat-label">Total Earned</div>
+                                    </div>
+                                    <div class="achievement-stat">
+                                        <div class="stat-value" id="achievement-points">450</div>
+                                        <div class="stat-label">Points</div>
+                                    </div>
+                                    <div class="achievement-stat">
+                                        <div class="stat-value" id="achievement-level">3</div>
+                                        <div class="stat-label">Level</div>
+                                    </div>
+                                    <div class="achievement-stat">
+                                        <div class="stat-value" id="next-level">75%</div>
+                                        <div class="stat-label">To Next Level</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div class="tab-content" id="settings-tab">
+                        <div class="card bg-base-100 shadow-xl">
+                            <div class="card-body">
+                                <h3 class="card-title mb-6">Privacy Settings</h3>
+                                
+                                <div class="space-y-6">
+                                    <div class="flex justify-between items-center p-4 bg-base-200 rounded-lg">
+                                        <div>
+                                            <h4 class="font-semibold">Profile Visibility</h4>
+                                            <p class="text-sm text-gray-600">Who can see your profile</p>
+                                        </div>
+                                        <select class="select select-bordered">
+                                            <option selected>Public</option>
+                                            <option>Friends Only</option>
+                                            <option>Private</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center p-4 bg-base-200 rounded-lg">
+                                        <div>
+                                            <h4 class="font-semibold">Email Notifications</h4>
+                                            <p class="text-sm text-gray-600">Receive email updates</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" checked>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center p-4 bg-base-200 rounded-lg">
+                                        <div>
+                                            <h4 class="font-semibold">Push Notifications</h4>
+                                            <p class="text-sm text-gray-600">Receive browser notifications</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" checked>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center p-4 bg-base-200 rounded-lg">
+                                        <div>
+                                            <h4 class="font-semibold">Leaderboard Visibility</h4>
+                                            <p class="text-sm text-gray-600">Show your rank publicly</p>
+                                        </div>
+                                        <input type="checkbox" class="toggle toggle-primary" checked>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Danger Zone -->
+                        <div class="card bg-base-100 shadow-xl border border-error/20 mt-6">
+                            <div class="card-body">
+                                <h3 class="card-title text-error mb-4">Danger Zone</h3>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center p-4 bg-error/10 rounded-lg">
+                                        <div>
+                                            <h4 class="font-semibold">Delete Account</h4>
+                                            <p class="text-sm text-gray-600">Permanently delete your account and all data</p>
+                                        </div>
+                                        <button class="btn btn-error btn-outline btn-sm" id="delete-account-btn">
+                                            Delete Account
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="flex justify-between items-center p-4 bg-warning/10 rounded-lg">
+                                        <div>
+                                            <h4 class="font-semibold">Export Data</h4>
+                                            <p class="text-sm text-gray-600">Download all your quiz data</p>
+                                        </div>
+                                        <button class="btn btn-warning btn-outline btn-sm" id="export-data-btn">
+                                            Export Data
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="change-password-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Change Password</h3>
+            
+            <form id="change-password-form" class="space-y-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Current Password</span>
+                    </label>
+                    <input type="password" class="input input-bordered" id="current-password" required>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">New Password</span>
+                    </label>
+                    <input type="password" class="input input-bordered" id="new-password" required>
+                    <div class="password-strength mt-2 hidden" id="password-strength">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>Password Strength</span>
+                            <span id="password-strength-text">Weak</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div id="password-strength-bar" class="bg-red-500 h-2 rounded-full transition-all duration-300" style="width: 20%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Confirm New Password</span>
+                    </label>
+                    <input type="password" class="input input-bordered" id="confirm-new-password" required>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-password">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-password">
+                        <i class="fa-solid fa-key mr-2"></i>
+                        Update Password
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-base-200 text-base-content p-10 mt-16">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full">
+                <div class="text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="text-xl font-bold">IUS QUIZ SYSTEM</span>
+                    </div>
+                    <p class="mb-4">The premier platform for interactive learning and knowledge testing at IUS.</p>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Quick Links</span>
+                    <a href="student_dashboard.html" class="link link-hover">Dashboard</a>
+                    <a href="quizzes.html" class="link link-hover">Quizzes</a>
+                    <a href="results.html" class="link link-hover">Results</a>
+                    <a href="leaderboard.html" class="link link-hover">Leaderboard</a>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Support</span>
+                    <a href="contact.html" class="link link-hover">Contact Us</a>
+                    <a href="#" class="link link-hover">FAQ</a>
+                    <a href="#" class="link link-hover">Privacy Policy</a>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Social</span>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-2xl"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t pt-6 text-center">
+                <p>Copyright © <span id="current-year">2025</span> - All rights reserved by IUS Quiz System</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="student_profile.js"></script>
+</body>
+
+</html>

@@ -10,6 +10,35 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="home.css">
+    <style>
+        /* Remove rotation animation */
+        .floating {
+            animation: none !important;
+        }
+        
+        /* Fix for tabs to prevent rotation */
+        .tabs-boxed {
+            transform: none !important;
+        }
+        
+        /* Particle animation without rotation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(0deg);
+            }
+        }
+        
+        .particle {
+            animation: float linear infinite;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body class="bg-base-100">
@@ -36,11 +65,11 @@
                             </ul>
                         </details>
                     </li>
-                    <li><a href="#"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Quizzes</a></li>
-                    <li><a href="#"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> Results</a></li>
-                    <li><a href="#"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i> Leaderboard</a></li>
-                    <li><a href="#"><i class="fa-solid fa-info" aria-hidden="true"></i> About</a></li>
-                    <li><a href="#"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
+                    <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Quizzes</a></li>
+                    <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> Results</a></li>
+                    <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i> Leaderboard</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-info" aria-hidden="true"></i> About</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
                     <li><a href="signin.html" class="active"><i class="fa-solid fa-arrow-right-to-bracket"
                                 aria-hidden="true"></i> SignIn</a></li>
                     <li><a href="signup.html"><i class="fa-solid fa-user-plus" aria-hidden="true"></i> SignUp</a></li>
@@ -71,11 +100,11 @@
                     </details>
                 </li>
 
-                <li><a href="#"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Quizzes</a></li>
-                <li><a href="#"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> Results</a></li>
-                <li><a href="#"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i> Leaderboard</a></li>
-                <li><a href="#"><i class="fa-solid fa-info" aria-hidden="true"></i> About</a></li>
-                <li><a href="#"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
+                <li><a href="quizzes.html"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Quizzes</a></li>
+                <li><a href="results.html"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> Results</a></li>
+                <li><a href="leaderboard.html"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i> Leaderboard</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-info" aria-hidden="true"></i> About</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-headset" aria-hidden="true"></i> Contact</a></li>
             </ul>
         </div>
 
@@ -164,7 +193,7 @@
                 <!-- Right Side - Signin Form -->
                 <div class="md:w-1/2 flex justify-center">
                     <div class="w-full max-w-md">
-                        <div class="bg-white rounded-2xl p-8 shadow-2xl text-gray-800 floating">
+                        <div class="bg-white rounded-2xl p-8 shadow-2xl text-gray-800">
                             <div class="text-center mb-8">
                                 <h2 class="text-3xl font-bold text-gray-900">Sign In</h2>
                                 <p class="text-gray-600 mt-2">Choose your account type to continue</p>
@@ -175,6 +204,10 @@
                                 <button class="tab tab-active flex-1" data-role="student">
                                     <i class="fa-solid fa-user-graduate mr-2"></i>
                                     Student
+                                </button>
+                                <button class="tab flex-1" data-role="teacher">
+                                    <i class="fa-solid fa-chalkboard-teacher mr-2"></i>
+                                    Teacher
                                 </button>
                                 <button class="tab flex-1" data-role="admin">
                                     <i class="fa-solid fa-user-tie mr-2"></i>
@@ -229,7 +262,7 @@
                                 </div>
 
                                 <!-- Submit Button -->
-                                <button type="submit" class="btn btn-primary w-full text-white text-lg py-3 pulse"
+                                <button type="submit" class="btn btn-primary w-full text-white text-lg py-3"
                                     id="signin-submit">
                                     <i class="fa-solid fa-arrow-right-to-bracket mr-2"></i>
                                     Sign In
@@ -303,7 +336,7 @@
                     <div class="space-y-2">
                         <a class="link link-hover">Computer Science (CSE)</a>
                         <a class="link link-hover">Business Administration (BBA)</a>
-                        <a class="link link-hover">Electrical Engineering (EEE)</a>
+                        <a class="link link-hover">Electrical and Electronic Engineering (EEE)</a>
                         <a class="link link-hover">English</a>
                         <a class="link link-hover">Textile Engineering</a>
                     </div>

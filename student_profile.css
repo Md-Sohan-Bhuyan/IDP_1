@@ -1,0 +1,297 @@
+/* Student Profile Specific Styles */
+
+/* Profile Avatar */
+.avatar {
+    transition: all 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+/* Progress Bars */
+.progress-fill {
+    animation: progressFill 1.5s ease-out forwards;
+}
+
+@keyframes progressFill {
+    from {
+        width: 0%;
+    }
+}
+
+/* Tab System */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Achievement Badges */
+.achievement-badge {
+    @apply flex flex-col items-center p-4 rounded-lg bg-base-200 transition-all duration-300 cursor-pointer text-center;
+}
+
+.achievement-badge.unlocked {
+    @apply border-2 border-transparent hover:border-primary hover:shadow-lg;
+}
+
+.achievement-badge.locked {
+    @apply opacity-60 grayscale;
+}
+
+.achievement-badge.unlocked:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.badge-icon {
+    @apply w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl mb-2 relative;
+}
+
+.badge-icon.gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.badge-icon.silver {
+    background: linear-gradient(135deg, #C0C0C0, #808080);
+    box-shadow: 0 4px 15px rgba(192, 192, 192, 0.3);
+}
+
+.badge-icon.bronze {
+    background: linear-gradient(135deg, #CD7F32, #8B4513);
+    box-shadow: 0 4px 15px rgba(205, 127, 50, 0.3);
+}
+
+.badge-icon.blue {
+    background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.badge-icon.green {
+    background: linear-gradient(135deg, #10B981, #047857);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.badge-icon.purple {
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+/* Achievement Stats */
+.achievement-stat {
+    @apply p-4 rounded-lg bg-base-200 transition-all duration-300 hover:bg-base-300;
+}
+
+.achievement-stat:hover {
+    transform: translateY(-2px);
+}
+
+.stat-value {
+    @apply text-3xl font-bold text-primary mb-1;
+}
+
+.stat-label {
+    @apply text-sm text-gray-600 font-medium;
+}
+
+/* Course Progress Items */
+.course-progress-item {
+    @apply flex items-center justify-between p-4 bg-base-200 rounded-lg transition-all duration-300 hover:bg-base-300;
+}
+
+.course-progress-item:hover {
+    transform: translateX(5px);
+}
+
+.course-progress-bar {
+    @apply flex-1 mx-4 bg-gray-300 rounded-full h-2 overflow-hidden;
+}
+
+.course-progress-fill {
+    @apply h-2 rounded-full transition-all duration-1000 ease-out;
+}
+
+/* Form Styles */
+.form-control {
+    transition: all 0.3s ease;
+}
+
+.form-control:focus-within {
+    transform: translateY(-1px);
+}
+
+.input:focus, .textarea:focus, .select:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    border-color: #3B82F6;
+}
+
+/* Security Items */
+.security-item {
+    @apply flex justify-between items-center p-4 bg-base-200 rounded-lg transition-all duration-300;
+}
+
+.security-item:hover {
+    @apply bg-base-300;
+    transform: translateX(5px);
+}
+
+/* Danger Zone */
+.danger-item {
+    @apply flex justify-between items-center p-4 rounded-lg transition-all duration-300;
+}
+
+.danger-item:hover {
+    transform: translateX(5px);
+}
+
+/* Loading States */
+.skeleton {
+    @apply bg-gray-300 animate-pulse rounded;
+}
+
+.skeleton-text {
+    @apply h-4 bg-gray-300 animate-pulse rounded;
+}
+
+/* Notification Badges */
+.notification-badge {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .achievement-badge {
+        @apply p-3;
+    }
+    
+    .badge-icon {
+        @apply w-12 h-12 text-xl;
+    }
+    
+    .stat-value {
+        @apply text-2xl;
+    }
+}
+
+/* Sticky Sidebar */
+.sticky {
+    position: sticky;
+}
+
+/* Password Strength Indicator */
+.password-strength-bar {
+    transition: all 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-base-200;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-focus;
+}
+
+/* Animation Classes */
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slideIn {
+    animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Hover Effects */
+.hover-lift {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Success States */
+.success-message {
+    @apply bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4;
+}
+
+.error-message {
+    @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4;
+}
+
+/* Print Styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .card {
+        break-inside: avoid;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .skeleton {
+        @apply bg-gray-700;
+    }
+    
+    .skeleton-text {
+        @apply bg-gray-700;
+    }
+}
+
+/* Focus states for accessibility */
+button:focus, input:focus, textarea:focus, select:focus {
+    outline: 2px solid #3B82F6;
+    outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+button, input, textarea, select, .card, .achievement-badge {
+    transition: all 0.3s ease;
+}
