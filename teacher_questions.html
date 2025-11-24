@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Questions - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="teacher_questions.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="teacher_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="teacher_questions.html" class="active"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                    <li><a href="teacher_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                    <li><a href="teacher_results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                    <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <a href="teacher_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-chalkboard-teacher"></i>
+                </div>
+                IUS QUIZ SYSTEM - TEACHER
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="teacher_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="teacher_questions.html" class="active"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                <li><a href="teacher_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                <li><a href="teacher_results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">DR</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Dr. Rahman</li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="teacher_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">Manage Questions</h1>
+            <p class="text-gray-600">Create, edit, and manage your question bank</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-primary">
+                    <i class="fa-solid fa-question-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Questions</div>
+                <div class="stat-value text-primary" id="total-questions">47</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-success">
+                    <i class="fa-solid fa-check-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Approved</div>
+                <div class="stat-value text-success" id="approved-questions">35</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-warning">
+                    <i class="fa-solid fa-clock text-3xl"></i>
+                </div>
+                <div class="stat-title">Pending</div>
+                <div class="stat-value text-warning" id="pending-questions">12</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-error">
+                    <i class="fa-solid fa-times-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Rejected</div>
+                <div class="stat-value text-error" id="rejected-questions">2</div>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="card bg-base-100 shadow-xl mb-8">
+            <div class="card-body">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h3 class="card-title mb-2">Question Bank</h3>
+                        <p class="text-gray-600">Manage all your questions in one place</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="btn btn-primary" id="add-question-btn">
+                            <i class="fa-solid fa-plus mr-2"></i>
+                            Add New Question
+                        </button>
+                        <div class="dropdown dropdown-end">
+                            <button class="btn btn-outline">
+                                <i class="fa-solid fa-filter mr-2"></i>
+                                Filter
+                                <i class="fa-solid fa-chevron-down ml-2"></i>
+                            </button>
+                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><a>All Questions</a></li>
+                                <li><a>Approved Only</a></li>
+                                <li><a>Pending Only</a></li>
+                                <li><a>Rejected Only</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions Table -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Subject</th>
+                                <th>Difficulty</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="questions-table-body">
+                            <!-- Questions will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="flex justify-center mt-6">
+                    <div class="join">
+                        <button class="join-item btn btn-sm">1</button>
+                        <button class="join-item btn btn-sm btn-active">2</button>
+                        <button class="join-item btn btn-sm">3</button>
+                        <button class="join-item btn btn-sm">4</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Question Modal -->
+    <div id="add-question-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-4xl">
+            <h3 class="font-bold text-2xl mb-4">Add New Question</h3>
+            
+            <form id="add-question-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Subject</span>
+                        </label>
+                        <select class="select select-bordered" id="question-subject" required>
+                            <option value="">Select Subject</option>
+                            <option value="math">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="chemistry">Chemistry</option>
+                            <option value="biology">Biology</option>
+                            <option value="english">English</option>
+                            <option value="computer">Computer Science</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Difficulty Level</span>
+                        </label>
+                        <select class="select select-bordered" id="question-difficulty" required>
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Question Text</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-24" id="question-text" placeholder="Enter your question here..." required></textarea>
+                </div>
+
+                <!-- Options -->
+                <div class="space-y-3">
+                    <label class="label">
+                        <span class="label-text font-semibold">Options</span>
+                    </label>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="option-a" placeholder="Option A" required>
+                        <input type="radio" name="correct-answer" value="A" class="radio radio-primary" required>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="option-b" placeholder="Option B" required>
+                        <input type="radio" name="correct-answer" value="B" class="radio radio-primary">
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="option-c" placeholder="Option C" required>
+                        <input type="radio" name="correct-answer" value="C" class="radio radio-primary">
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="option-d" placeholder="Option D" required>
+                        <input type="radio" name="correct-answer" value="D" class="radio radio-primary">
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Explanation (Optional)</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-20" id="question-explanation" placeholder="Explain why this answer is correct..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Time Limit (seconds)</span>
+                        </label>
+                        <input type="number" class="input input-bordered" id="question-time" min="30" max="300" value="60" required>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Marks</span>
+                        </label>
+                        <input type="number" class="input input-bordered" id="question-marks" min="1" max="10" value="5" required>
+                    </div>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-question">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-question">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>
+                        Submit for Approval
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Question Modal -->
+    <div id="edit-question-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-4xl">
+            <h3 class="font-bold text-2xl mb-4">Edit Question</h3>
+            
+            <form id="edit-question-form" class="space-y-6">
+                <input type="hidden" id="edit-question-id">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Subject</span>
+                        </label>
+                        <select class="select select-bordered" id="edit-question-subject" required>
+                            <option value="">Select Subject</option>
+                            <option value="math">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="chemistry">Chemistry</option>
+                            <option value="biology">Biology</option>
+                            <option value="english">English</option>
+                            <option value="computer">Computer Science</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Difficulty Level</span>
+                        </label>
+                        <select class="select select-bordered" id="edit-question-difficulty" required>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Question Text</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-24" id="edit-question-text" placeholder="Enter your question here..." required></textarea>
+                </div>
+
+                <!-- Options -->
+                <div class="space-y-3">
+                    <label class="label">
+                        <span class="label-text font-semibold">Options</span>
+                    </label>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="edit-option-a" placeholder="Option A" required>
+                        <input type="radio" name="edit-correct-answer" value="A" class="radio radio-primary" required>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="edit-option-b" placeholder="Option B" required>
+                        <input type="radio" name="edit-correct-answer" value="B" class="radio radio-primary">
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="edit-option-c" placeholder="Option C" required>
+                        <input type="radio" name="edit-correct-answer" value="C" class="radio radio-primary">
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <input type="text" class="input input-bordered flex-1" id="edit-option-d" placeholder="Option D" required>
+                        <input type="radio" name="edit-correct-answer" value="D" class="radio radio-primary">
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Explanation (Optional)</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-20" id="edit-question-explanation" placeholder="Explain why this answer is correct..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Time Limit (seconds)</span>
+                        </label>
+                        <input type="number" class="input input-bordered" id="edit-question-time" min="30" max="300" value="60" required>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Marks</span>
+                        </label>
+                        <input type="number" class="input input-bordered" id="edit-question-marks" min="1" max="10" value="5" required>
+                    </div>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-edit-question">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="update-question">
+                        <i class="fa-solid fa-save mr-2"></i>
+                        Update Question
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="teacher_questions.js"></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="teacher_results.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="teacher_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="teacher_questions.html"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                    <li><a href="teacher_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                    <li><a href="teacher_results.html" class="active"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                    <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <a href="teacher_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-chalkboard-teacher"></i>
+                </div>
+                IUS QUIZ SYSTEM - TEACHER
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="teacher_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="teacher_questions.html"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                <li><a href="teacher_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                <li><a href="teacher_results.html" class="active"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">DR</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Dr. Rahman</li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="teacher_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">Quiz Results</h1>
+            <p class="text-gray-600">View and analyze student performance</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-primary">
+                    <i class="fa-solid fa-chart-line text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Quizzes</div>
+                <div class="stat-value text-primary" id="total-quizzes">12</div>
+                <div class="stat-desc">8 completed, 4 ongoing</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-secondary">
+                    <i class="fa-solid fa-users text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Participants</div>
+                <div class="stat-value text-secondary" id="total-participants">347</div>
+                <div class="stat-desc">↗︎ 42 this month</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-accent">
+                    <i class="fa-solid fa-percentage text-3xl"></i>
+                </div>
+                <div class="stat-title">Avg. Score</div>
+                <div class="stat-value text-accent" id="avg-score">78.5%</div>
+                <div class="stat-desc">↗︎ 5.2% from last month</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-info">
+                    <i class="fa-solid fa-check-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Pass Rate</div>
+                <div class="stat-value text-info" id="pass-rate">85%</div>
+                <div class="stat-desc">↗︎ 3% from last month</div>
+            </div>
+        </div>
+
+        <!-- Filters and Actions -->
+        <div class="card bg-base-100 shadow-xl mb-8">
+            <div class="card-body">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h3 class="card-title mb-2">Results Overview</h3>
+                        <p class="text-gray-600">Filter and analyze quiz results</p>
+                    </div>
+                    <div class="flex gap-2 flex-wrap">
+                        <select class="select select-bordered select-sm">
+                            <option>All Quizzes</option>
+                            <option>Mathematics Midterm</option>
+                            <option>Physics Quiz - Unit 2</option>
+                            <option>Chemistry Basics</option>
+                        </select>
+                        <select class="select select-bordered select-sm">
+                            <option>All Time</option>
+                            <option>This Week</option>
+                            <option>This Month</option>
+                            <option>Last 3 Months</option>
+                        </select>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fa-solid fa-download mr-2"></i>
+                            Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column - Results Table -->
+            <div class="lg:col-span-2">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Recent Quiz Results</h3>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="table table-zebra">
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Quiz</th>
+                                        <th>Score</th>
+                                        <th>Status</th>
+                                        <th>Time Taken</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="results-table-body">
+                                    <!-- Results will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="flex justify-center mt-6">
+                            <div class="join">
+                                <button class="join-item btn btn-sm">1</button>
+                                <button class="join-item btn btn-sm btn-active">2</button>
+                                <button class="join-item btn btn-sm">3</button>
+                                <button class="join-item btn btn-sm">4</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Analytics -->
+            <div class="space-y-6">
+                <!-- Performance Chart -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Performance Overview</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span>Excellent (90-100%)</span>
+                                <div class="flex items-center gap-2">
+                                    <progress class="progress progress-success w-32" value="25" max="100"></progress>
+                                    <span class="text-sm font-semibold">25%</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Good (75-89%)</span>
+                                <div class="flex items-center gap-2">
+                                    <progress class="progress progress-info w-32" value="45" max="100"></progress>
+                                    <span class="text-sm font-semibold">45%</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Average (50-74%)</span>
+                                <div class="flex items-center gap-2">
+                                    <progress class="progress progress-warning w-32" value="20" max="100"></progress>
+                                    <span class="text-sm font-semibold">20%</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Needs Improvement (<50%)</span>
+                                <div class="flex items-center gap-2">
+                                    <progress class="progress progress-error w-32" value="10" max="100"></progress>
+                                    <span class="text-sm font-semibold">10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Performers -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Top Performers</h3>
+                        <div class="space-y-3" id="top-performers-list">
+                            <!-- Top performers will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Quick Actions</h3>
+                        <div class="space-y-2">
+                            <button class="btn btn-outline btn-sm btn-block justify-start">
+                                <i class="fa-solid fa-chart-bar mr-2"></i>
+                                Generate Report
+                            </button>
+                            <button class="btn btn-outline btn-sm btn-block justify-start">
+                                <i class="fa-solid fa-envelope mr-2"></i>
+                                Email Results
+                            </button>
+                            <button class="btn btn-outline btn-sm btn-block justify-start">
+                                <i class="fa-solid fa-print mr-2"></i>
+                                Print Results
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Details Modal -->
+    <div id="result-details-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-4xl">
+            <h3 class="font-bold text-2xl mb-4">Result Details</h3>
+            
+            <div class="space-y-6" id="result-details-content">
+                <!-- Result details will be populated by JavaScript -->
+            </div>
+
+            <div class="modal-action">
+                <button class="btn btn-ghost" id="close-result-details">Close</button>
+                <button class="btn btn-primary">
+                    <i class="fa-solid fa-download mr-2"></i>
+                    Download Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="teacher_results.js"></script>
+</body>
+</html>

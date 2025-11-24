@@ -1,0 +1,317 @@
+/* Profile Page Specific Styles */
+.stat {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar Styles */
+.avatar {
+    position: relative;
+}
+
+.avatar .w-24 {
+    width: 6rem;
+    height: 6rem;
+    border: 4px solid hsl(var(--b1));
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+.form-control {
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Checkbox Styles */
+.checkbox {
+    border-radius: 0.375rem;
+}
+
+/* Card Styles */
+.card {
+    border-radius: 1rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, hsl(var(--p)), hsl(var(--pf)));
+    color: white;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+.profile-avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: white;
+    color: hsl(var(--p));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 4px solid white;
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.profile-info p {
+    margin: 0.25rem 0 0 0;
+    opacity: 0.9;
+}
+
+/* Settings Sections */
+.settings-section {
+    margin-bottom: 2rem;
+}
+
+.settings-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: hsl(var(--bc));
+    border-bottom: 2px solid hsl(var(--b3));
+    padding-bottom: 0.5rem;
+}
+
+/* Preference Items */
+.preference-item {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--b1));
+    border: 1px solid hsl(var(--bc) / 0.1);
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.preference-item:hover {
+    border-color: hsl(var(--p));
+    background-color: hsl(var(--bc) / 0.05);
+}
+
+.preference-info {
+    flex: 1;
+}
+
+.preference-name {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.preference-description {
+    font-size: 0.875rem;
+    color: hsl(var(--bc) / 0.6);
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--b2));
+    transition: all 0.2s ease-in-out;
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: hsl(var(--bc) / 0.7);
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Success States */
+.success-message {
+    background-color: hsl(var(--su) / 0.1);
+    border: 1px solid hsl(var(--su) / 0.2);
+    color: hsl(var(--su));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Error States */
+.error-message {
+    background-color: hsl(var(--er) / 0.1);
+    border: 1px solid hsl(var(--er) / 0.2);
+    color: hsl(var(--er));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-box {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--b1));
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--bc) / 0.3);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--bc) / 0.5);
+}
+
+/* Focus styles for accessibility */
+.btn:focus,
+.input:focus,
+.textarea:focus,
+.select:focus,
+.checkbox:focus {
+    outline: 2px solid hsl(var(--p));
+    outline-offset: 2px;
+}
+
+/* Animation for form elements */
+.input,
+.textarea,
+.select {
+    transition: all 0.2s ease-in-out;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    border-color: hsl(var(--p));
+    box-shadow: 0 0 0 3px hsl(var(--p) / 0.1);
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .btn,
+    .card-actions {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+}

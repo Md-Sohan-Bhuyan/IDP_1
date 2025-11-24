@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="admin_departments.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="admin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="admin_teachers.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</a></li>
+                    <li><a href="admin_departments.html" class="active"><i class="fa-solid fa-building"></i> Departments</a></li>
+                    <li><a href="admin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                    <li><a href="admin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+                </ul>
+            </div>
+            <a href="admin_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                IUS QUIZ SYSTEM - ADMIN
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="admin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="admin_teachers.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</a></li>
+                <li><a href="admin_departments.html" class="active"><i class="fa-solid fa-building"></i> Departments</a></li>
+                <li><a href="admin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                <li><a href="admin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                <li><a href="admin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">SA</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Super Admin</li>
+                    <li><a href="admin_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="admin_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">Department Management</h1>
+            <p class="text-gray-600">Manage academic departments and their settings</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-primary">
+                    <i class="fa-solid fa-building text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Departments</div>
+                <div class="stat-value text-primary" id="total-departments">8</div>
+                <div class="stat-desc">6 active, 2 inactive</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-secondary">
+                    <i class="fa-solid fa-chalkboard-teacher text-3xl"></i>
+                </div>
+                <div class="stat-title">Department Heads</div>
+                <div class="stat-value text-secondary" id="department-heads">8</div>
+                <div class="stat-desc">All positions filled</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-accent">
+                    <i class="fa-solid fa-users text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Teachers</div>
+                <div class="stat-value text-accent" id="total-teachers">47</div>
+                <div class="stat-desc">Across all departments</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-info">
+                    <i class="fa-solid fa-question-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Questions</div>
+                <div class="stat-value text-info" id="total-questions">1,247</div>
+                <div class="stat-desc">Department-wise questions</div>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="card bg-base-100 shadow-xl mb-8">
+            <div class="card-body">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h3 class="card-title mb-2">All Departments</h3>
+                        <p class="text-gray-600">Manage department settings and assignments</p>
+                    </div>
+                    <div class="flex gap-2 flex-wrap">
+                        <button class="btn btn-primary" id="add-department-btn">
+                            <i class="fa-solid fa-plus mr-2"></i>
+                            Add Department
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="fa-solid fa-download mr-2"></i>
+                            Export Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Departments Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="departments-grid">
+            <!-- Departments will be populated by JavaScript -->
+        </div>
+
+        <!-- Department Details Table -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h3 class="card-title mb-6">Department Statistics</h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Head</th>
+                                <th>Teachers</th>
+                                <th>Students</th>
+                                <th>Questions</th>
+                                <th>Quizzes</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="departments-table-body">
+                            <!-- Departments data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Department Modal -->
+    <div id="add-department-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-2xl">
+            <h3 class="font-bold text-2xl mb-4">Add New Department</h3>
+            
+            <form id="add-department-form" class="space-y-6">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Department Name</span>
+                    </label>
+                    <input type="text" class="input input-bordered" id="department-name" placeholder="e.g., Computer Science" required>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Department Code</span>
+                    </label>
+                    <input type="text" class="input input-bordered" id="department-code" placeholder="e.g., CS" required>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Description</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-24" id="department-description" placeholder="Brief description of the department..."></textarea>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Department Head</span>
+                    </label>
+                    <select class="select select-bordered" id="department-head">
+                        <option value="">Assign Later</option>
+                        <option value="T2024001">Dr. Mohammad Rahman</option>
+                        <option value="T2024002">Dr. Ahmed Khan</option>
+                        <option value="T2024003">Dr. Fatima Begum</option>
+                    </select>
+                </div>
+
+                <div class="form-control">
+                    <label class="label cursor-pointer justify-start gap-3">
+                        <input type="checkbox" class="checkbox checkbox-primary" id="department-active" checked>
+                        <span class="label-text font-semibold">Active Department</span>
+                    </label>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-department">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-department">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        Create Department
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Department Details Modal -->
+    <div id="department-details-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-4xl">
+            <h3 class="font-bold text-2xl mb-4" id="department-details-title">Department Details</h3>
+            
+            <div class="space-y-6" id="department-details-content">
+                <!-- Department details will be populated by JavaScript -->
+            </div>
+
+            <div class="modal-action">
+                <button class="btn btn-ghost" id="close-department-details">Close</button>
+                <button class="btn btn-primary" id="edit-department-btn">
+                    <i class="fa-solid fa-edit mr-2"></i>
+                    Edit Department
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin_departments.js"></script>
+</body>
+</html>

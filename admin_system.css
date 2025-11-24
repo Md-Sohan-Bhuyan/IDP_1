@@ -1,0 +1,378 @@
+/* System Settings Specific Styles */
+.stat {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Settings Navigation */
+#system-settings-menu {
+    width: 100%;
+}
+
+#system-settings-menu li a {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+}
+
+#system-settings-menu li a:hover {
+    background-color: hsl(var(--bc) / 0.05);
+    border-color: hsl(var(--bc) / 0.1);
+}
+
+#system-settings-menu li a.active {
+    background-color: hsl(var(--p) / 0.1);
+    border-color: hsl(var(--p));
+    color: hsl(var(--p));
+    font-weight: 600;
+}
+
+/* Settings Panels */
+.settings-panel {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.settings-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Styles */
+.form-control {
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Toggle Styles */
+.toggle {
+    border-radius: 1.5rem;
+}
+
+.toggle:checked {
+    background-color: hsl(var(--p));
+}
+
+/* Checkbox Styles */
+.checkbox {
+    border-radius: 0.375rem;
+}
+
+/* Integration Items */
+.integration-item {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--b1));
+    border: 1px solid hsl(var(--bc) / 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.integration-item:hover {
+    border-color: hsl(var(--p));
+    background-color: hsl(var(--bc) / 0.05);
+}
+
+/* API Key Items */
+.api-key-item {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--b2));
+    border: 1px solid hsl(var(--bc) / 0.1);
+}
+
+/* Backup Actions */
+.backup-actions {
+    margin: 1.5rem 0;
+}
+
+.backup-actions .btn {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    justify-content: flex-start;
+    transition: all 0.2s ease-in-out;
+}
+
+.backup-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.alert i {
+    font-size: 1.25rem;
+}
+
+.alert-warning {
+    background-color: hsl(var(--wa) / 0.1);
+    border: 1px solid hsl(var(--wa) / 0.2);
+    color: hsl(var(--wa));
+}
+
+.alert-info {
+    background-color: hsl(var(--in) / 0.1);
+    border: 1px solid hsl(var(--in) / 0.2);
+    color: hsl(var(--in));
+}
+
+.alert-error {
+    background-color: hsl(var(--er) / 0.1);
+    border: 1px solid hsl(var(--er) / 0.2);
+    color: hsl(var(--er));
+}
+
+/* Notification Categories */
+.notification-category {
+    margin-bottom: 1.5rem;
+}
+
+.notification-category h4 {
+    color: hsl(var(--bc));
+    border-bottom: 2px solid hsl(var(--b3));
+    padding-bottom: 0.5rem;
+}
+
+/* Divider */
+.divider {
+    margin: 1.5rem 0;
+    border-color: hsl(var(--bc) / 0.2);
+}
+
+/* Health Check Items */
+.health-check-item {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--b1));
+    border: 1px solid hsl(var(--bc) / 0.1);
+    margin-bottom: 0.5rem;
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Success States */
+.success-message {
+    background-color: hsl(var(--su) / 0.1);
+    border: 1px solid hsl(var(--su) / 0.2);
+    color: hsl(var(--su));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Error States */
+.error-message {
+    background-color: hsl(var(--er) / 0.1);
+    border: 1px solid hsl(var(--er) / 0.2);
+    color: hsl(var(--er));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .grid-cols-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .settings-menu {
+        position: static;
+        margin-bottom: 2rem;
+    }
+    
+    .backup-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .integration-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .integration-item .btn {
+        align-self: stretch;
+        text-align: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .modal-box {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .alert {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--b1));
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--bc) / 0.3);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--bc) / 0.5);
+}
+
+/* Focus styles for accessibility */
+.btn:focus,
+.input:focus,
+.textarea:focus,
+.select:focus,
+.toggle:focus,
+.checkbox:focus {
+    outline: 2px solid hsl(var(--p));
+    outline-offset: 2px;
+}
+
+/* Animation for form elements */
+.input,
+.textarea,
+.select {
+    transition: all 0.2s ease-in-out;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    border-color: hsl(var(--p));
+    box-shadow: 0 0 0 3px hsl(var(--p) / 0.1);
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .settings-menu,
+    .btn {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+    
+    .settings-panel {
+        display: block !important;
+    }
+}
+
+/* System Status Indicators */
+.system-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-online {
+    background-color: hsl(var(--su) / 0.1);
+    color: hsl(var(--su));
+    border: 1px solid hsl(var(--su) / 0.2);
+}
+
+.status-offline {
+    background-color: hsl(var(--er) / 0.1);
+    color: hsl(var(--er));
+    border: 1px solid hsl(var(--er) / 0.2);
+}
+
+.status-warning {
+    background-color: hsl(var(--wa) / 0.1);
+    color: hsl(var(--wa));
+    border: 1px solid hsl(var(--wa) / 0.2);
+}
+
+/* Setting Groups */
+.setting-group {
+    background-color: hsl(var(--b2));
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid hsl(var(--bc) / 0.1);
+}
+
+.setting-group-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: hsl(var(--bc));
+    border-bottom: 2px solid hsl(var(--b3));
+    padding-bottom: 0.5rem;
+}

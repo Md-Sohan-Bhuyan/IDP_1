@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Approval - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="admin_questions.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="admin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="admin_teachers.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</a></li>
+                    <li><a href="admin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                    <li><a href="admin_questions.html" class="active"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                    <li><a href="admin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+                </ul>
+            </div>
+            <a href="admin_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                IUS QUIZ SYSTEM - ADMIN
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="admin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="admin_teachers.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</a></li>
+                <li><a href="admin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                <li><a href="admin_questions.html" class="active"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                <li><a href="admin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                <li><a href="admin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">SA</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Super Admin</li>
+                    <li><a href="admin_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="admin_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">Question Approval</h1>
+            <p class="text-gray-600">Review and approve questions submitted by teachers</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-primary">
+                    <i class="fa-solid fa-question-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Pending Questions</div>
+                <div class="stat-value text-primary" id="pending-questions">23</div>
+                <div class="stat-desc">↗︎ 5 new today</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-secondary">
+                    <i class="fa-solid fa-check-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Approved This Week</div>
+                <div class="stat-value text-secondary" id="approved-questions">47</div>
+                <div class="stat-desc">↗︎ 12 from last week</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-accent">
+                    <i class="fa-solid fa-times-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Rejected This Week</div>
+                <div class="stat-value text-accent" id="rejected-questions">8</div>
+                <div class="stat-desc">↘︎ 2 from last week</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-info">
+                    <i class="fa-solid fa-chart-line text-3xl"></i>
+                </div>
+                <div class="stat-title">Approval Rate</div>
+                <div class="stat-value text-info" id="approval-rate">85%</div>
+                <div class="stat-desc">↗︎ 5% from last month</div>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="card bg-base-100 shadow-xl mb-8">
+            <div class="card-body">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h3 class="card-title mb-2">Pending Questions</h3>
+                        <p class="text-gray-600">Review and take action on submitted questions</p>
+                    </div>
+                    <div class="flex gap-2 flex-wrap">
+                        <div class="dropdown dropdown-end">
+                            <button class="btn btn-outline">
+                                <i class="fa-solid fa-filter mr-2"></i>
+                                Filter
+                                <i class="fa-solid fa-chevron-down ml-2"></i>
+                            </button>
+                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <li><a>All Questions</a></li>
+                                <li><a>Pending Only</a></li>
+                                <li><a>Approved Only</a></li>
+                                <li><a>Rejected Only</a></li>
+                                <li><a>By Department</a></li>
+                            </ul>
+                        </div>
+                        <select class="select select-bordered">
+                            <option>All Departments</option>
+                            <option>Computer Science</option>
+                            <option>Mathematics</option>
+                            <option>Physics</option>
+                            <option>Chemistry</option>
+                        </select>
+                        <button class="btn btn-outline">
+                            <i class="fa-solid fa-download mr-2"></i>
+                            Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions List -->
+        <div class="space-y-6" id="questions-list">
+            <!-- Questions will be populated by JavaScript -->
+        </div>
+        
+        <!-- Pagination -->
+        <div class="flex justify-center mt-8">
+            <div class="join">
+                <button class="join-item btn btn-sm">1</button>
+                <button class="join-item btn btn-sm btn-active">2</button>
+                <button class="join-item btn btn-sm">3</button>
+                <button class="join-item btn btn-sm">4</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question Review Modal -->
+    <div id="question-review-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-4xl">
+            <h3 class="font-bold text-2xl mb-4">Review Question</h3>
+            
+            <div class="space-y-6" id="question-review-content">
+                <!-- Question details will be populated by JavaScript -->
+            </div>
+
+            <div class="modal-action">
+                <button class="btn btn-ghost" id="close-question-review">Close</button>
+                <button class="btn btn-error" id="reject-question-btn">
+                    <i class="fa-solid fa-times mr-2"></i>
+                    Reject
+                </button>
+                <button class="btn btn-success" id="approve-question-btn">
+                    <i class="fa-solid fa-check mr-2"></i>
+                    Approve
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Reason Modal -->
+    <div id="reject-reason-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Reject Question</h3>
+            
+            <div class="space-y-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Reason for Rejection</span>
+                    </label>
+                    <select class="select select-bordered" id="rejection-reason">
+                        <option value="">Select a reason</option>
+                        <option value="incorrect">Incorrect Answer</option>
+                        <option value="ambiguous">Ambiguous Question</option>
+                        <option value="grammar">Grammar/Spelling Issues</option>
+                        <option value="duplicate">Duplicate Question</option>
+                        <option value="inappropriate">Inappropriate Content</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Additional Comments</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-24" id="rejection-comments" placeholder="Provide specific feedback for the teacher..."></textarea>
+                </div>
+            </div>
+
+            <div class="modal-action">
+                <button class="btn btn-ghost" id="cancel-rejection">Cancel</button>
+                <button class="btn btn-error" id="confirm-rejection">
+                    <i class="fa-solid fa-times mr-2"></i>
+                    Confirm Rejection
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin_questions.js"></script>
+</body>
+</html>

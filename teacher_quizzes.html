@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="teacher_quizzes.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="teacher_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="teacher_questions.html"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                    <li><a href="teacher_quizzes.html" class="active"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                    <li><a href="teacher_results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                    <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+            <a href="teacher_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-chalkboard-teacher"></i>
+                </div>
+                IUS QUIZ SYSTEM - TEACHER
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="teacher_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="teacher_questions.html"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                <li><a href="teacher_quizzes.html" class="active"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                <li><a href="teacher_results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">DR</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Dr. Rahman</li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="teacher_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">Create Quiz</h1>
+            <p class="text-gray-600">Create and manage quizzes for your students</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column - Quiz Form -->
+            <div class="lg:col-span-2">
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Quiz Details</h3>
+                        
+                        <form id="quiz-form" class="space-y-6">
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text font-semibold">Quiz Title</span>
+                                </label>
+                                <input type="text" class="input input-bordered" id="quiz-title" placeholder="Enter quiz title..." required>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Subject</span>
+                                    </label>
+                                    <select class="select select-bordered" id="quiz-subject" required>
+                                        <option value="">Select Subject</option>
+                                        <option value="math">Mathematics</option>
+                                        <option value="physics">Physics</option>
+                                        <option value="chemistry">Chemistry</option>
+                                        <option value="biology">Biology</option>
+                                        <option value="english">English</option>
+                                        <option value="computer">Computer Science</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Difficulty Level</span>
+                                    </label>
+                                    <select class="select select-bordered" id="quiz-difficulty" required>
+                                        <option value="easy">Easy</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="hard">Hard</option>
+                                        <option value="mixed">Mixed</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Start Date & Time</span>
+                                    </label>
+                                    <input type="datetime-local" class="input input-bordered" id="quiz-start-time" required>
+                                </div>
+                                
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">End Date & Time</span>
+                                    </label>
+                                    <input type="datetime-local" class="input input-bordered" id="quiz-end-time" required>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Duration (minutes)</span>
+                                    </label>
+                                    <input type="number" class="input input-bordered" id="quiz-duration" min="5" max="180" value="30" required>
+                                </div>
+                                
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Total Marks</span>
+                                    </label>
+                                    <input type="number" class="input input-bordered" id="quiz-total-marks" min="1" max="100" value="50" required>
+                                </div>
+                                
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Passing Marks</span>
+                                    </label>
+                                    <input type="number" class="input input-bordered" id="quiz-passing-marks" min="1" max="100" value="25" required>
+                                </div>
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text font-semibold">Instructions</span>
+                                </label>
+                                <textarea class="textarea textarea-bordered h-24" id="quiz-instructions" placeholder="Enter quiz instructions for students..."></textarea>
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label cursor-pointer justify-start gap-3">
+                                    <input type="checkbox" class="checkbox checkbox-primary" id="quiz-shuffle-questions">
+                                    <span class="label-text font-semibold">Shuffle Questions</span>
+                                </label>
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label cursor-pointer justify-start gap-3">
+                                    <input type="checkbox" class="checkbox checkbox-primary" id="quiz-show-results">
+                                    <span class="label-text font-semibold">Show Results Immediately</span>
+                                </label>
+                            </div>
+
+                            <div class="card-actions justify-end">
+                                <button type="button" class="btn btn-ghost" id="save-draft-btn">Save as Draft</button>
+                                <button type="submit" class="btn btn-primary" id="create-quiz-btn">
+                                    <i class="fa-solid fa-plus mr-2"></i>
+                                    Create Quiz
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Question Selection -->
+            <div class="space-y-6">
+                <!-- Question Bank -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Question Bank</h3>
+                        
+                        <div class="form-control mb-4">
+                            <div class="join w-full">
+                                <input type="text" placeholder="Search questions..." class="input input-bordered join-item flex-1">
+                                <button class="btn btn-primary join-item">
+                                    <i class="fa-solid fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 max-h-96 overflow-y-auto custom-scrollbar" id="question-bank-list">
+                            <!-- Questions will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selected Questions -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="card-title">Selected Questions</h3>
+                            <span class="badge badge-primary" id="selected-count">0</span>
+                        </div>
+                        
+                        <div class="space-y-3 max-h-64 overflow-y-auto custom-scrollbar" id="selected-questions-list">
+                            <!-- Selected questions will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Existing Quizzes -->
+        <div class="mt-12">
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="card-title">Your Quizzes</h3>
+                        <div class="tabs tabs-boxed">
+                            <a class="tab tab-active">All</a>
+                            <a class="tab">Active</a>
+                            <a class="tab">Draft</a>
+                            <a class="tab">Completed</a>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="table table-zebra">
+                            <thead>
+                                <tr>
+                                    <th>Quiz Title</th>
+                                    <th>Subject</th>
+                                    <th>Status</th>
+                                    <th>Start Date</th>
+                                    <th>Participants</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="quizzes-table-body">
+                                <!-- Quizzes will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="teacher_quizzes.js"></script>
+</body>
+</html>

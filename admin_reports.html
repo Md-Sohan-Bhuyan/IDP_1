@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="admin_reports.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="admin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="admin_teachers.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</a></li>
+                    <li><a href="admin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                    <li><a href="admin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                    <li><a href="admin_reports.html" class="active"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+                </ul>
+            </div>
+            <a href="admin_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                IUS QUIZ SYSTEM - ADMIN
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="admin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="admin_teachers.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</a></li>
+                <li><a href="admin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                <li><a href="admin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                <li><a href="admin_reports.html" class="active"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                <li><a href="admin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">SA</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Super Admin</li>
+                    <li><a href="admin_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="admin_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">System Reports</h1>
+            <p class="text-gray-600">Comprehensive analytics and system performance reports</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-primary">
+                    <i class="fa-solid fa-users text-3xl"></i>
+                </div>
+                <div class="stat-title">Active Users</div>
+                <div class="stat-value text-primary" id="active-users">1,294</div>
+                <div class="stat-desc">47 teachers, 1,247 students</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-secondary">
+                    <i class="fa-solid fa-chart-line text-3xl"></i>
+                </div>
+                <div class="stat-title">Avg. Performance</div>
+                <div class="stat-value text-secondary" id="avg-performance">76.8%</div>
+                <div class="stat-desc">↗︎ 3.2% from last month</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-accent">
+                    <i class="fa-solid fa-question-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Questions</div>
+                <div class="stat-value text-accent" id="total-questions">1,247</div>
+                <div class="stat-desc">85% approval rate</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-info">
+                    <i class="fa-solid fa-check-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Completion Rate</div>
+                <div class="stat-value text-info" id="completion-rate">92.5%</div>
+                <div class="stat-desc">↗︎ 2.1% from last month</div>
+            </div>
+        </div>
+
+        <!-- Report Filters -->
+        <div class="card bg-base-100 shadow-xl mb-8">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Report Filters</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Time Period</span>
+                        </label>
+                        <select class="select select-bordered" id="time-period">
+                            <option value="7days">Last 7 Days</option>
+                            <option value="30days" selected>Last 30 Days</option>
+                            <option value="90days">Last 90 Days</option>
+                            <option value="year">This Year</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Department</span>
+                        </label>
+                        <select class="select select-bordered" id="department-filter">
+                            <option value="all">All Departments</option>
+                            <option value="computer">Computer Science</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <option value="chemistry">Chemistry</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Report Type</span>
+                        </label>
+                        <select class="select select-bordered" id="report-type">
+                            <option value="overview">Overview</option>
+                            <option value="performance">Performance</option>
+                            <option value="usage">Usage Statistics</option>
+                            <option value="growth">Growth Analysis</option>
+                        </select>
+                    </div>
+                    <div class="form-control flex items-end">
+                        <button class="btn btn-primary" id="generate-report">
+                            <i class="fa-solid fa-chart-bar mr-2"></i>
+                            Generate Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column - Charts -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Performance Chart -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Performance Overview</h3>
+                        <div class="chart-container" id="performance-chart">
+                            <!-- Chart will be populated by JavaScript -->
+                            <div class="chart-placeholder">
+                                <i class="fa-solid fa-chart-bar text-4xl text-gray-400 mb-4"></i>
+                                <p class="text-gray-500">Performance chart will be displayed here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Statistics -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Usage Statistics</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="usage-item">
+                                <h4 class="font-semibold mb-3">Quiz Activity</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span>Total Quizzes Created</span>
+                                        <span class="font-semibold">156</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Active Quizzes</span>
+                                        <span class="font-semibold">28</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Avg. Quiz Duration</span>
+                                        <span class="font-semibold">32 min</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Completion Rate</span>
+                                        <span class="font-semibold text-success">92.5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="usage-item">
+                                <h4 class="font-semibold mb-3">User Activity</h4>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span>Daily Active Users</span>
+                                        <span class="font-semibold">347</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Weekly Active Users</span>
+                                        <span class="font-semibold">894</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Avg. Session Duration</span>
+                                        <span class="font-semibold">18 min</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>New Users (30 days)</span>
+                                        <span class="font-semibold text-success">+42</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Quick Reports -->
+            <div class="space-y-6">
+                <!-- Quick Reports -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Quick Reports</h3>
+                        <div class="space-y-3">
+                            <button class="btn btn-outline btn-block justify-start report-btn" data-report="teacher-performance">
+                                <i class="fa-solid fa-chalkboard-teacher mr-2"></i>
+                                Teacher Performance
+                            </button>
+                            <button class="btn btn-outline btn-block justify-start report-btn" data-report="department-analysis">
+                                <i class="fa-solid fa-building mr-2"></i>
+                                Department Analysis
+                            </button>
+                            <button class="btn btn-outline btn-block justify-start report-btn" data-report="question-approval">
+                                <i class="fa-solid fa-question-circle mr-2"></i>
+                                Question Approval Stats
+                            </button>
+                            <button class="btn btn-outline btn-block justify-start report-btn" data-report="system-usage">
+                                <i class="fa-solid fa-server mr-2"></i>
+                                System Usage
+                            </button>
+                            <button class="btn btn-outline btn-block justify-start report-btn" data-report="student-progress">
+                                <i class="fa-solid fa-user-graduate mr-2"></i>
+                                Student Progress
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Options -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Export Reports</h3>
+                        <div class="space-y-3">
+                            <button class="btn btn-outline btn-sm btn-block justify-start" id="export-pdf">
+                                <i class="fa-solid fa-file-pdf mr-2"></i>
+                                Export as PDF
+                            </button>
+                            <button class="btn btn-outline btn-sm btn-block justify-start" id="export-excel">
+                                <i class="fa-solid fa-file-excel mr-2"></i>
+                                Export as Excel
+                            </button>
+                            <button class="btn btn-outline btn-sm btn-block justify-start" id="export-csv">
+                                <i class="fa-solid fa-file-csv mr-2"></i>
+                                Export as CSV
+                            </button>
+                            <button class="btn btn-outline btn-sm btn-block justify-start" id="schedule-report">
+                                <i class="fa-solid fa-clock mr-2"></i>
+                                Schedule Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Reports -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Recent Reports</h3>
+                        <div class="space-y-3">
+                            <div class="report-item">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="font-medium text-sm">Monthly Performance Report</div>
+                                        <div class="text-xs text-gray-500">Generated on Jan 15, 2025</div>
+                                    </div>
+                                    <button class="btn btn-ghost btn-xs">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="report-item">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="font-medium text-sm">Teacher Activity Analysis</div>
+                                        <div class="text-xs text-gray-500">Generated on Jan 10, 2025</div>
+                                    </div>
+                                    <button class="btn btn-ghost btn-xs">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="report-item">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <div class="font-medium text-sm">System Usage Statistics</div>
+                                        <div class="text-xs text-gray-500">Generated on Jan 5, 2025</div>
+                                    </div>
+                                    <button class="btn btn-ghost btn-xs">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Reports Table -->
+        <div class="card bg-base-100 shadow-xl mt-8">
+            <div class="card-body">
+                <h3 class="card-title mb-6">Detailed Performance Data</h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Teachers</th>
+                                <th>Students</th>
+                                <th>Quizzes</th>
+                                <th>Avg. Score</th>
+                                <th>Completion Rate</th>
+                                <th>Growth</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reports-table-body">
+                            <!-- Reports data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Generation Modal -->
+    <div id="report-generation-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Generating Report</h3>
+            
+            <div class="space-y-4 text-center">
+                <div class="loading loading-spinner loading-lg text-primary"></div>
+                <p class="text-lg">Please wait while we generate your report...</p>
+                <div class="progress progress-primary w-full"></div>
+                <p class="text-sm text-gray-500" id="report-progress">Processing data...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin_reports.js"></script>
+</body>
+</html>

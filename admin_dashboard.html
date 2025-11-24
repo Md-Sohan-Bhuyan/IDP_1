@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="admin_dashboard.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="admin_dashboard.html" class="active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="admin_teachers.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</a></li>
+                    <li><a href="admin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                    <li><a href="admin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                    <li><a href="admin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="admin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+                </ul>
+            </div>
+            <a href="admin_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                IUS QUIZ SYSTEM - ADMIN
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="admin_dashboard.html" class="active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="admin_teachers.html"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</a></li>
+                <li><a href="admin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                <li><a href="admin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                <li><a href="admin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                <li><a href="admin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+            
+            <!-- Notification Bell -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-ghost btn-circle relative">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                    <span class="badge badge-xs badge-primary absolute -top-1 -right-1" id="notification-count">5</span>
+                </button>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                    <li class="menu-title">Notifications</li>
+                    <li><a class="text-sm"><i class="fa-solid fa-question-circle text-warning"></i> 3 new questions pending</a></li>
+                    <li><a class="text-sm"><i class="fa-solid fa-user-plus text-info"></i> 2 new teacher requests</a></li>
+                    <li><a class="text-sm"><i class="fa-solid fa-exclamation-triangle text-error"></i> System backup required</a></li>
+                </ul>
+            </div>
+
+            <!-- User Profile -->
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">SA</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Super Admin</li>
+                    <li><a href="admin_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="admin_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">Admin Dashboard</h1>
+            <p class="text-gray-600">Manage the entire IUS Quiz System platform</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-primary">
+                    <i class="fa-solid fa-chalkboard-teacher text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Teachers</div>
+                <div class="stat-value text-primary" id="total-teachers">47</div>
+                <div class="stat-desc" id="teachers-status">2 pending approval</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-secondary">
+                    <i class="fa-solid fa-building text-3xl"></i>
+                </div>
+                <div class="stat-title">Departments</div>
+                <div class="stat-value text-secondary" id="total-departments">8</div>
+                <div class="stat-desc">6 active departments</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-accent">
+                    <i class="fa-solid fa-question-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Pending Questions</div>
+                <div class="stat-value text-accent" id="pending-questions">23</div>
+                <div class="stat-desc">↗︎ 5 new today</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-info">
+                    <i class="fa-solid fa-users text-3xl"></i>
+                </div>
+                <div class="stat-title">Total Students</div>
+                <div class="stat-value text-info" id="total-students">1,247</div>
+                <div class="stat-desc">↗︎ 42 new this week</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Quick Actions -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Quick Actions</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <button class="btn btn-primary btn-outline justify-start" id="manage-teachers-btn">
+                                <i class="fa-solid fa-user-plus mr-2"></i>
+                                Manage Teachers
+                            </button>
+                            <button class="btn btn-secondary btn-outline justify-start" id="approve-questions-btn">
+                                <i class="fa-solid fa-check-circle mr-2"></i>
+                                Approve Questions
+                            </button>
+                            <button class="btn btn-accent btn-outline justify-start" id="department-management-btn">
+                                <i class="fa-solid fa-sitemap mr-2"></i>
+                                Department Management
+                            </button>
+                            <button class="btn btn-info btn-outline justify-start" id="system-reports-btn">
+                                <i class="fa-solid fa-chart-line mr-2"></i>
+                                System Reports
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Approvals -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="card-title">Pending Approvals</h3>
+                            <div class="badge badge-warning badge-lg" id="pending-count">8 pending</div>
+                        </div>
+                        
+                        <div class="space-y-4" id="pending-approvals-list">
+                            <!-- Pending items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Recent System Activity</h3>
+                        <div class="space-y-4" id="recent-activity-list">
+                            <!-- Activity items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-8">
+                <!-- System Status -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">System Status</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span>Server Status</span>
+                                <span class="badge badge-success">Online</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Database</span>
+                                <span class="badge badge-success">Healthy</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Storage Usage</span>
+                                <span class="badge badge-warning">75%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Last Backup</span>
+                                <span class="text-sm">2 hours ago</span>
+                            </div>
+                            <div class="divider"></div>
+                            <button class="btn btn-sm btn-outline btn-block">
+                                <i class="fa-solid fa-sync mr-2"></i>
+                                Run System Check
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department Heads -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Department Heads</h3>
+                        <div class="space-y-4" id="department-heads-list">
+                            <!-- Department heads will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h3 class="card-title mb-6">Quick Statistics</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span>Active Quizzes</span>
+                                <span class="font-semibold text-success">28</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Total Questions</span>
+                                <span class="font-semibold text-primary">1,247</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Avg. Quiz Score</span>
+                                <span class="font-semibold text-info">76%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>System Uptime</span>
+                                <span class="font-semibold text-accent">99.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Quick Access -->
+                <div class="card bg-base-100 shadow-xl border-2 border-primary">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary mb-4">Admin Tools</h3>
+                        <p class="text-sm mb-4">Quick access to system management tools</p>
+                        <div class="space-y-2">
+                            <button class="btn btn-sm btn-outline btn-block justify-start" id="user-management-btn">
+                                <i class="fa-solid fa-users-cog mr-2"></i>
+                                User Management
+                            </button>
+                            <button class="btn btn-sm btn-outline btn-block justify-start" id="backup-system-btn">
+                                <i class="fa-solid fa-database mr-2"></i>
+                                Backup System
+                            </button>
+                            <button class="btn btn-sm btn-outline btn-block justify-start" id="system-logs-btn">
+                                <i class="fa-solid fa-file-lines mr-2"></i>
+                                System Logs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-base-200 text-base-content p-10 mt-16">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 w-full">
+                <div class="text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <span class="text-xl font-bold">IUS QUIZ SYSTEM</span>
+                    </div>
+                    <p class="mb-4">Administrative portal for managing the IUS Quiz System platform.</p>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Admin Links</span>
+                    <a href="admin_dashboard.html" class="link link-hover">Dashboard</a>
+                    <a href="admin_teachers.html" class="link link-hover">Teacher Management</a>
+                    <a href="admin_departments.html" class="link link-hover">Departments</a>
+                    <a href="admin_reports.html" class="link link-hover">Reports</a>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">Support</span>
+                    <a href="#" class="link link-hover">System Documentation</a>
+                    <a href="#" class="link link-hover">Admin Guide</a>
+                    <a href="#" class="link link-hover">Privacy Policy</a>
+                </div>
+                <div class="text-left">
+                    <span class="footer-title">System</span>
+                    <div class="flex gap-4">
+                        <span class="text-sm">Version: 2.1.0</span>
+                        <span class="text-sm">Status: <span class="text-success">Online</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t pt-6 text-center">
+                <p>Copyright © <span id="current-year">2025</span> - All rights reserved by IUS Quiz System Admin</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="admin_dashboard.js"></script>
+</body>
+</html>

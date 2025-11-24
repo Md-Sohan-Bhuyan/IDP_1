@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - IUS QUIZ SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="teacher_settings.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="teacher_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="teacher_questions.html"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                    <li><a href="teacher_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                    <li><a href="teacher_results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                    <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="teacher_settings.html" class="active"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                </ul>
+            </div>
+            <a href="teacher_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-chalkboard-teacher"></i>
+                </div>
+                IUS QUIZ SYSTEM - TEACHER
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="teacher_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="teacher_questions.html"><i class="fa-solid fa-question-circle"></i> Manage Questions</a></li>
+                <li><a href="teacher_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Create Quiz</a></li>
+                <li><a href="teacher_results.html"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+                <li><a href="teacher_students.html"><i class="fa-solid fa-users"></i> Students</a></li>
+                <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="teacher_settings.html" class="active"><i class="fa-solid fa-gear"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">DR</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Dr. Rahman</li>
+                    <li><a href="teacher_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="teacher_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">Settings</h1>
+            <p class="text-gray-600">Customize your experience and preferences</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Left Sidebar - Settings Navigation -->
+            <div class="lg:col-span-1">
+                <div class="card bg-base-100 shadow-xl sticky top-24">
+                    <div class="card-body p-4">
+                        <ul class="menu space-y-1" id="settings-menu">
+                            <li>
+                                <a class="active" data-target="general-settings">
+                                    <i class="fa-solid fa-sliders-h"></i>
+                                    General Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="quiz-settings">
+                                    <i class="fa-solid fa-feather-pointed"></i>
+                                    Quiz Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="notification-settings">
+                                    <i class="fa-solid fa-bell"></i>
+                                    Notifications
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="privacy-settings">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    Privacy & Security
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="appearance-settings">
+                                    <i class="fa-solid fa-palette"></i>
+                                    Appearance
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="integration-settings">
+                                    <i class="fa-solid fa-plug"></i>
+                                    Integrations
+                                </a>
+                            </li>
+                            <li>
+                                <a data-target="backup-settings">
+                                    <i class="fa-solid fa-database"></i>
+                                    Backup & Export
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content - Settings Panels -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- General Settings -->
+                <div id="general-settings" class="settings-panel active">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">General Settings</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Language</span>
+                                    </label>
+                                    <select class="select select-bordered">
+                                        <option selected>English</option>
+                                        <option>Bangla</option>
+                                        <option>Arabic</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Time Zone</span>
+                                    </label>
+                                    <select class="select select-bordered">
+                                        <option selected>(GMT+6) Dhaka</option>
+                                        <option>(GMT+5:30) India</option>
+                                        <option>(GMT+0) London</option>
+                                        <option>(GMT-5) New York</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Date Format</span>
+                                    </label>
+                                    <select class="select select-bordered">
+                                        <option selected>DD/MM/YYYY</option>
+                                        <option>MM/DD/YYYY</option>
+                                        <option>YYYY-MM-DD</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary" checked>
+                                        <span class="label-text font-semibold">Auto-save drafts</span>
+                                    </label>
+                                    <div class="label-text-alt text-gray-500 ml-12">
+                                        Automatically save quiz and question drafts
+                                    </div>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary">
+                                        <span class="label-text font-semibold">Email confirmations</span>
+                                    </label>
+                                    <div class="label-text-alt text-gray-500 ml-12">
+                                        Send email confirmations for important actions
+                                    </div>
+                                </div>
+
+                                <div class="card-actions justify-end">
+                                    <button class="btn btn-primary save-settings" data-section="general">
+                                        <i class="fa-solid fa-save mr-2"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Settings -->
+                <div id="quiz-settings" class="settings-panel">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Quiz Settings</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Default Quiz Duration (minutes)</span>
+                                    </label>
+                                    <input type="number" class="input input-bordered" value="30" min="5" max="180">
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Default Passing Percentage</span>
+                                    </label>
+                                    <input type="number" class="input input-bordered" value="60" min="0" max="100">
+                                    <div class="label-text-alt text-gray-500">
+                                        Minimum percentage required to pass a quiz
+                                    </div>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary" checked>
+                                        <span class="label-text font-semibold">Shuffle questions by default</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary">
+                                        <span class="label-text font-semibold">Show results immediately</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary" checked>
+                                        <span class="label-text font-semibold">Allow retakes</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Maximum Retake Attempts</span>
+                                    </label>
+                                    <input type="number" class="input input-bordered" value="3" min="1" max="10">
+                                </div>
+
+                                <div class="card-actions justify-end">
+                                    <button class="btn btn-primary save-settings" data-section="quiz">
+                                        <i class="fa-solid fa-save mr-2"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div id="notification-settings" class="settings-panel">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Notification Settings</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="notification-category">
+                                    <h4 class="font-semibold mb-3 text-lg">Email Notifications</h4>
+                                    <div class="space-y-3">
+                                        <div class="form-control">
+                                            <label class="label cursor-pointer justify-start gap-3">
+                                                <input type="checkbox" class="checkbox checkbox-primary" checked>
+                                                <span class="label-text">Quiz submissions</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label cursor-pointer justify-start gap-3">
+                                                <input type="checkbox" class="checkbox checkbox-primary">
+                                                <span class="label-text">Question approvals</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label cursor-pointer justify-start gap-3">
+                                                <input type="checkbox" class="checkbox checkbox-primary" checked>
+                                                <span class="label-text">System updates</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label cursor-pointer justify-start gap-3">
+                                                <input type="checkbox" class="checkbox checkbox-primary" checked>
+                                                <span class="label-text">Student registrations</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="divider"></div>
+
+                                <div class="notification-category">
+                                    <h4 class="font-semibold mb-3 text-lg">In-app Notifications</h4>
+                                    <div class="space-y-3">
+                                        <div class="form-control">
+                                            <label class="label cursor-pointer justify-start gap-3">
+                                                <input type="checkbox" class="checkbox checkbox-primary" checked>
+                                                <span class="label-text">New quiz results</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label cursor-pointer justify-start gap-3">
+                                                <input type="checkbox" class="checkbox checkbox-primary" checked>
+                                                <span class="label-text">Pending approvals</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label cursor-pointer justify-start gap-3">
+                                                <input type="checkbox" class="checkbox checkbox-primary">
+                                                <span class="label-text">System maintenance</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-actions justify-end mt-6">
+                                    <button class="btn btn-primary save-settings" data-section="notifications">
+                                        <i class="fa-solid fa-save mr-2"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy & Security -->
+                <div id="privacy-settings" class="settings-panel">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Privacy & Security</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Two-Factor Authentication</span>
+                                    </label>
+                                    <div class="flex items-center gap-4">
+                                        <span class="badge badge-warning">Disabled</span>
+                                        <button class="btn btn-sm btn-outline">Enable 2FA</button>
+                                    </div>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary" checked>
+                                        <span class="label-text font-semibold">Show online status</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary">
+                                        <span class="label-text font-semibold">Allow data collection for analytics</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Data Retention Period</span>
+                                    </label>
+                                    <select class="select select-bordered">
+                                        <option>6 months</option>
+                                        <option selected>1 year</option>
+                                        <option>2 years</option>
+                                        <option>Indefinitely</option>
+                                    </select>
+                                </div>
+
+                                <div class="alert alert-warning">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Security Notice</h4>
+                                        <div class="text-sm">Last password change: 3 months ago</div>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline">Change Password</button>
+                                </div>
+
+                                <div class="card-actions justify-end">
+                                    <button class="btn btn-primary save-settings" data-section="privacy">
+                                        <i class="fa-solid fa-save mr-2"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appearance Settings -->
+                <div id="appearance-settings" class="settings-panel">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Appearance</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Theme</span>
+                                    </label>
+                                    <div class="flex gap-4 flex-wrap">
+                                        <div class="theme-option">
+                                            <input type="radio" name="theme" id="theme-light" class="theme-radio" checked>
+                                            <label for="theme-light" class="theme-label">
+                                                <div class="theme-preview bg-white border-2"></div>
+                                                <span>Light</span>
+                                            </label>
+                                        </div>
+                                        <div class="theme-option">
+                                            <input type="radio" name="theme" id="theme-dark" class="theme-radio">
+                                            <label for="theme-dark" class="theme-label">
+                                                <div class="theme-preview bg-gray-900 border-2"></div>
+                                                <span>Dark</span>
+                                            </label>
+                                        </div>
+                                        <div class="theme-option">
+                                            <input type="radio" name="theme" id="theme-auto" class="theme-radio">
+                                            <label for="theme-auto" class="theme-label">
+                                                <div class="theme-preview bg-gradient-to-r from-white to-gray-900 border-2"></div>
+                                                <span>Auto</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Font Size</span>
+                                    </label>
+                                    <select class="select select-bordered">
+                                        <option>Small</option>
+                                        <option selected>Medium</option>
+                                        <option>Large</option>
+                                        <option>Extra Large</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Density</span>
+                                    </label>
+                                    <select class="select select-bordered">
+                                        <option>Comfortable</option>
+                                        <option selected>Normal</option>
+                                        <option>Compact</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary" checked>
+                                        <span class="label-text font-semibold">Show animations</span>
+                                    </label>
+                                </div>
+
+                                <div class="card-actions justify-end">
+                                    <button class="btn btn-primary save-settings" data-section="appearance">
+                                        <i class="fa-solid fa-save mr-2"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration Settings -->
+                <div id="integration-settings" class="settings-panel">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Integrations</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="integration-item">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white">
+                                                <i class="fa-brands fa-google"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Google Classroom</h4>
+                                                <p class="text-sm text-gray-600">Sync with your Google Classroom</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline btn-sm">Connect</button>
+                                    </div>
+                                </div>
+
+                                <div class="integration-item">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-white">
+                                                <i class="fa-brands fa-microsoft"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Microsoft Teams</h4>
+                                                <p class="text-sm text-gray-600">Integrate with Microsoft Teams</p>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline btn-sm">Connect</button>
+                                    </div>
+                                </div>
+
+                                <div class="integration-item">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center text-white">
+                                                <i class="fa-solid fa-envelope"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-semibold">Email System</h4>
+                                                <p class="text-sm text-gray-600">Configure email notifications</p>
+                                            </div>
+                                        </div>
+                                        <div class="badge badge-success">Connected</div>
+                                    </div>
+                                </div>
+
+                                <div class="card-actions justify-end">
+                                    <button class="btn btn-primary save-settings" data-section="integrations">
+                                        <i class="fa-solid fa-save mr-2"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backup & Export -->
+                <div id="backup-settings" class="settings-panel">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Backup & Export</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Auto Backup Frequency</span>
+                                    </label>
+                                    <select class="select select-bordered">
+                                        <option>Never</option>
+                                        <option>Daily</option>
+                                        <option selected>Weekly</option>
+                                        <option>Monthly</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary" checked>
+                                        <span class="label-text font-semibold">Include student data in backups</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="toggle toggle-primary">
+                                        <span class="label-text font-semibold">Encrypt backup files</span>
+                                    </label>
+                                </div>
+
+                                <div class="backup-actions grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <button class="btn btn-outline justify-start">
+                                        <i class="fa-solid fa-download mr-2"></i>
+                                        Export All Data
+                                    </button>
+                                    <button class="btn btn-outline justify-start">
+                                        <i class="fa-solid fa-file-export mr-2"></i>
+                                        Export Questions
+                                    </button>
+                                    <button class="btn btn-outline justify-start">
+                                        <i class="fa-solid fa-file-export mr-2"></i>
+                                        Export Quiz Results
+                                    </button>
+                                    <button class="btn btn-outline justify-start">
+                                        <i class="fa-solid fa-upload mr-2"></i>
+                                        Import Data
+                                    </button>
+                                </div>
+
+                                <div class="alert alert-info">
+                                    <i class="fa-solid fa-info-circle"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Last Backup</h4>
+                                        <div class="text-sm">January 15, 2025 at 2:30 AM</div>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary">Backup Now</button>
+                                </div>
+
+                                <div class="card-actions justify-end">
+                                    <button class="btn btn-primary save-settings" data-section="backup">
+                                        <i class="fa-solid fa-save mr-2"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="teacher_settings.js"></script>
+</body>
+</html>

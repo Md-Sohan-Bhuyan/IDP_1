@@ -1,0 +1,314 @@
+/* Reports Page Specific Styles */
+.stat {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Chart Containers */
+.chart-container {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(var(--b2));
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--bc) / 0.1);
+}
+
+.chart-placeholder {
+    text-align: center;
+    color: hsl(var(--bc) / 0.5);
+}
+
+/* Usage Items */
+.usage-item {
+    padding: 1rem;
+}
+
+.usage-item h4 {
+    color: hsl(var(--bc));
+    border-bottom: 2px solid hsl(var(--b3));
+    padding-bottom: 0.5rem;
+}
+
+/* Report Items */
+.report-item {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: hsl(var(--b1));
+    border: 1px solid hsl(var(--bc) / 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.report-item:hover {
+    border-color: hsl(var(--p));
+    background-color: hsl(var(--bc) / 0.05);
+}
+
+/* Report Buttons */
+.report-btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.report-btn:hover {
+    transform: translateX(4px);
+}
+
+/* Tables */
+.table {
+    width: 100%;
+}
+
+.table th {
+    background-color: hsl(var(--b2));
+    font-weight: 600;
+    padding: 1rem 0.75rem;
+}
+
+.table td {
+    padding: 1rem 0.75rem;
+    vertical-align: top;
+}
+
+/* Status Indicators */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-excellent {
+    background-color: hsl(var(--su) / 0.1);
+    color: hsl(var(--su));
+    border: 1px solid hsl(var(--su) / 0.2);
+}
+
+.status-good {
+    background-color: hsl(var(--in) / 0.1);
+    color: hsl(var(--in));
+    border: 1px solid hsl(var(--in) / 0.2);
+}
+
+.status-average {
+    background-color: hsl(var(--wa) / 0.1);
+    color: hsl(var(--wa));
+    border: 1px solid hsl(var(--wa) / 0.2);
+}
+
+.status-poor {
+    background-color: hsl(var(--er) / 0.1);
+    color: hsl(var(--er));
+    border: 1px solid hsl(var(--er) / 0.2);
+}
+
+/* Growth Indicators */
+.growth-positive {
+    color: hsl(var(--su));
+    font-weight: 600;
+}
+
+.growth-negative {
+    color: hsl(var(--er));
+    font-weight: 600;
+}
+
+.growth-neutral {
+    color: hsl(var(--bc) / 0.6);
+    font-weight: 600;
+}
+
+/* Progress Bars */
+.progress {
+    height: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+/* Modal Styles */
+.modal {
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: hsl(var(--bc) / 0.6);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stat {
+        padding: 1rem;
+    }
+    
+    .chart-container {
+        min-height: 200px;
+    }
+    
+    .table {
+        font-size: 0.875rem;
+    }
+    
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .modal-box {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--b1));
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--bc) / 0.3);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--bc) / 0.5);
+}
+
+/* Focus styles for accessibility */
+.btn:focus,
+.input:focus,
+.textarea:focus,
+.select:focus {
+    outline: 2px solid hsl(var(--p));
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .btn,
+    .modal {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+    
+    .stat {
+        break-inside: avoid;
+    }
+}
+
+/* Chart Animation */
+@keyframes chartFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chart-container {
+    animation: chartFadeIn 0.6s ease-out;
+}
+
+/* Data Visualization */
+.data-point {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.data-point.primary {
+    background-color: hsl(var(--p));
+}
+
+.data-point.secondary {
+    background-color: hsl(var(--s));
+}
+
+.data-point.accent {
+    background-color: hsl(var(--a));
+}
+
+/* Metric Cards */
+.metric-card {
+    background: linear-gradient(135deg, hsl(var(--b1)), hsl(var(--b2)));
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid hsl(var(--bc) / 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
