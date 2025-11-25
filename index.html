@@ -127,79 +127,92 @@
     </nav>
 
     <!-- Banner Section -->
-    <section class="banner-gradient py-16 px-4 md:px-8 text-white relative overflow-hidden">
-        <!-- Particle Background -->
-        <div class="particles-container" id="particles-container"></div>
+     
+    <!-- Banner Section -->
+<section class="banner-section py-16 px-4 md:px-8 text-white relative overflow-hidden min-h-[600px] flex items-center">
+    <!-- Video Background -->
+    <div class="video-container absolute top-0 left-0 w-full h-full overflow-hidden">
+        <video muted autoplay loop playsinline class="w-full h-full object-cover" id="banner-video">
+            <source src="images/intro.mp4" type="video/mp4">
+            <!-- Fallback for browsers that don't support video -->
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600"></div>
+        </video>
+        <!-- Video overlay for better text readability -->
+        <div class="absolute inset-0 bg-black/40"></div>
+    </div>
 
-        <div class="container mx-auto relative z-10">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeInUp">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4 typing-animation text-white drop-shadow-lg">Test Your
-                        Knowledge <br>with IUS Quiz System</h1>
-                    <p class="text-xl mb-6">Challenge yourself with interactive quizzes across various subjects and
-                        track your progress in real-time.</p>
-                    <div class="flex flex-wrap gap-4">
-                        <button class="btn btn-primary btn-lg text-white btn-beautiful pulse-glow" id="start-quiz-btn">
-                            <i class="fa-solid fa-play mr-2"></i> Start Quiz Now
-                        </button>
-                        <button
-                            class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-purple-700 btn-beautiful"
-                            id="leaderboard-btn">
-                            <i class="fa-solid fa-chart-line mr-2"></i> View Leaderboard
-                        </button>
-                    </div>
-                    <div class="mt-8 flex items-center">
-                        <div class="flex -space-x-4 mr-4">
-                            <div
-                                class="w-10 h-10 rounded-full bg-primary border-2 border-white flex items-center justify-center">
-                                <span class="text-xs font-bold">CSE</span>
-                            </div>
-                            <div
-                                class="w-10 h-10 rounded-full bg-secondary border-2 border-white flex items-center justify-center">
-                                <span class="text-xs font-bold">BBA</span>
-                            </div>
-                            <div
-                                class="w-10 h-10 rounded-full bg-accent border-2 border-white flex items-center justify-center">
-                                <span class="text-xs font-bold">ENG</span>
-                            </div>
-                            <div
-                                class="w-10 h-10 rounded-full bg-neutral border-2 border-white flex items-center justify-center">
-                                <span class="text-xs font-bold">+5</span>
-                            </div>
-                        </div>
-                        <p class="text-sm">Join <span class="font-bold" id="total-students">2,500+</span> students
-                            already testing their knowledge</p>
-                    </div>
+    <!-- Particle Background -->
+    <div class="particles-container absolute top-0 left-0 w-full h-full" id="particles-container"></div>
+
+    <div class="container mx-auto relative z-10">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeInUp">
+                <h1 class="text-4xl md:text-5xl lg:text-5xl font-bold mb-4 typing-animation text-white drop-shadow-lg">Test Your
+                    Knowledge <br>with IUS Quiz System</h1>
+                <p class="text-xl mb-6 drop-shadow-md">Challenge yourself with interactive quizzes across various subjects and
+                    track your progress in real-time.</p>
+                <div class="flex flex-wrap gap-4">
+                    <button class="btn btn-primary btn-lg text-white btn-beautiful pulse-glow" id="start-quiz-btn">
+                        <i class="fa-solid fa-play mr-2"></i> Start Quiz Now
+                    </button>
+                    <button
+                        class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-purple-700 btn-beautiful"
+                        id="leaderboard-btn">
+                        <i class="fa-solid fa-chart-line mr-2"></i> View Leaderboard
+                    </button>
                 </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="relative w-full max-w-md">
-                        <div class="floating">
-                            <div class="bg-white rounded-2xl p-6 shadow-2xl text-gray-800">
-                                <div class="flex justify-between items-center mb-4">
-                                    <h3 class="font-bold text-lg">Current Active Quiz</h3>
-                                    <div class="badge badge-primary pulse" id="live-badge">Live</div>
+                <div class="mt-8 flex items-center">
+                    <div class="flex -space-x-4 mr-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-primary border-2 border-white flex items-center justify-center">
+                            <span class="text-xs font-bold">CSE</span>
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-secondary border-2 border-white flex items-center justify-center">
+                            <span class="text-xs font-bold">BBA</span>
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-accent border-2 border-white flex items-center justify-center">
+                            <span class="text-xs font-bold">ENG</span>
+                        </div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-neutral border-2 border-white flex items-center justify-center">
+                            <span class="text-xs font-bold">+5</span>
+                        </div>
+                    </div>
+                    <p class="text-sm drop-shadow-md">Join <span class="font-bold" id="total-students">2,500+</span> students
+                        already testing their knowledge</p>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-full max-w-md">
+                    <div class="floating">
+                        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-2xl text-gray-800">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-bold text-lg">Current Active Quiz</h3>
+                                <div class="badge badge-primary pulse" id="live-badge">Live</div>
+                            </div>
+                            <div class="mb-4">
+                                <h4 class="font-semibold" id="active-quiz-title">Computer Science Fundamentals</h4>
+                                <p class="text-sm text-gray-600" id="active-quiz-details">10 questions • 15 minutes
+                                </p>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm">Participants: <span class="font-bold"
+                                            id="active-quiz-participants">243</span></p>
                                 </div>
-                                <div class="mb-4">
-                                    <h4 class="font-semibold" id="active-quiz-title">Computer Science Fundamentals</h4>
-                                    <p class="text-sm text-gray-600" id="active-quiz-details">10 questions • 15 minutes
-                                    </p>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <p class="text-sm">Participants: <span class="font-bold"
-                                                id="active-quiz-participants">243</span></p>
-                                    </div>
-                                    <button class="btn btn-sm btn-primary" id="join-quiz-btn">Join Now</button>
-                                </div>
+                                <button class="btn btn-sm btn-primary" id="join-quiz-btn">Join Now</button>
                             </div>
                         </div>
-                        <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-yellow-400 rounded-full opacity-20"></div>
-                        <div class="absolute -top-6 -right-6 w-20 h-20 bg-pink-400 rounded-full opacity-20"></div>
                     </div>
+                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-yellow-400 rounded-full opacity-20"></div>
+                    <div class="absolute -top-6 -right-6 w-20 h-20 bg-pink-400 rounded-full opacity-20"></div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Real-time Stats Section -->
     <section class="py-12 stats-gradient text-white">
