@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Approval - Super Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="superadmin_questions.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="superadmin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="superadmin_users.html"><i class="fa-solid fa-users"></i> User Management</a></li>
+                    <li><a href="superadmin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                    <li><a href="superadmin_questions.html" class="active"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                    <li><a href="superadmin_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quiz Management</a></li>
+                    <li><a href="superadmin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="superadmin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+                </ul>
+            </div>
+            <a href="superadmin_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                IUS QUIZ SYSTEM - SUPER ADMIN
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="superadmin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="superadmin_users.html"><i class="fa-solid fa-users"></i> User Management</a></li>
+                <li><a href="superadmin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                <li><a href="superadmin_questions.html" class="active"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                <li><a href="superadmin_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quiz Management</a></li>
+                <li><a href="superadmin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                <li><a href="superadmin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+            
+            <!-- Notification Bell -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-ghost btn-circle relative">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                    <span class="badge badge-xs badge-primary absolute -top-1 -right-1" id="notification-count">12</span>
+                </button>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                    <li class="menu-title">Notifications</li>
+                    <li><a class="text-sm"><i class="fa-solid fa-question-circle text-warning"></i> 8 new questions pending</a></li>
+                </ul>
+            </div>
+
+            <!-- User Profile -->
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">SA</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Super Admin</li>
+                    <li><a href="superadmin_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="superadmin_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-4xl font-bold mb-2">Question Approval</h1>
+                <p class="text-gray-600">Review and approve questions from teachers</p>
+            </div>
+            <div class="flex gap-2">
+                <button class="btn btn-outline" id="export-questions">
+                    <i class="fa-solid fa-download mr-2"></i>
+                    Export
+                </button>
+                <button class="btn btn-primary" id="bulk-approve" style="display: none;">
+                    <i class="fa-solid fa-check-double mr-2"></i>
+                    Bulk Approve
+                </button>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-warning">
+                    <i class="fa-solid fa-clock text-3xl"></i>
+                </div>
+                <div class="stat-title">Pending Questions</div>
+                <div class="stat-value text-warning" id="pending-count">28</div>
+                <div class="stat-desc">Waiting for review</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-success">
+                    <i class="fa-solid fa-check-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Approved Today</div>
+                <div class="stat-value text-success" id="approved-today">15</div>
+                <div class="stat-desc">↗︎ 5 more than yesterday</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-error">
+                    <i class="fa-solid fa-times-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Rejected Today</div>
+                <div class="stat-value text-error" id="rejected-today">3</div>
+                <div class="stat-desc">↘︎ 2 less than yesterday</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-info">
+                    <i class="fa-solid fa-chart-line text-3xl"></i>
+                </div>
+                <div class="stat-title">Approval Rate</div>
+                <div class="stat-value text-info" id="approval-rate">83%</div>
+                <div class="stat-desc">This month</div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card bg-base-100 shadow-lg mb-6">
+            <div class="card-body">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Search</span>
+                        </label>
+                        <input type="text" placeholder="Search questions..." class="input input-bordered" id="search-questions">
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Department</span>
+                        </label>
+                        <select class="select select-bordered" id="filter-department">
+                            <option value="">All Departments</option>
+                            <option value="cse">Computer Science</option>
+                            <option value="bba">Business Administration</option>
+                            <option value="eee">Electrical Engineering</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Difficulty</span>
+                        </label>
+                        <select class="select select-bordered" id="filter-difficulty">
+                            <option value="">All Levels</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Status</span>
+                        </label>
+                        <select class="select select-bordered" id="filter-status">
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Teacher</span>
+                        </label>
+                        <select class="select select-bordered" id="filter-teacher">
+                            <option value="">All Teachers</option>
+                            <option value="1">Dr. Rahman Ahmed</option>
+                            <option value="2">Prof. David Wilson</option>
+                            <option value="3">Dr. Lisa Chen</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions List -->
+        <div class="space-y-4" id="questions-list">
+            <!-- Questions will be populated by JavaScript -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-between items-center mt-8">
+            <div class="text-sm text-gray-600">
+                Showing <span id="showing-start">1</span> to <span id="showing-end">10</span> of <span id="total-questions">0</span> questions
+            </div>
+            <div class="join">
+                <button class="join-item btn btn-sm" id="prev-page">«</button>
+                <button class="join-item btn btn-sm btn-active">1</button>
+                <button class="join-item btn btn-sm">2</button>
+                <button class="join-item btn btn-sm">3</button>
+                <button class="join-item btn btn-sm" id="next-page">»</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question Detail Modal -->
+    <div id="question-detail-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-4xl">
+            <h3 class="font-bold text-2xl mb-4">Question Details</h3>
+            
+            <div class="space-y-6" id="question-detail-content">
+                <!-- Question details will be populated by JavaScript -->
+            </div>
+
+            <div class="modal-action">
+                <button class="btn btn-ghost" id="close-detail-modal">Close</button>
+                <div class="flex gap-2">
+                    <button class="btn btn-error" id="reject-question">
+                        <i class="fa-solid fa-times mr-2"></i>
+                        Reject
+                    </button>
+                    <button class="btn btn-success" id="approve-question">
+                        <i class="fa-solid fa-check mr-2"></i>
+                        Approve
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Reason Modal -->
+    <div id="reject-reason-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Reject Question</h3>
+            
+            <form id="reject-reason-form" class="space-y-4">
+                <input type="hidden" id="reject-question-id">
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Reason for Rejection</span>
+                    </label>
+                    <select class="select select-bordered" id="reject-reason" required>
+                        <option value="">Select a reason</option>
+                        <option value="incorrect">Incorrect Answer</option>
+                        <option value="ambiguous">Ambiguous Question</option>
+                        <option value="grammar">Grammar/Spelling Issues</option>
+                        <option value="duplicate">Duplicate Question</option>
+                        <option value="inappropriate">Inappropriate Content</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Additional Comments</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-24" id="reject-comments" placeholder="Provide additional feedback for the teacher..."></textarea>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-reject">Cancel</button>
+                    <button type="submit" class="btn btn-error">
+                        <i class="fa-solid fa-times mr-2"></i>
+                        Confirm Rejection
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="superadmin_questions.js"></script>
+</body>
+</html>

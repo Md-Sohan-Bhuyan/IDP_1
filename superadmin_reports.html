@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports & Analytics - Super Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="superadmin_reports.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="superadmin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="superadmin_users.html"><i class="fa-solid fa-users"></i> User Management</a></li>
+                    <li><a href="superadmin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                    <li><a href="superadmin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                    <li><a href="superadmin_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quiz Management</a></li>
+                    <li><a href="superadmin_reports.html" class="active"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="superadmin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+                </ul>
+            </div>
+            <a href="superadmin_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                IUS QUIZ SYSTEM - SUPER ADMIN
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="superadmin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="superadmin_users.html"><i class="fa-solid fa-users"></i> User Management</a></li>
+                <li><a href="superadmin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                <li><a href="superadmin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                <li><a href="superadmin_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quiz Management</a></li>
+                <li><a href="superadmin_reports.html" class="active"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                <li><a href="superadmin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+            
+            <!-- Notification Bell -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-ghost btn-circle relative">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                    <span class="badge badge-xs badge-primary absolute -top-1 -right-1" id="notification-count">3</span>
+                </button>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                    <li class="menu-title">Notifications</li>
+                    <li><a class="text-sm"><i class="fa-solid fa-chart-line text-info"></i> Weekly report ready</a></li>
+                </ul>
+            </div>
+
+            <!-- User Profile -->
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">SA</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Super Admin</li>
+                    <li><a href="superadmin_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="superadmin_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-4xl font-bold mb-2">Reports & Analytics</h1>
+                <p class="text-gray-600">Comprehensive insights and platform analytics</p>
+            </div>
+            <div class="flex gap-2">
+                <div class="dropdown dropdown-end">
+                    <button class="btn btn-outline">
+                        <i class="fa-solid fa-calendar mr-2"></i>
+                        Last 30 Days
+                        <i class="fa-solid fa-chevron-down ml-2"></i>
+                    </button>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><a>Today</a></li>
+                        <li><a>Last 7 Days</a></li>
+                        <li><a class="active">Last 30 Days</a></li>
+                        <li><a>Last 90 Days</a></li>
+                        <li><a>Custom Range</a></li>
+                    </ul>
+                </div>
+                <button class="btn btn-primary" id="generate-report">
+                    <i class="fa-solid fa-download mr-2"></i>
+                    Export Report
+                </button>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-primary">
+                    <i class="fa-solid fa-users text-3xl"></i>
+                </div>
+                <div class="stat-title">Active Users</div>
+                <div class="stat-value text-primary" id="active-users">1,247</div>
+                <div class="stat-desc">↗︎ 12% from last month</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-success">
+                    <i class="fa-solid fa-feather-pointed text-3xl"></i>
+                </div>
+                <div class="stat-title">Quizzes Taken</div>
+                <div class="stat-value text-success" id="quizzes-taken">3,458</div>
+                <div class="stat-desc">↗︎ 8% from last month</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-warning">
+                    <i class="fa-solid fa-question-circle text-3xl"></i>
+                </div>
+                <div class="stat-title">Questions Added</div>
+                <div class="stat-value text-warning" id="questions-added">2,847</div>
+                <div class="stat-desc">↗︎ 15% from last month</div>
+            </div>
+
+            <div class="stat bg-base-100 rounded-lg shadow">
+                <div class="stat-figure text-info">
+                    <i class="fa-solid fa-chart-line text-3xl"></i>
+                </div>
+                <div class="stat-title">Avg. Score</div>
+                <div class="stat-value text-info" id="avg-score">76%</div>
+                <div class="stat-desc">↗︎ 3% from last month</div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Quiz Activity Chart -->
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Quiz Activity Trend</h3>
+                    <div class="chart-container" id="quiz-activity-chart">
+                        <div class="chart-placeholder">
+                            <i class="fa-solid fa-chart-line text-4xl text-gray-300 mb-2"></i>
+                            <div class="text-gray-500">Quiz activity chart would be displayed here</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Performance -->
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Department Performance</h3>
+                    <div class="chart-container" id="department-performance-chart">
+                        <div class="chart-placeholder">
+                            <i class="fa-solid fa-chart-bar text-4xl text-gray-300 mb-2"></i>
+                            <div class="text-gray-500">Department performance chart would be displayed here</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Growth -->
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">User Growth</h3>
+                    <div class="chart-container" id="user-growth-chart">
+                        <div class="chart-placeholder">
+                            <i class="fa-solid fa-user-plus text-4xl text-gray-300 mb-2"></i>
+                            <div class="text-gray-500">User growth chart would be displayed here</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Statistics -->
+            <div class="card bg-base-100 shadow-lg">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Question Statistics</h3>
+                    <div class="chart-container" id="question-stats-chart">
+                        <div class="chart-placeholder">
+                            <i class="fa-solid fa-chart-pie text-4xl text-gray-300 mb-2"></i>
+                            <div class="text-gray-500">Question statistics chart would be displayed here</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Reports -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Top Performers -->
+                <div class="card bg-base-100 shadow-lg">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Top Performing Students</h3>
+                        <div class="overflow-x-auto">
+                            <table class="table table-zebra">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Student</th>
+                                        <th>Department</th>
+                                        <th>Avg. Score</th>
+                                        <th>Quizzes Taken</th>
+                                        <th>Progress</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="top-students-table">
+                                    <!-- Top students will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card bg-base-100 shadow-lg">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Recent Platform Activity</h3>
+                        <div class="space-y-4" id="recent-activity-list">
+                            <!-- Recent activity will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-8">
+                <!-- Quick Stats -->
+                <div class="card bg-base-100 shadow-lg">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Quick Statistics</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span>Total Teachers</span>
+                                <span class="font-semibold text-primary">47</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Total Students</span>
+                                <span class="font-semibold text-success">1,247</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Active Quizzes</span>
+                                <span class="font-semibold text-warning">15</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Pending Questions</span>
+                                <span class="font-semibold text-error">28</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>System Uptime</span>
+                                <span class="font-semibold text-info">99.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department Comparison -->
+                <div class="card bg-base-100 shadow-lg">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Department Comparison</h3>
+                        <div class="space-y-3" id="department-comparison">
+                            <!-- Department comparison will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Types -->
+                <div class="card bg-base-100 shadow-lg border-2 border-primary">
+                    <div class="card-body">
+                        <h3 class="card-title text-primary mb-4">Generate Reports</h3>
+                        <div class="space-y-2">
+                            <button class="btn btn-outline btn-block justify-start" id="user-report-btn">
+                                <i class="fa-solid fa-users mr-2"></i>
+                                User Activity Report
+                            </button>
+                            <button class="btn btn-outline btn-block justify-start" id="quiz-report-btn">
+                                <i class="fa-solid fa-feather-pointed mr-2"></i>
+                                Quiz Performance Report
+                            </button>
+                            <button class="btn btn-outline btn-block justify-start" id="system-report-btn">
+                                <i class="fa-solid fa-cog mr-2"></i>
+                                System Usage Report
+                            </button>
+                            <button class="btn btn-outline btn-block justify-start" id="financial-report-btn">
+                                <i class="fa-solid fa-chart-line mr-2"></i>
+                                Financial Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generate Report Modal -->
+    <div id="generate-report-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Generate Custom Report</h3>
+            
+            <form id="generate-report-form" class="space-y-4">
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Report Type</span>
+                    </label>
+                    <select class="select select-bordered" id="report-type" required>
+                        <option value="">Select Report Type</option>
+                        <option value="user_activity">User Activity Report</option>
+                        <option value="quiz_performance">Quiz Performance Report</option>
+                        <option value="system_usage">System Usage Report</option>
+                        <option value="financial">Financial Report</option>
+                        <option value="comprehensive">Comprehensive Report</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Start Date</span>
+                        </label>
+                        <input type="date" class="input input-bordered" id="report-start-date" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">End Date</span>
+                        </label>
+                        <input type="date" class="input input-bordered" id="report-end-date" required>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Format</span>
+                    </label>
+                    <div class="flex gap-4">
+                        <label class="cursor-pointer label justify-start">
+                            <input type="radio" name="report-format" value="pdf" class="radio radio-primary mr-2" checked>
+                            <span class="label-text">PDF</span>
+                        </label>
+                        <label class="cursor-pointer label justify-start">
+                            <input type="radio" name="report-format" value="excel" class="radio radio-primary mr-2">
+                            <span class="label-text">Excel</span>
+                        </label>
+                        <label class="cursor-pointer label justify-start">
+                            <input type="radio" name="report-format" value="csv" class="radio radio-primary mr-2">
+                            <span class="label-text">CSV</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Include Charts</span>
+                    </label>
+                    <label class="cursor-pointer label justify-start">
+                        <input type="checkbox" class="checkbox checkbox-primary mr-2" id="include-charts" checked>
+                        <span class="label-text">Include charts and graphs in the report</span>
+                    </label>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-report">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-download mr-2"></i>
+                        Generate Report
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="superadmin_reports.js"></script>
+</body>
+</html>

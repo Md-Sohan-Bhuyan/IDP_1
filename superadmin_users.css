@@ -1,0 +1,229 @@
+/* Super Admin Users Management Styles */
+
+.user-table-row {
+    @apply transition-all duration-200 hover:bg-base-200;
+}
+
+.user-avatar {
+    @apply w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold;
+}
+
+.role-badge {
+    @apply badge badge-sm;
+}
+
+.role-student {
+    @apply badge-info;
+}
+
+.role-teacher {
+    @apply badge-primary;
+}
+
+.role-admin {
+    @apply badge-secondary;
+}
+
+.role-superadmin {
+    @apply badge-accent;
+}
+
+.status-badge {
+    @apply badge badge-sm;
+}
+
+.status-active {
+    @apply badge-success;
+}
+
+.status-inactive {
+    @apply badge-error;
+}
+
+.status-pending {
+    @apply badge-warning;
+}
+
+/* Action buttons */
+.action-btn {
+    @apply btn btn-xs btn-ghost;
+}
+
+/* Loading animation */
+.loading-spinner {
+    @apply animate-spin rounded-full h-4 w-4 border-b-2 border-primary;
+}
+
+/* Filter styles */
+.filter-section {
+    @apply transition-all duration-300;
+}
+
+/* Modal animations */
+.modal-open {
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Table responsive styles */
+@media (max-width: 768px) {
+    .table {
+        @apply text-sm;
+    }
+    
+    .user-info {
+        @apply flex-col items-start;
+    }
+}
+
+/* Permission checkboxes */
+.permission-checkbox {
+    @apply transition-all duration-200;
+}
+
+.permission-checkbox:checked {
+    @apply transform scale-110;
+}
+
+/* Notification styles */
+.notification-preview {
+    @apply p-3 bg-base-200 rounded-lg border-l-4 border-primary;
+}
+
+/* Pagination active state */
+.pagination-active {
+    @apply btn-active;
+}
+
+/* Search highlight */
+.highlight {
+    @apply bg-yellow-200 text-yellow-800 px-1 rounded;
+}
+
+/* User status indicators */
+.status-indicator {
+    @apply inline-block w-2 h-2 rounded-full mr-2;
+}
+
+.status-indicator.active {
+    @apply bg-green-500;
+}
+
+.status-indicator.inactive {
+    @apply bg-red-500;
+}
+
+.status-indicator.pending {
+    @apply bg-yellow-500;
+}
+
+/* Department colors */
+.department-cse {
+    @apply text-blue-600;
+}
+
+.department-bba {
+    @apply text-green-600;
+}
+
+.department-eee {
+    @apply text-purple-600;
+}
+
+.department-civil {
+    @apply text-orange-600;
+}
+
+/* Action menu dropdown */
+.action-menu {
+    @apply transition-all duration-200 origin-top-right;
+}
+
+/* Bulk actions */
+.bulk-actions-bar {
+    @apply fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-3 rounded-full shadow-lg z-40;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, 100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+/* User card view */
+.user-card {
+    @apply bg-base-100 rounded-lg shadow-md p-4 transition-all duration-300 hover:shadow-lg;
+}
+
+.user-card:hover {
+    @apply transform scale-105;
+}
+
+/* Statistics cards */
+.stats-card {
+    @apply stat bg-base-100 rounded-lg shadow;
+}
+
+/* Responsive grid */
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .highlight {
+        @apply bg-yellow-600 text-yellow-100;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar, .modal, .btn {
+        display: none !important;
+    }
+    
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+    }
+}
+
+/* Custom scrollbar for tables */
+.table-container {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.base-300') theme('colors.base-100');
+}
+
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    @apply bg-base-100 rounded;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    @apply bg-base-300 rounded;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    @apply bg-base-content/30;
+}

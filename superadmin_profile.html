@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Super Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="superadmin_profile.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="superadmin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="superadmin_users.html"><i class="fa-solid fa-users"></i> User Management</a></li>
+                    <li><a href="superadmin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                    <li><a href="superadmin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                    <li><a href="superadmin_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quiz Management</a></li>
+                    <li><a href="superadmin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="superadmin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+                </ul>
+            </div>
+            <a href="superadmin_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                IUS QUIZ SYSTEM - SUPER ADMIN
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="superadmin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="superadmin_users.html"><i class="fa-solid fa-users"></i> User Management</a></li>
+                <li><a href="superadmin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                <li><a href="superadmin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                <li><a href="superadmin_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quiz Management</a></li>
+                <li><a href="superadmin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                <li><a href="superadmin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+            
+            <!-- User Profile -->
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">SA</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Super Admin</li>
+                    <li><a href="superadmin_profile.html" class="active"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="superadmin_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold mb-2">My Profile</h1>
+            <p class="text-gray-600">Manage your personal information and account settings</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Left Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="card bg-base-100 shadow-lg sticky top-24">
+                    <div class="card-body p-4">
+                        <!-- Profile Picture -->
+                        <div class="text-center mb-6">
+                            <div class="avatar relative inline-block">
+                                <div class="w-24 h-24 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mb-3">
+                                    SA
+                                </div>
+                                <button class="btn btn-circle btn-sm btn-primary absolute bottom-2 right-2" id="change-avatar-btn">
+                                    <i class="fa-solid fa-camera"></i>
+                                </button>
+                            </div>
+                            <h3 class="font-bold text-lg">Super Admin</h3>
+                            <p class="text-gray-600 text-sm">Administrator</p>
+                            <div class="badge badge-primary badge-lg mt-1">Super Admin</div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <ul class="menu menu-vertical gap-1" id="profile-menu">
+                            <li><a class="active" data-tab="personal"><i class="fa-solid fa-user"></i> Personal Info</a></li>
+                            <li><a data-tab="security"><i class="fa-solid fa-shield-alt"></i> Security</a></li>
+                            <li><a data-tab="preferences"><i class="fa-solid fa-sliders"></i> Preferences</a></li>
+                            <li><a data-tab="activity"><i class="fa-solid fa-chart-line"></i> Activity</a></li>
+                            <li><a data-tab="notifications"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Personal Information Tab -->
+                <div id="personal-tab" class="profile-tab active">
+                    <div class="card bg-base-100 shadow-lg">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Personal Information</h3>
+                            
+                            <form class="space-y-6" id="personal-info-form">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">First Name</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered" value="Super" id="first-name" required>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Last Name</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered" value="Admin" id="last-name" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Email Address</span>
+                                    </label>
+                                    <input type="email" class="input input-bordered" value="superadmin@ius.ac.bd" id="email" required>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Phone Number</span>
+                                        </label>
+                                        <input type="tel" class="input input-bordered" value="+880 XXXX-XXXXXX" id="phone">
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Department</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered" value="Administration" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-control">
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Bio</span>
+                                    </label>
+                                    <textarea class="textarea textarea-bordered h-24" id="bio" placeholder="Tell us about yourself...">System administrator with full control over the IUS Quiz System platform. Responsible for managing users, departments, and system settings.</textarea>
+                                </div>
+
+                                <div class="card-actions justify-end">
+                                    <button type="button" class="btn btn-ghost" id="reset-personal">Reset</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Tab -->
+                <div id="security-tab" class="profile-tab">
+                    <div class="card bg-base-100 shadow-lg">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Security Settings</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Password Change -->
+                                <div class="security-section">
+                                    <h4 class="font-semibold text-lg mb-4">Change Password</h4>
+                                    <form class="space-y-4" id="change-password-form">
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Current Password</span>
+                                            </label>
+                                            <input type="password" class="input input-bordered" id="current-password" required>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">New Password</span>
+                                            </label>
+                                            <input type="password" class="input input-bordered" id="new-password" required>
+                                            <label class="label">
+                                                <span class="label-text-alt">Must be at least 8 characters long</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Confirm New Password</span>
+                                            </label>
+                                            <input type="password" class="input input-bordered" id="confirm-password" required>
+                                        </div>
+                                        <div class="form-control">
+                                            <button type="submit" class="btn btn-primary">Update Password</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Two-Factor Authentication -->
+                                <div class="security-section">
+                                    <h4 class="font-semibold text-lg mb-4">Two-Factor Authentication</h4>
+                                    <div class="alert alert-info">
+                                        <i class="fa-solid fa-info-circle"></i>
+                                        <span>2FA is currently enabled for your account</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-4 bg-base-200 rounded-lg">
+                                        <div>
+                                            <div class="font-semibold">Authenticator App</div>
+                                            <div class="text-sm text-gray-600">Google Authenticator</div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="btn btn-sm btn-outline" id="disable-2fa">Disable</button>
+                                            <button class="btn btn-sm btn-primary" id="change-2fa">Change</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Session Management -->
+                                <div class="security-section">
+                                    <h4 class="font-semibold text-lg mb-4">Active Sessions</h4>
+                                    <div class="space-y-3">
+                                        <div class="session-item active">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <div class="font-semibold">Current Session</div>
+                                                    <div class="text-sm text-gray-600">
+                                                        Chrome on Windows • Dhaka, Bangladesh
+                                                    </div>
+                                                    <div class="text-xs text-gray-500">Last active: Just now</div>
+                                                </div>
+                                                <div class="badge badge-success">Current</div>
+                                            </div>
+                                        </div>
+                                        <div class="session-item">
+                                            <div class="flex items-center justify-between">
+                                                <div>
+                                                    <div class="font-semibold">Mobile Session</div>
+                                                    <div class="text-sm text-gray-600">
+                                                        Safari on iPhone • Dhaka, Bangladesh
+                                                    </div>
+                                                    <div class="text-xs text-gray-500">Last active: 2 hours ago</div>
+                                                </div>
+                                                <button class="btn btn-sm btn-error">Logout</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm mt-4" id="logout-all">
+                                        <i class="fa-solid fa-sign-out-alt mr-2"></i>
+                                        Logout All Other Sessions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Tab -->
+                <div id="activity-tab" class="profile-tab">
+                    <div class="card bg-base-100 shadow-lg">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Recent Activity</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Activity Stats -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                    <div class="stat bg-base-200 rounded-lg p-4 text-center">
+                                        <div class="stat-value text-2xl">247</div>
+                                        <div class="stat-title">Actions Today</div>
+                                    </div>
+                                    <div class="stat bg-base-200 rounded-lg p-4 text-center">
+                                        <div class="stat-value text-2xl">1,528</div>
+                                        <div class="stat-title">This Week</div>
+                                    </div>
+                                    <div class="stat bg-base-200 rounded-lg p-4 text-center">
+                                        <div class="stat-value text-2xl">5,892</div>
+                                        <div class="stat-title">This Month</div>
+                                    </div>
+                                </div>
+
+                                <!-- Activity Timeline -->
+                                <div class="activity-timeline">
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-primary">
+                                            <i class="fa-solid fa-user-check"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="font-semibold">Approved User Registration</div>
+                                            <div class="text-sm text-gray-600">Approved teacher registration for Dr. Lisa Chen</div>
+                                            <div class="text-xs text-gray-500">2 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-success">
+                                            <i class="fa-solid fa-question-circle"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="font-semibold">Approved Questions</div>
+                                            <div class="text-sm text-gray-600">Approved 5 questions from Computer Science department</div>
+                                            <div class="text-xs text-gray-500">15 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-warning">
+                                            <i class="fa-solid fa-cog"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="font-semibold">System Settings Updated</div>
+                                            <div class="text-sm text-gray-600">Modified security settings and backup schedule</div>
+                                            <div class="text-xs text-gray-500">1 hour ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-info">
+                                            <i class="fa-solid fa-chart-bar"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="font-semibold">Generated Report</div>
+                                            <div class="text-sm text-gray-600">Exported system usage report for management</div>
+                                            <div class="text-xs text-gray-500">3 hours ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-secondary">
+                                            <i class="fa-solid fa-users"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="font-semibold">User Management</div>
+                                            <div class="text-sm text-gray-600">Updated permissions for 3 teachers</div>
+                                            <div class="text-xs text-gray-500">5 hours ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Load More -->
+                                <div class="text-center">
+                                    <button class="btn btn-outline" id="load-more-activity">
+                                        <i class="fa-solid fa-refresh mr-2"></i>
+                                        Load More Activity
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Tab -->
+                <div id="notifications-tab" class="profile-tab">
+                    <div class="card bg-base-100 shadow-lg">
+                        <div class="card-body">
+                            <h3 class="card-title mb-6">Notification Preferences</h3>
+                            
+                            <form class="space-y-6" id="notification-settings-form">
+                                <!-- Email Notifications -->
+                                <div class="notification-section">
+                                    <h4 class="font-semibold text-lg mb-4">Email Notifications</h4>
+                                    <div class="space-y-3">
+                                        <label class="cursor-pointer label justify-start">
+                                            <input type="checkbox" class="checkbox checkbox-primary mr-2" id="email-system" checked>
+                                            <span class="label-text">System alerts and updates</span>
+                                        </label>
+                                        <label class="cursor-pointer label justify-start">
+                                            <input type="checkbox" class="checkbox checkbox-primary mr-2" id="email-security" checked>
+                                            <span class="label-text">Security notifications</span>
+                                        </label>
+                                        <label class="cursor-pointer label justify-start">
+                                            <input type="checkbox" class="checkbox checkbox-primary mr-2" id="email-backup">
+                                            <span class="label-text">Backup completion reports</span>
+                                        </label>
+                                        <label class="cursor-pointer label justify-start">
+                                            <input type="checkbox" class="checkbox checkbox-primary mr-2" id="email-reports" checked>
+                                            <span class="label-text">Weekly activity reports</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Push Notifications -->
+                                <div class="notification-section">
+                                    <h4 class="font-semibold text-lg mb-4">Push Notifications</h4>
+                                    <div class="space-y-3">
+                                        <label class="cursor-pointer label justify-start">
+                                            <input type="checkbox" class="checkbox checkbox-primary mr-2" id="push-urgent" checked>
+                                            <span class="label-text">Urgent system issues</span>
+                                        </label>
+                                        <label class="cursor-pointer label justify-start">
+                                            <input type="checkbox" class="checkbox checkbox-primary mr-2" id="push-approvals" checked>
+                                            <span class="label-text">Pending approvals</span>
+                                        </label>
+                                        <label class="cursor-pointer label justify-start">
+                                            <input type="checkbox" class="checkbox checkbox-primary mr-2" id="push-backup">
+                                            <span class="label-text">Backup status</span>
+                                        </label>
+                                        <label class="cursor-pointer label justify-start">
+                                            <input type="checkbox" class="checkbox checkbox-primary mr-2" id="push-maintenance">
+                                            <span class="label-text">Maintenance alerts</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Notification Frequency -->
+                                <div class="notification-section">
+                                    <h4 class="font-semibold text-lg mb-4">Notification Frequency</h4>
+                                    <div class="form-control">
+                                        <select class="select select-bordered" id="notification-frequency">
+                                            <option value="realtime">Real-time (Immediate)</option>
+                                            <option value="hourly" selected>Hourly Digest</option>
+                                            <option value="daily">Daily Summary</option>
+                                            <option value="weekly">Weekly Report</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Quiet Hours -->
+                                <div class="notification-section">
+                                    <h4 class="font-semibold text-lg mb-4">Quiet Hours</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Start Time</span>
+                                            </label>
+                                            <input type="time" class="input input-bordered" value="22:00" id="quiet-start">
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">End Time</span>
+                                            </label>
+                                            <input type="time" class="input input-bordered" value="07:00" id="quiet-end">
+                                        </div>
+                                    </div>
+                                    <label class="cursor-pointer label justify-start mt-2">
+                                        <input type="checkbox" class="checkbox checkbox-primary mr-2" id="enable-quiet-hours">
+                                        <span class="label-text">Enable quiet hours (only urgent notifications)</span>
+                                    </label>
+                                </div>
+
+                                <div class="card-actions justify-end">
+                                    <button type="button" class="btn btn-ghost" id="reset-notifications">Reset to Defaults</button>
+                                    <button type="submit" class="btn btn-primary">Save Notification Settings</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Avatar Modal -->
+    <div id="change-avatar-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Change Profile Picture</h3>
+            
+            <div class="space-y-4">
+                <div class="text-center">
+                    <div class="avatar-preview mx-auto mb-4">
+                        <div class="w-32 h-32 rounded-full bg-primary text-white flex items-center justify-center text-3xl font-bold">
+                            SA
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Upload New Image</span>
+                    </label>
+                    <input type="file" class="file-input file-input-bordered w-full" accept="image/*" id="avatar-upload">
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Or Choose Avatar</span>
+                    </label>
+                    <div class="grid grid-cols-4 gap-2">
+                        <div class="avatar-option active" data-avatar="SA">
+                            <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold cursor-pointer">
+                                SA
+                            </div>
+                        </div>
+                        <div class="avatar-option" data-avatar="AD">
+                            <div class="w-12 h-12 rounded-full bg-secondary text-white flex items-center justify-center text-sm font-bold cursor-pointer">
+                                AD
+                            </div>
+                        </div>
+                        <div class="avatar-option" data-avatar="SU">
+                            <div class="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold cursor-pointer">
+                                SU
+                            </div>
+                        </div>
+                        <div class="avatar-option" data-avatar="AM">
+                            <div class="w-12 h-12 rounded-full bg-info text-white flex items-center justify-center text-sm font-bold cursor-pointer">
+                                AM
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-avatar">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="save-avatar">
+                        <i class="fa-solid fa-save mr-2"></i>
+                        Save Avatar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="superadmin_profile.js"></script>
+</body>
+</html>

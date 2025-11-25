@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Super Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="superadmin_users.css">
+</head>
+<body class="bg-base-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="navbar bg-base-200 px-4 shadow sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="superadmin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                    <li><a href="superadmin_users.html" class="active"><i class="fa-solid fa-users"></i> User Management</a></li>
+                    <li><a href="superadmin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                    <li><a href="superadmin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                    <li><a href="superadmin_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quiz Management</a></li>
+                    <li><a href="superadmin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="superadmin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+                </ul>
+            </div>
+            <a href="superadmin_dashboard.html" class="flex items-center gap-2 text-xl font-bold">
+                <div class="w-10 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                IUS QUIZ SYSTEM - SUPER ADMIN
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="superadmin_dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="superadmin_users.html" class="active"><i class="fa-solid fa-users"></i> User Management</a></li>
+                <li><a href="superadmin_departments.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+                <li><a href="superadmin_questions.html"><i class="fa-solid fa-question-circle"></i> Question Approval</a></li>
+                <li><a href="superadmin_quizzes.html"><i class="fa-solid fa-feather-pointed"></i> Quiz Management</a></li>
+                <li><a href="superadmin_reports.html"><i class="fa-solid fa-chart-bar"></i> Reports</a></li>
+                <li><a href="superadmin_system.html"><i class="fa-solid fa-cog"></i> System Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+            <div id="navbar-clock" class="hidden md:flex items-center text-sm bg-base-300 px-3 py-1 rounded-full mr-2">
+                <i class="fa-regular fa-clock mr-1"></i> Loading...
+            </div>
+            
+            <!-- Notification Bell -->
+            <div class="dropdown dropdown-end">
+                <button class="btn btn-ghost btn-circle relative">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                    <span class="badge badge-xs badge-primary absolute -top-1 -right-1" id="notification-count">5</span>
+                </button>
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 mt-4">
+                    <li class="menu-title">Notifications</li>
+                    <li><a class="text-sm"><i class="fa-solid fa-user-plus text-info"></i> 3 new user requests</a></li>
+                    <li><a class="text-sm"><i class="fa-solid fa-question-circle text-warning"></i> 2 questions pending</a></li>
+                </ul>
+            </div>
+
+            <!-- User Profile -->
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full bg-primary text-white flex items-center justify-center">
+                        <span class="font-bold">SA</span>
+                    </div>
+                </label>
+                <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <li class="menu-title">Super Admin</li>
+                    <li><a href="superadmin_profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a href="superadmin_settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li><a href="index.html" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-4xl font-bold mb-2">User Management</h1>
+                <p class="text-gray-600">Manage all users, roles, and permissions</p>
+            </div>
+            <button class="btn btn-primary" id="add-user-btn">
+                <i class="fa-solid fa-plus mr-2"></i>
+                Add New User
+            </button>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="card bg-base-100 shadow-lg mb-6">
+            <div class="card-body">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Search Users</span>
+                        </label>
+                        <input type="text" placeholder="Search by name, email..." class="input input-bordered" id="search-users">
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Role</span>
+                        </label>
+                        <select class="select select-bordered" id="filter-role">
+                            <option value="">All Roles</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="admin">Admin</option>
+                            <option value="superadmin">Super Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Department</span>
+                        </label>
+                        <select class="select select-bordered" id="filter-department">
+                            <option value="">All Departments</option>
+                            <option value="cse">Computer Science</option>
+                            <option value="bba">Business Administration</option>
+                            <option value="eee">Electrical Engineering</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Status</span>
+                        </label>
+                        <select class="select select-bordered" id="filter-status">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="card bg-base-100 shadow-lg">
+            <div class="card-body">
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Role</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <!-- Users will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="flex justify-between items-center mt-6">
+                    <div class="text-sm text-gray-600">
+                        Showing <span id="showing-start">1</span> to <span id="showing-end">10</span> of <span id="total-users">0</span> users
+                    </div>
+                    <div class="join">
+                        <button class="join-item btn btn-sm" id="prev-page">«</button>
+                        <button class="join-item btn btn-sm btn-active">1</button>
+                        <button class="join-item btn btn-sm">2</button>
+                        <button class="join-item btn btn-sm">3</button>
+                        <button class="join-item btn btn-sm" id="next-page">»</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-2xl">
+            <h3 class="font-bold text-2xl mb-4">Add New User</h3>
+            
+            <form id="add-user-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">First Name</span>
+                        </label>
+                        <input type="text" class="input input-bordered" id="first-name" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Last Name</span>
+                        </label>
+                        <input type="text" class="input input-bordered" id="last-name" required>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Email</span>
+                    </label>
+                    <input type="email" class="input input-bordered" id="user-email" required>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Role</span>
+                        </label>
+                        <select class="select select-bordered" id="user-role" required>
+                            <option value="">Select Role</option>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="admin">Admin</option>
+                            <option value="superadmin">Super Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Department</span>
+                        </label>
+                        <select class="select select-bordered" id="user-department" required>
+                            <option value="">Select Department</option>
+                            <option value="cse">Computer Science</option>
+                            <option value="bba">Business Administration</option>
+                            <option value="eee">Electrical Engineering</option>
+                            <option value="civil">Civil Engineering</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Permissions</span>
+                    </label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="cursor-pointer label justify-start">
+                            <input type="checkbox" class="checkbox checkbox-primary mr-2" value="create">
+                            <span class="label-text">Create Content</span>
+                        </label>
+                        <label class="cursor-pointer label justify-start">
+                            <input type="checkbox" class="checkbox checkbox-primary mr-2" value="edit">
+                            <span class="label-text">Edit Content</span>
+                        </label>
+                        <label class="cursor-pointer label justify-start">
+                            <input type="checkbox" class="checkbox checkbox-primary mr-2" value="delete">
+                            <span class="label-text">Delete Content</span>
+                        </label>
+                        <label class="cursor-pointer label justify-start">
+                            <input type="checkbox" class="checkbox checkbox-primary mr-2" value="manage_users">
+                            <span class="label-text">Manage Users</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-add-user">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-user-plus mr-2"></i>
+                        Add User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="edit-user-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-2xl">
+            <h3 class="font-bold text-2xl mb-4">Edit User</h3>
+            
+            <form id="edit-user-form" class="space-y-4">
+                <input type="hidden" id="edit-user-id">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">First Name</span>
+                        </label>
+                        <input type="text" class="input input-bordered" id="edit-first-name" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Last Name</span>
+                        </label>
+                        <input type="text" class="input input-bordered" id="edit-last-name" required>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Email</span>
+                    </label>
+                    <input type="email" class="input input-bordered" id="edit-user-email" required>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Role</span>
+                        </label>
+                        <select class="select select-bordered" id="edit-user-role" required>
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="admin">Admin</option>
+                            <option value="superadmin">Super Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-semibold">Status</span>
+                        </label>
+                        <select class="select select-bordered" id="edit-user-status" required>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Department</span>
+                    </label>
+                    <select class="select select-bordered" id="edit-user-department" required>
+                        <option value="cse">Computer Science</option>
+                        <option value="bba">Business Administration</option>
+                        <option value="eee">Electrical Engineering</option>
+                        <option value="civil">Civil Engineering</option>
+                    </select>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Permissions</span>
+                    </label>
+                    <div class="grid grid-cols-2 gap-2" id="edit-permissions-container">
+                        <!-- Permissions will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-edit-user">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-save mr-2"></i>
+                        Update User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Send Notification Modal -->
+    <div id="send-notification-modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="font-bold text-2xl mb-4">Send Notification</h3>
+            
+            <form id="send-notification-form" class="space-y-4">
+                <input type="hidden" id="notify-user-id">
+                
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">To</span>
+                    </label>
+                    <input type="text" class="input input-bordered" id="notify-user-name" readonly>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Subject</span>
+                    </label>
+                    <input type="text" class="input input-bordered" id="notification-subject" required>
+                </div>
+
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-semibold">Message</span>
+                    </label>
+                    <textarea class="textarea textarea-bordered h-32" id="notification-message" required></textarea>
+                </div>
+
+                <div class="form-control">
+                    <label class="cursor-pointer label justify-start">
+                        <input type="checkbox" class="checkbox checkbox-primary mr-2" id="urgent-notification">
+                        <span class="label-text">Mark as Urgent</span>
+                    </label>
+                </div>
+
+                <div class="modal-action">
+                    <button type="button" class="btn btn-ghost" id="cancel-notification">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>
+                        Send Notification
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="superadmin_users.js"></script>
+</body>
+</html>
